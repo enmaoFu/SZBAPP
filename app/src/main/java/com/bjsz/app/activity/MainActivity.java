@@ -1,0 +1,285 @@
+package com.bjsz.app.activity;
+
+import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.bjsz.app.R;
+import com.bjsz.app.base.BaseFragmentActivity;
+import com.bjsz.app.fragments.archives.ArchivesFragment;
+import com.bjsz.app.fragments.data.DataFragment;
+import com.bjsz.app.fragments.home.HomeFragment;
+import com.bjsz.app.fragments.my.MyFragment;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+/**
+ * 主页面
+ * @author enmaoFu
+ * @date 2016-12-26
+ */
+public class MainActivity extends BaseFragmentActivity implements View.OnClickListener{
+
+    //记录是否有首次按键
+    private boolean mBackKeyPressed = false;
+
+    //底部菜单的布局
+    private RelativeLayout home,data,archives,my;
+
+    //底部菜单需要的图片
+    private ImageView home_img,data_img,archives_img,my_img;
+
+    //底部菜单的字
+    private TextView home_text,data_text,archives_text,my_text;
+
+    private FrameLayout contentf;
+
+    private FragmentManager fm;
+
+    private HomeFragment hf;//首页fragemnt
+
+    private DataFragment df;//健康数据fragment
+
+    private ArchivesFragment af;//健康档案fragment
+
+    private MyFragment mf;//个人中心fragment
+
+    private int textcolor,textcolor1;//底部菜单字体颜色
+
+    private int relacolor,relacolor1;//底部菜单背景颜色
+
+    @Override
+    protected void bindViews() {
+        setContentView(R.layout.activity_main);
+
+    }
+
+    @Override
+    protected void initView() {
+        contentf = (FrameLayout)findViewById(R.id.content_frame);
+        home = (RelativeLayout)findViewById(R.id.home);
+        data = (RelativeLayout)findViewById(R.id.data);
+        archives = (RelativeLayout)findViewById(R.id.archives);
+        my = (RelativeLayout)findViewById(R.id.my);
+        home_img = (ImageView)findViewById(R.id.home_img);
+        data_img = (ImageView)findViewById(R.id.data_img);
+        archives_img = (ImageView)findViewById(R.id.archives_img);
+        my_img = (ImageView)findViewById(R.id.my_img);
+        home_text = (TextView)findViewById(R.id.home_text);
+        data_text = (TextView)findViewById(R.id.data_text);
+        archives_text = (TextView)findViewById(R.id.archives_text);
+        my_text = (TextView)findViewById(R.id.my_text);
+
+        home.setOnClickListener(this);
+        data.setOnClickListener(this);
+        archives.setOnClickListener(this);
+        my.setOnClickListener(this);
+
+    }
+
+    @Override
+    protected void initData() {
+        fm = getSupportFragmentManager();
+        selectTab(0);
+    }
+
+    @Override
+    protected void initActionBar() {
+
+    }
+
+    /**
+     * 菜单切换
+     * @param postion 选择了第几个fragement
+     */
+    public void selectTab(int postion){
+
+        FragmentTransaction ft = fm.beginTransaction();
+
+        switch (postion) {
+            case 0:
+                if(hf == null){
+                    hf = new HomeFragment();
+                    ft.replace(R.id.content_frame, hf);
+                }else{
+                    ft.replace(R.id.content_frame, hf);
+                }
+
+                textcolor = Color.parseColor("#777777");
+                textcolor1 = Color.parseColor("#fa7121");
+
+                home_text.setTextColor(textcolor1);
+                data_text.setTextColor(textcolor);
+                archives_text.setTextColor(textcolor);
+                my_text.setTextColor(textcolor);
+
+                relacolor = Color.parseColor("#f4f4f4");
+                relacolor1 = Color.parseColor("#ffffff");
+
+                home.setBackgroundColor(relacolor);
+                data.setBackgroundColor(relacolor1);
+                archives.setBackgroundColor(relacolor1);
+                my.setBackgroundColor(relacolor1);
+
+                /*home_img.setBackgroundResource(R.drawable.shouyea);
+                problem_img.setBackgroundResource(R.drawable.lanmub);
+                live_img.setBackgroundResource(R.drawable.zhibob);
+                my_img.setBackgroundResource(R.drawable.wodeb);*/
+
+                break;
+
+            case 1:
+                if(df == null){
+                    df = new DataFragment();
+                    ft.replace(R.id.content_frame, df);
+                }else{
+                    ft.replace(R.id.content_frame, df);
+                }
+
+                textcolor = Color.parseColor("#777777");
+                textcolor1 = Color.parseColor("#fa7121");
+
+                home_text.setTextColor(textcolor);
+                data_text.setTextColor(textcolor1);
+                archives_text.setTextColor(textcolor);
+                my_text.setTextColor(textcolor);
+
+                relacolor = Color.parseColor("#f4f4f4");
+                relacolor1 = Color.parseColor("#ffffff");
+
+                home.setBackgroundColor(relacolor1);
+                data.setBackgroundColor(relacolor);
+                archives.setBackgroundColor(relacolor1);
+                my.setBackgroundColor(relacolor1);
+
+                /*home_img.setBackgroundResource(R.drawable.shouyeb);
+                problem_img.setBackgroundResource(R.drawable.lanmua);
+                live_img.setBackgroundResource(R.drawable.zhibob);
+                my_img.setBackgroundResource(R.drawable.wodeb);*/
+
+                break;
+
+            case 2:
+
+                if(af == null){
+                    af = new ArchivesFragment();
+                    ft.replace(R.id.content_frame, af);
+                }else{
+                    ft.replace(R.id.content_frame, af);
+                }
+
+                textcolor = Color.parseColor("#777777");
+                textcolor1 = Color.parseColor("#fa7121");
+
+                home_text.setTextColor(textcolor);
+                data_text.setTextColor(textcolor);
+                archives_text.setTextColor(textcolor1);
+                my_text.setTextColor(textcolor);
+
+                relacolor = Color.parseColor("#f4f4f4");
+                relacolor1 = Color.parseColor("#ffffff");
+
+                home.setBackgroundColor(relacolor1);
+                data.setBackgroundColor(relacolor1);
+                archives.setBackgroundColor(relacolor);
+                my.setBackgroundColor(relacolor1);
+
+                /*home_img.setBackgroundResource(R.drawable.shouyeb);
+                problem_img.setBackgroundResource(R.drawable.lanmub);
+                live_img.setBackgroundResource(R.drawable.zhiboa);
+                my_img.setBackgroundResource(R.drawable.wodeb);*/
+
+                break;
+
+            case 3:
+
+                if(mf == null){
+                    mf = new MyFragment();
+                    ft.replace(R.id.content_frame, mf);
+                }else{
+                    ft.replace(R.id.content_frame, mf);
+                }
+
+                textcolor = Color.parseColor("#777777");
+                textcolor1 = Color.parseColor("#fa7121");
+
+                home_text.setTextColor(textcolor);
+                data_text.setTextColor(textcolor);
+                archives_text.setTextColor(textcolor);
+                my_text.setTextColor(textcolor1);
+
+                relacolor = Color.parseColor("#f4f4f4");
+                relacolor1 = Color.parseColor("#ffffff");
+
+                home.setBackgroundColor(relacolor1);
+                data.setBackgroundColor(relacolor1);
+                archives.setBackgroundColor(relacolor1);
+                my.setBackgroundColor(relacolor);
+
+                /*home_img.setBackgroundResource(R.drawable.shouyeb);
+                problem_img.setBackgroundResource(R.drawable.lanmub);
+                live_img.setBackgroundResource(R.drawable.zhibob);
+                my_img.setBackgroundResource(R.drawable.wodea);*/
+
+                break;
+        }
+
+        ft.commit();
+
+    }
+
+    /**
+     * 给控件注册监听事件
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.home:
+                selectTab(0);
+                break;
+
+            case R.id.data:
+                selectTab(1);
+                break;
+
+            case R.id.archives:
+                selectTab(2);
+                break;
+
+            case R.id.my:
+                selectTab(3);
+                break;
+        }
+    }
+
+    /**
+     * 监听后退键，点击两次退出APP
+     */
+    @Override
+    public void onBackPressed() {
+        if(!mBackKeyPressed){
+            showToast("再按一次退出应用");
+            mBackKeyPressed = true;
+            //延时两秒，如果超出则擦除第一次按键记录
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    mBackKeyPressed = false;
+                }
+            }, 2000);
+        }else{
+            //退出程序
+            this.finish();
+            System.exit(0);
+        }
+    }
+
+}

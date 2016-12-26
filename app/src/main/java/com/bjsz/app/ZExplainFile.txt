@@ -1,0 +1,11 @@
+此文件为说明文件
+activity：此包存放所有的Activity
+adapters：此包存放所有的适配器
+base：此包存放所有的基础封装类
+dialogs：此包存放过渡对话框（过渡动画）
+entitys：此包存放所有的实体类
+fragments：此包存放所有的Fragment
+interfaces：此包存放所有的接口
+utils：此包存放所有的工具类
+views：此包存放所有的自定义View
+MyApplication：此类为程序全局类

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/bottom_menu"
+        ></FrameLayout>
+
+    <View android:layout_height="1px"
+        android:background="#cecece"
+        android:layout_width="fill_parent"
+        android:layout_above="@+id/bottom_menu">
+    </View>
+
+    <RelativeLayout
+        android:id="@+id/bottom_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerVertical="true"
+            android:background="#fff"
+            >
+
+            <RelativeLayout
+                android:id="@+id/home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/home_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/base_frame_ic_launcher"
+                    />
+
+                <TextView
+                    android:id="@+id/home_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/home_img"
+                    android:layout_centerHorizontal="true"
+                    android:text="首页"
+                    android:textColor="#777777"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/data_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/base_frame_ic_launcher"
+                    />
+
+                <TextView
+                    android:id="@+id/data_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/data_img"
+                    android:layout_centerHorizontal="true"
+                    android:text="健康数据"
+                    android:textColor="#777777"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/archives"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/archives_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/base_frame_ic_launcher"
+                    />
+
+                <TextView
+                    android:id="@+id/archives_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/archives_img"
+                    android:layout_centerHorizontal="true"
+                    android:text="健康档案"
+                    android:textColor="#777777"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/my"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/my_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/base_frame_ic_launcher"
+                    />
+
+                <TextView
+                    android:id="@+id/my_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/my_img"
+                    android:layout_centerHorizontal="true"
+                    android:text="个人中心"
+                    android:textColor="#777777"
+                    android:textSize="15sp"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

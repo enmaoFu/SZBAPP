@@ -1,0 +1,3 @@
+此文件为说明文件
+retrofit.service.ApiService：此包下面的类为封装的最基础的Retrofit网络请求（改造的接口）
+HttpUrlDefinition:此类为通用的HTTP网络地址接口类

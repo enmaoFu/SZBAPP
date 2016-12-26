@@ -1,0 +1,2 @@
+此文件为说明文件
+此包里面为对基础的Activity/Fragment/fragmentActivity/ViewHolder的封装
