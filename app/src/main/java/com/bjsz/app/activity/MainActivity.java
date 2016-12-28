@@ -1,6 +1,5 @@
 package com.bjsz.app.activity;
 
-import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -111,7 +110,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     ft.replace(R.id.content_frame, hf);
                 }
 
-                textcolor = Color.parseColor("#777777");
+                /*textcolor = Color.parseColor("#777777");
                 textcolor1 = Color.parseColor("#fa7121");
 
                 home_text.setTextColor(textcolor1);
@@ -125,7 +124,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 home.setBackgroundColor(relacolor);
                 data.setBackgroundColor(relacolor1);
                 archives.setBackgroundColor(relacolor1);
-                my.setBackgroundColor(relacolor1);
+                my.setBackgroundColor(relacolor1);*/
 
                 /*home_img.setBackgroundResource(R.drawable.shouyea);
                 problem_img.setBackgroundResource(R.drawable.lanmub);
@@ -142,7 +141,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     ft.replace(R.id.content_frame, df);
                 }
 
-                textcolor = Color.parseColor("#777777");
+                /*textcolor = Color.parseColor("#777777");
                 textcolor1 = Color.parseColor("#fa7121");
 
                 home_text.setTextColor(textcolor);
@@ -156,7 +155,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 home.setBackgroundColor(relacolor1);
                 data.setBackgroundColor(relacolor);
                 archives.setBackgroundColor(relacolor1);
-                my.setBackgroundColor(relacolor1);
+                my.setBackgroundColor(relacolor1);*/
 
                 /*home_img.setBackgroundResource(R.drawable.shouyeb);
                 problem_img.setBackgroundResource(R.drawable.lanmua);
@@ -174,7 +173,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     ft.replace(R.id.content_frame, af);
                 }
 
-                textcolor = Color.parseColor("#777777");
+                /*textcolor = Color.parseColor("#777777");
                 textcolor1 = Color.parseColor("#fa7121");
 
                 home_text.setTextColor(textcolor);
@@ -188,7 +187,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 home.setBackgroundColor(relacolor1);
                 data.setBackgroundColor(relacolor1);
                 archives.setBackgroundColor(relacolor);
-                my.setBackgroundColor(relacolor1);
+                my.setBackgroundColor(relacolor1);*/
 
                 /*home_img.setBackgroundResource(R.drawable.shouyeb);
                 problem_img.setBackgroundResource(R.drawable.lanmub);
@@ -206,7 +205,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                     ft.replace(R.id.content_frame, mf);
                 }
 
-                textcolor = Color.parseColor("#777777");
+                /*textcolor = Color.parseColor("#777777");
                 textcolor1 = Color.parseColor("#fa7121");
 
                 home_text.setTextColor(textcolor);
@@ -220,7 +219,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 home.setBackgroundColor(relacolor1);
                 data.setBackgroundColor(relacolor1);
                 archives.setBackgroundColor(relacolor1);
-                my.setBackgroundColor(relacolor);
+                my.setBackgroundColor(relacolor);*/
 
                 /*home_img.setBackgroundResource(R.drawable.shouyeb);
                 problem_img.setBackgroundResource(R.drawable.lanmub);

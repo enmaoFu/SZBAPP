@@ -11,8 +11,8 @@
         android:layout_above="@+id/bottom_menu"
         ></FrameLayout>
 
-    <View android:layout_height="1px"
-        android:background="#cecece"
+    <View android:layout_height="1.5px"
+        android:background="#E5E9EA"
         android:layout_width="fill_parent"
         android:layout_above="@+id/bottom_menu">
     </View>
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@mipmap/base_frame_ic_launcher"
+                    android:background="@mipmap/ic_home_img"
                     />
 
                 <TextView
@@ -55,42 +55,11 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/home_img"
                     android:layout_centerHorizontal="true"
-                    android:text="首页"
-                    android:textColor="#777777"
-                    android:textSize="15sp"
+                    android:text="应用首页"
+                    android:textColor="#505050"
+                    android:textSize="13sp"
                     />
             </RelativeLayout>
-
-
-            <RelativeLayout
-                android:id="@+id/data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:padding="5dp"
-                >
-
-                <ImageView
-                    android:id="@+id/data_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:background="@mipmap/base_frame_ic_launcher"
-                    />
-
-                <TextView
-                    android:id="@+id/data_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/data_img"
-                    android:layout_centerHorizontal="true"
-                    android:text="健康数据"
-                    android:textColor="#777777"
-                    android:textSize="15sp"
-                    />
-            </RelativeLayout>
-
 
             <RelativeLayout
                 android:id="@+id/archives"
@@ -106,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@mipmap/base_frame_ic_launcher"
+                    android:background="@mipmap/ic_archives_img"
                     />
 
                 <TextView
@@ -116,8 +85,37 @@
                     android:layout_below="@+id/archives_img"
                     android:layout_centerHorizontal="true"
                     android:text="健康档案"
-                    android:textColor="#777777"
-                    android:textSize="15sp"
+                    android:textColor="#505050"
+                    android:textSize="13sp"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                >
+
+                <ImageView
+                    android:id="@+id/data_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/ic_data_img"
+                    />
+
+                <TextView
+                    android:id="@+id/data_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/data_img"
+                    android:layout_centerHorizontal="true"
+                    android:text="健康数据"
+                    android:textColor="#505050"
+                    android:textSize="13sp"
                     />
             </RelativeLayout>
 
@@ -135,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:background="@mipmap/base_frame_ic_launcher"
+                    android:background="@mipmap/ic_my_img"
                     />
 
                 <TextView
@@ -145,8 +143,8 @@
                     android:layout_below="@+id/my_img"
                     android:layout_centerHorizontal="true"
                     android:text="个人中心"
-                    android:textColor="#777777"
-                    android:textSize="15sp"
+                    android:textColor="#505050"
+                    android:textSize="13sp"
                     />
             </RelativeLayout>
 
