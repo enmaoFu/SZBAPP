@@ -171,10 +171,10 @@
             android:layout_below="@+id/home_msg_re"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="25dp"
             android:numColumns="4"
             android:columnWidth="20dp"
-            android:verticalSpacing="15dp"
+            android:verticalSpacing="20dp"
             android:scrollbars="none"></GridView>
 
     </RelativeLayout>

@@ -5,6 +5,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bjsz.app.MyApplication;
 import com.bjsz.app.R;
 import com.bjsz.app.adapters.home.FragmentHomeAdapter;
 import com.bjsz.app.base.BaseFragment;
@@ -12,7 +13,6 @@ import com.bjsz.app.entity.home.HomeGridviewOptionEntity;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -30,13 +30,19 @@ public class HomeFragment extends BaseFragment{
     private GridView home_grid;//医生listview
     private List<HomeGridviewOptionEntity> homeGridviewOptionArrayList = new ArrayList<>();//数据集
     private FragmentHomeAdapter fragmentHomeAdapter;//适配器
-    private Map<Integer,String> homeGridviewImageMap = new HashMap<>();//gridview图片数据源
 
+    /**
+     * 初始化布局
+     * @return
+     */
     @Override
     protected int bindViews() {
         return R.layout.fragment_home;
     }
 
+    /**
+     * 初始化组件
+     */
     @Override
     protected void initView() {
         right_img = (ImageView)findViewById(R.id.right_img);
@@ -46,25 +52,17 @@ public class HomeFragment extends BaseFragment{
         home_grid.setAdapter(fragmentHomeAdapter);
     }
 
+    /**
+     * 初始化数据
+     */
     @Override
     protected void initData() {
-        homeGridviewImageMap.put(R.mipmap.ic_heart_pulse_img,"心脉");
-        homeGridviewImageMap.put(R.mipmap.ic_blood_pressure_img,"血压");
-        homeGridviewImageMap.put(R.mipmap.ic_oxygen_img,"血氧");
-        homeGridviewImageMap.put(R.mipmap.ic_blood_sugar_img,"血糖");
-        homeGridviewImageMap.put(R.mipmap.ic_temperature_img,"体温");
-        homeGridviewImageMap.put(R.mipmap.ic_uric_acid_img,"尿酸");
-        homeGridviewImageMap.put(R.mipmap.ic_cholesterol_img,"胆固醇");
-        homeGridviewImageMap.put(R.mipmap.ic_urine_routine_img,"尿常规");
-        homeGridviewImageMap.put(R.mipmap.ic_ecg_img,"心电");
         initGridview();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
+    /**
+     * 初始化标题栏
+     */
     @Override
     protected void initActionBar() {
         right_img.setVisibility(View.VISIBLE);
@@ -85,7 +83,8 @@ public class HomeFragment extends BaseFragment{
 
         HomeGridviewOptionEntity homeGridviewOptionEntity = null;
 
-        Iterator<Map.Entry<Integer, String>> it = homeGridviewImageMap.entrySet().iterator();
+        //获得首页girdview数据源，使用迭代器进行循环读取
+        Iterator<Map.Entry<Integer, String>> it = MyApplication.homeGridviewImageMap.entrySet().iterator();
 
         while (it.hasNext()) {
 

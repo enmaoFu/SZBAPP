@@ -234,7 +234,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     }
 
     /**
-     * 给控件注册监听事件
+     * 事件监听
      * @param v
      */
     @Override

@@ -5,6 +5,9 @@ import android.app.Application;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 /**
  * 当前应用的 Application
@@ -14,6 +17,7 @@ import com.orhanobut.logger.Logger;
 public class MyApplication extends Application {
 
     private static String TAG = "print";//设置日志框架打印的TAG
+    public static Map<Integer,String> homeGridviewImageMap = new HashMap<>();//gridview图片数据源
 
     @Override
     public void onCreate() {
@@ -26,6 +30,7 @@ public class MyApplication extends Application {
          */
         Logger.init(TAG);
         Logger.v("Init Application...");
+        initHomeGridviewImageMap();
         initFresco();
 
     }
@@ -50,6 +55,22 @@ public class MyApplication extends Application {
     public void initFresco(){
 
         Fresco.initialize(this);
+
+    }
+
+    /**
+     * 初始化首页girdview map数据源
+     */
+    public void initHomeGridviewImageMap(){
+        homeGridviewImageMap.put(R.mipmap.ic_heart_pulse_img,"心脉");
+        homeGridviewImageMap.put(R.mipmap.ic_blood_pressure_img,"血压");
+        homeGridviewImageMap.put(R.mipmap.ic_oxygen_img,"血氧");
+        homeGridviewImageMap.put(R.mipmap.ic_blood_sugar_img,"血糖");
+        homeGridviewImageMap.put(R.mipmap.ic_temperature_img,"体温");
+        homeGridviewImageMap.put(R.mipmap.ic_uric_acid_img,"尿酸");
+        homeGridviewImageMap.put(R.mipmap.ic_cholesterol_img,"胆固醇");
+        homeGridviewImageMap.put(R.mipmap.ic_urine_routine_img,"尿常规");
+        homeGridviewImageMap.put(R.mipmap.ic_ecg_img,"心电");
 
     }
 

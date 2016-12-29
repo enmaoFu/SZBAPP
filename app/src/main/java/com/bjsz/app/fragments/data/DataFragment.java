@@ -21,22 +21,35 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private SwipeRefreshLayout swipeLayout;//下拉刷新控件
 
+    /**
+     * 初始化布局
+     * @return
+     */
     @Override
     protected int bindViews() {
         return R.layout.fragment_data;
     }
 
+    /**
+     * 初始化组件
+     */
     @Override
     protected void initView() {
         center_text = (TextView)findViewById(R.id.center_text);
         swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipeLayout);
     }
 
+    /**
+     * 初始化数据
+     */
     @Override
     protected void initData() {
         initSwipeRefreshLayout();
     }
 
+    /**
+     * 初始化标题栏
+     */
     @Override
     protected void initActionBar() {
         center_text.setVisibility(View.VISIBLE);
