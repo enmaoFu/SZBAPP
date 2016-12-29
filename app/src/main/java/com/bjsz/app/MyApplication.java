@@ -1,9 +1,10 @@
 package com.bjsz.app;
 
 import android.app.Application;
-import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.orhanobut.logger.Logger;
+
 
 /**
  * 当前应用的 Application
@@ -12,11 +13,19 @@ import com.facebook.drawee.backends.pipeline.Fresco;
  */
 public class MyApplication extends Application {
 
+    private static String TAG = "print";//设置日志框架打印的TAG
+
     @Override
     public void onCreate() {
         super.onCreate();
 
-        Log.v("print","Init Application...");
+        /**
+         * init将TAG初始化
+         * logLevel 默认是FULL，打印日志
+         * NONE为不打印日志，上线后可设置
+         */
+        Logger.init(TAG);
+        Logger.v("Init Application...");
         initFresco();
 
     }

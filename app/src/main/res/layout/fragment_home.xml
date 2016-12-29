@@ -112,13 +112,15 @@
      </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/home_gridview_re"
         android:layout_width="match_parent"
-        android:layout_height="295dp"
+        android:layout_height="match_parent"
         android:background="@drawable/shape_fragment_home_re"
         android:layout_marginRight="12dp"
         android:layout_marginLeft="12dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="232dp">
 
         <RelativeLayout
             android:id="@+id/home_msg_re"
@@ -157,7 +159,7 @@
                 android:text="15:43"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:textColor="#666666"/>
 
         </RelativeLayout>
@@ -169,7 +171,7 @@
             android:layout_below="@+id/home_msg_re"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="17dp"
             android:numColumns="4"
             android:columnWidth="20dp"
             android:verticalSpacing="15dp"

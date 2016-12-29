@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "com.bjsz.app"
-        minSdkVersion 23
+        minSdkVersion 22
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -38,4 +38,6 @@ dependencies {
     //6.0需要的动态权限机制框架
     compile 'com.github.hotchemi:permissionsdispatcher:2.2.0'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
+    //日志框架
+    compile 'com.orhanobut:logger:1.15'
 }
