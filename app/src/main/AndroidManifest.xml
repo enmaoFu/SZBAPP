@@ -19,6 +19,20 @@
             </intent-filter>
         </activity>
 
+        <!-- 健康档案 通用查看个人病里 既往史，家族史，遗传病史，页面 -->
+        <activity
+            android:name=".activity.archives.ArchivesPublicQueryPastHistoryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- 健康档案 公共的添加个人病史里 既往史，家族史，遗传病史页面 -->
+        <activity
+            android:name=".activity.archives.ArchivesPublicAddPastHistoryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>

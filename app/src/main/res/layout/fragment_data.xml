@@ -56,7 +56,7 @@
                         android:layout_toRightOf="@+id/data_heart_pulse_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -64,7 +64,7 @@
                         android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textColor="#939393"/>
 
                     <ImageView
@@ -102,7 +102,7 @@
                         android:layout_toRightOf="@+id/data_blood_pressure_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -110,7 +110,7 @@
                         android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textColor="#939393"/>
 
                     <ImageView
@@ -148,7 +148,7 @@
                         android:layout_toRightOf="@+id/data_oxygen_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
                         android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textColor="#939393"/>
 
                     <ImageView
@@ -194,7 +194,7 @@
                         android:layout_toRightOf="@+id/data_blood_sugar_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -202,7 +202,7 @@
                         android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textColor="#939393"/>
 
                     <ImageView
@@ -240,7 +240,7 @@
                         android:layout_toRightOf="@+id/data_temperature_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                         android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textColor="#939393"/>
 
                     <ImageView
@@ -286,16 +286,7 @@
                         android:layout_toRightOf="@+id/data_uric_acid_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="110bpm"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
-                        android:textColor="#939393"/>
+                        android:textSize="15sp"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -303,7 +294,18 @@
                         android:src="@mipmap/ic_data_edx_img"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="15dp"/>
+                        android:layout_marginRight="15dp"
+                        android:id="@+id/imageView" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="110bpm"
+                        android:textSize="15sp"
+                        android:textColor="#939393"
+                        android:layout_alignTop="@+id/imageView"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/textView2" />
 
                 </RelativeLayout>
 
@@ -332,7 +334,7 @@
                         android:layout_toRightOf="@+id/data_cholesterol_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -340,7 +342,7 @@
                         android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
-                        android:textSize="16sp"
+                        android:textSize="15sp"
                         android:textColor="#939393"/>
 
                     <ImageView
@@ -378,7 +380,7 @@
                         android:layout_toRightOf="@+id/data_urine_routine_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -416,7 +418,7 @@
                         android:layout_toRightOf="@+id/data_ecg_img"
                         android:layout_marginLeft="5dp"
                         android:textColor="#343434"
-                        android:textSize="16sp"/>
+                        android:textSize="15sp"/>
 
                     <ImageView
                         android:layout_width="wrap_content"

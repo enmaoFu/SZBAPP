@@ -1,14 +1,21 @@
 package com.bjsz.app.fragments.archives;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
+import com.bjsz.app.activity.archives.ArchivesPublicQueryPastHistoryActivity;
 import com.bjsz.app.adapters.archives.MyViewPagerAdapter;
+import com.bjsz.app.adapters.archives.ViewpagerArchivewAdapter;
 import com.bjsz.app.base.BaseFragment;
+import com.bjsz.app.entity.archives.ViewpagerArchivewEntity;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 
 import java.util.ArrayList;
@@ -31,6 +38,18 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     private View archives_essential_information,archives_habits_and_customs,archives_person_medical_history;//各个页卡
     /*private int bmpW;// 动画图片宽度
     private ImageView imageView;// 动画图片*/
+
+    private ListView archives_list;//listview
+    private List<ViewpagerArchivewEntity> viewpagerArchivewEntityArrayList = new ArrayList<>();//数据集
+    private ViewpagerArchivewAdapter viewpagerArchivewAdapter;//适配器
+
+    private ListView archives_listha;//listview
+    private List<ViewpagerArchivewEntity> viewpagerArchivewEntityArrayListha = new ArrayList<>();//数据集
+    private ViewpagerArchivewAdapter viewpagerArchivewAdapterha;//适配器
+
+    private RelativeLayout apmh_jws;//既往史
+    private RelativeLayout apmh_jzs;//家族史
+    private RelativeLayout apmh_ycbs;//遗传病史
 
     /**
      * 初始化布局
@@ -75,7 +94,6 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
      */
     @Override
     public void onClick(View v) {
-
     }
 
     /**
@@ -94,6 +112,62 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         viewPager.setAdapter(new MyViewPagerAdapter(views));
         viewPager.setCurrentItem(0);
         viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+
+        archives_list = (ListView)archives_essential_information.findViewById(R.id.archives_list);
+        archives_list.setDivider(new ColorDrawable(Color.parseColor("#F4F8F9")));
+        archives_list.setDividerHeight(2);
+        viewpagerArchivewAdapter = new ViewpagerArchivewAdapter(getActivity());
+        archives_list.setAdapter(viewpagerArchivewAdapter);
+
+        archives_listha = (ListView)archives_habits_and_customs.findViewById(R.id.archives_list);
+        archives_listha.setDivider(new ColorDrawable(Color.parseColor("#F4F8F9")));
+        archives_listha.setDividerHeight(2);
+        viewpagerArchivewAdapterha = new ViewpagerArchivewAdapter(getActivity());
+        archives_listha.setAdapter(viewpagerArchivewAdapterha);
+
+        apmh_jws = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_jws);
+        apmh_jzs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_jzs);
+        apmh_ycbs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_ycbs);
+
+        initEssentialInformation();
+        initHabitsAndCustoms();
+        apmhOnclick();
+
+    }
+
+    /**
+     * 既往史、家族史、遗传病史的监听
+     */
+    public void apmhOnclick(){
+
+        final Intent intent = new Intent();
+
+        apmh_jws.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getActivity(), ArchivesPublicQueryPastHistoryActivity.class);
+                intent.putExtra("key","jws");
+                startActivity(intent);
+            }
+        });
+
+        apmh_jzs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getActivity(), ArchivesPublicQueryPastHistoryActivity.class);
+                intent.putExtra("key","jzs");
+                startActivity(intent);
+            }
+        });
+
+        apmh_ycbs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.setClass(getActivity(), ArchivesPublicQueryPastHistoryActivity.class);
+                intent.putExtra("key","ycbs");
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -178,6 +252,48 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                 textView3.setTextColor(Color.parseColor("#51BEFF"));
             }
         }
+    }
+
+    /**
+     * 初始化健康档案基本信息
+     */
+    public void initEssentialInformation(){
+
+        viewpagerArchivewEntityArrayList.clear();
+
+        ViewpagerArchivewEntity viewpagerArchivewEntity = null;
+
+        for(int i = 0; i < 3; i++){
+
+            viewpagerArchivewEntity = new ViewpagerArchivewEntity("身高","170cm",0);
+
+            viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntity);
+
+        }
+
+        viewpagerArchivewAdapter.setItems(viewpagerArchivewEntityArrayList);
+
+    }
+
+    /**
+     * 初始化健康档案生活习惯
+     */
+    public void initHabitsAndCustoms(){
+
+        viewpagerArchivewEntityArrayListha.clear();
+
+        ViewpagerArchivewEntity viewpagerArchivewEntity = null;
+
+        for(int i = 0; i < 6; i++){
+
+            viewpagerArchivewEntity = new ViewpagerArchivewEntity("饮食是否规律","是",0);
+
+            viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntity);
+
+        }
+
+        viewpagerArchivewAdapterha.setItems(viewpagerArchivewEntityArrayListha);
+
     }
 
 }
