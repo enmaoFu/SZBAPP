@@ -33,6 +33,13 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <!-- 个人中心 设置页面 -->
+        <activity
+            android:name=".activity.my.MySetingActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 </manifest>

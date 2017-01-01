@@ -1,9 +1,12 @@
 package com.bjsz.app.fragments.my;
 
+import android.content.Intent;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
+import com.bjsz.app.activity.my.MySetingActivity;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 
@@ -15,6 +18,8 @@ import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 public class MyFragment extends BaseFragment implements View.OnClickListener{
 
     private TextView center_text;//标题栏中间标题
+
+    private RelativeLayout my_seting;//设置
 
     /**
      * 初始化布局
@@ -31,6 +36,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener{
     @Override
     protected void initView() {
         center_text = (TextView)findViewById(R.id.center_text);
+        my_seting = (RelativeLayout)findViewById(R.id.my_seting);
+        my_seting.setOnClickListener(this);
     }
 
     /**
@@ -60,6 +67,14 @@ public class MyFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
+        Intent intent = new Intent();
+
+        switch (v.getId()){
+            case R.id.my_seting:
+                intent.setClass(getActivity(), MySetingActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
 }
