@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
@@ -33,6 +34,8 @@ public class ArchivesPublicQueryPastHistoryActivity extends BaseActivity impleme
     private List<ArchivesPublicQueryPastHistoryEntity> archivesPublicQueryPastHistoryEntityArrayList = new ArrayList<>();//数据集
     private ArchivesPublicQueryPastHistoryAdapter archivesPublicQueryPastHistoryAdapter;//适配器
 
+    private RelativeLayout query_ycbs_title;//遗传病史需要的头部标题
+
     private String keyValue;//接收传过来的值，便于判断是点击的既往史，家族史，遗传病史的哪一个
 
     /**
@@ -54,6 +57,7 @@ public class ArchivesPublicQueryPastHistoryActivity extends BaseActivity impleme
         aaqqh_list = (ListView)findViewById(R.id.aaqqh_list);
         aaqqh_list.setDivider(new ColorDrawable(Color.parseColor("#F4F8F9")));
         aaqqh_list.setDividerHeight(2);
+        query_ycbs_title = (RelativeLayout)findViewById(R.id.query_ycbs_title);
         archivesPublicQueryPastHistoryAdapter = new ArchivesPublicQueryPastHistoryAdapter(this);
         aaqqh_list.setAdapter(archivesPublicQueryPastHistoryAdapter);
         left_img.setOnClickListener(this);
@@ -67,6 +71,7 @@ public class ArchivesPublicQueryPastHistoryActivity extends BaseActivity impleme
     protected void initData() {
         Bundle bundle = this.getIntent().getExtras();
         keyValue = bundle.getString("key");
+        isGeneticHistory();
         initList();
     }
 
@@ -157,6 +162,19 @@ public class ArchivesPublicQueryPastHistoryActivity extends BaseActivity impleme
         }
 
         archivesPublicQueryPastHistoryAdapter.setItems(archivesPublicQueryPastHistoryEntityArrayList);
+
+    }
+
+    /**
+     * 检测是否是遗传病史跳转进来的,如果是则显示遗传病史需要的头部标题,默认隐藏
+     */
+    public void isGeneticHistory(){
+
+        if(keyValue.equals("ycbs")){
+            query_ycbs_title.setVisibility(View.VISIBLE);
+        }else {
+            return;
+        }
 
     }
 

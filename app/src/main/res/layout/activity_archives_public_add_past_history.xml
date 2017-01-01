@@ -20,9 +20,9 @@
         android:layout_height="50dp">
 
         <TextView
+            android:id="@+id/arc_one_add_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="疾病名称"
             android:textSize="15sp"
             android:textColor="#323232"
             android:layout_centerVertical="true"
@@ -51,21 +51,23 @@
         android:layout_height="50dp">
 
         <TextView
+            android:id="@+id/arc_to_add_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="日期"
             android:textSize="15sp"
             android:textColor="#323232"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"/>
 
         <LinearLayout
+            android:id="@+id/arc_to_add_left_lin"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -99,6 +101,16 @@
                 android:gravity="right"/>
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/arc_to_add_left_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_right_img"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 

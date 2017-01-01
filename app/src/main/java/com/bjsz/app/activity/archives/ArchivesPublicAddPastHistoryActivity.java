@@ -3,6 +3,8 @@ package com.bjsz.app.activity.archives;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
@@ -23,11 +25,19 @@ public class ArchivesPublicAddPastHistoryActivity extends BaseActivity implement
     private String keyValue;//接收传过来的值，便于判断是点击的既往史，家族史，遗传病史的哪一个
 
     /**
+     * 这四个组件用于添加的时候,根据既往史，家族史，遗传病史动态改变
+     */
+    private TextView arc_one_add_left;//添加项第一栏左边的名称
+    private TextView arc_to_add_left;//添加项第二栏左边的名称
+    private LinearLayout arc_to_add_left_lin;//添加项第二栏右边的选择时间
+    private ImageView arc_to_add_left_img;//添加项第二栏右边的箭头图标
+
+    /**
      * 初始化视图
      */
     @Override
     protected void bindViews() {
-        setContentView(R.layout.activity_archives_public_past_history);
+        setContentView(R.layout.activity_archives_public_add_past_history);
     }
 
     /**
@@ -38,6 +48,10 @@ public class ArchivesPublicAddPastHistoryActivity extends BaseActivity implement
         left_img = (ImageView)findViewById(R.id.left_img);
         center_text = (TextView)findViewById(R.id.center_text);
         right_text = (TextView)findViewById(R.id.right_text);
+        arc_one_add_left = (TextView)findViewById(R.id.arc_one_add_left);
+        arc_to_add_left = (TextView)findViewById(R.id.arc_to_add_left);
+        arc_to_add_left_lin = (LinearLayout)findViewById(R.id.arc_to_add_left_lin);
+        arc_to_add_left_img = (ImageView)findViewById(R.id.arc_to_add_left_img);
         left_img.setOnClickListener(this);
     }
 
@@ -48,6 +62,7 @@ public class ArchivesPublicAddPastHistoryActivity extends BaseActivity implement
     protected void initData() {
         Bundle bundle = this.getIntent().getExtras();
         keyValue = bundle.getString("key");
+        initAddData();
     }
 
     /**
@@ -87,4 +102,34 @@ public class ArchivesPublicAddPastHistoryActivity extends BaseActivity implement
                 break;
         }
     }
+
+    /**
+     * 根据既往史，家族史，遗传病史初始化添加项
+     */
+    public void initAddData(){
+
+        switch (keyValue){
+
+            case "jws":
+                arc_one_add_left.setText("疾病名称");
+                arc_to_add_left.setText("日期");
+                arc_to_add_left_lin.setVisibility(View.VISIBLE);
+                break;
+            case "jzs":
+                arc_one_add_left.setText("家人姓名");
+                arc_to_add_left.setText("疾病名称");
+                arc_to_add_left_img.setVisibility(View.VISIBLE);
+                break;
+            case "ycbs":
+                arc_one_add_left.setText("遗传病史");
+                arc_to_add_left.setText("残疾情况");
+                arc_to_add_left_img.setVisibility(View.VISIBLE);
+                break;
+
+        }
+
+
+    }
+
+
 }
