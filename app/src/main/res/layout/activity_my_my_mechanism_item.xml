@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="950dp"
+    android:background="#F4F8F9">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/shape_activity_msg_core_re">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/archives_msg_core_img"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/my_my_mec_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="虎溪街道卫生所"
+                android:textSize="14sp"
+                android:textColor="#50BDFE"
+                android:ellipsize="end"
+                android:maxEms="12"
+                android:singleLine="true"/>
+
+            <TextView
+                android:id="@+id/my_my_mec_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重庆市沙坪坝区大学城虎溪"
+                android:textSize="14sp"
+                android:textColor="#5C5C5C"
+                android:layout_alignParentBottom="true"
+                android:ellipsize="end"
+                android:maxEms="12"
+                android:singleLine="true"/>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/my_my_mec_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_my_my_mechanism_img"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

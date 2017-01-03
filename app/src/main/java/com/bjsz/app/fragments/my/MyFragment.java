@@ -6,7 +6,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
-import com.bjsz.app.activity.LoginActivity;
+import com.bjsz.app.activity.my.MyMyMechanismActivity;
 import com.bjsz.app.activity.my.MySetingActivity;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
@@ -21,6 +21,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener{
 
     private TextView center_text;//标题栏中间标题
 
+    private RelativeLayout my_mechanism;//我的机构
     private RelativeLayout my_seting;//设置
     private BaseLyRoundImageView my_head;//头像
 
@@ -39,10 +40,11 @@ public class MyFragment extends BaseFragment implements View.OnClickListener{
     @Override
     protected void initView() {
         center_text = (TextView)findViewById(R.id.center_text);
+        my_mechanism = (RelativeLayout)findViewById(R.id.my_mechanism);
         my_seting = (RelativeLayout)findViewById(R.id.my_seting);
         my_head = (BaseLyRoundImageView)findViewById(R.id.my_head);
         my_seting.setOnClickListener(this);
-        my_head.setOnClickListener(this);
+        my_mechanism.setOnClickListener(this);
     }
 
     /**
@@ -79,8 +81,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener{
                 intent.setClass(getActivity(), MySetingActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.my_head:
-                intent.setClass(getActivity(), LoginActivity.class);
+            case R.id.my_mechanism:
+                intent.setClass(getActivity(), MyMyMechanismActivity.class);
                 startActivity(intent);
                 break;
         }
