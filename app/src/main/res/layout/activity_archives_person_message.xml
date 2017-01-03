@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F8F9"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#50BDFE">
+
+        <include layout="@layout/public_title_include" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名"
+            android:layout_centerVertical="true"
+            android:textColor="#505050"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="请输入您的真实姓名"
+            android:textColor="#ACACAC"
+            android:textSize="15sp"
+            android:layout_toLeftOf="@+id/archives_name_img"
+            android:layout_marginRight="18dp"/>
+
+        <ImageView
+            android:id="@+id/archives_name_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_right_img"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_height="1.5px"
+            android:background="#F4F8F9"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true">
+        </View>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="性别"
+            android:layout_centerVertical="true"
+            android:textColor="#505050"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="请选择性别"
+            android:textColor="#ACACAC"
+            android:textSize="15sp"
+            android:layout_toLeftOf="@+id/archives_sex_img"
+            android:layout_marginRight="18dp"/>
+
+        <ImageView
+            android:id="@+id/archives_sex_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_right_img"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_height="1.5px"
+            android:background="#F4F8F9"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true">
+        </View>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="年龄"
+            android:layout_centerVertical="true"
+            android:textColor="#505050"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="请输入年龄"
+            android:textColor="#ACACAC"
+            android:textSize="15sp"
+            android:layout_toLeftOf="@+id/archives_age_img"
+            android:layout_marginRight="18dp"/>
+
+        <ImageView
+            android:id="@+id/archives_age_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_right_img"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_height="1.5px"
+            android:background="#F4F8F9"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true">
+        </View>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机号"
+            android:layout_centerVertical="true"
+            android:textColor="#505050"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="请输入您的手机号"
+            android:textColor="#ACACAC"
+            android:textSize="15sp"
+            android:layout_toLeftOf="@+id/archives_phone_img"
+            android:layout_marginRight="18dp"/>
+
+        <ImageView
+            android:id="@+id/archives_phone_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_right_img"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_height="1.5px"
+            android:background="#F4F8F9"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true">
+        </View>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:background="#ffffff">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证号"
+            android:layout_centerVertical="true"
+            android:textColor="#505050"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="请输入身份证号"
+            android:textColor="#ACACAC"
+            android:textSize="15sp"
+            android:layout_toLeftOf="@+id/archives_number_img"
+            android:layout_marginRight="18dp"/>
+
+        <ImageView
+            android:id="@+id/archives_number_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_right_img"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+
+        <View
+            android:layout_height="1.5px"
+            android:background="#F4F8F9"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true">
+        </View>
+
+    </RelativeLayout>
+
+</LinearLayout>

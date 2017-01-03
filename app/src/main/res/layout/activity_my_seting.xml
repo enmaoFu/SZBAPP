@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#F4F8F9"
     android:orientation="vertical">
 
@@ -36,12 +37,14 @@
                 android:textColor="#505050"
                 android:textSize="15sp"/>
 
-            <ImageView
+            <com.suke.widget.SwitchButton
+                android:id="@+id/switch_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_right_img"
+                android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"/>
+                app:sb_checkline_color="#ffffff"
+                app:sb_checked_color="#4EBEFE"/>
 
         </RelativeLayout>
 
@@ -54,6 +57,7 @@
         </View>
 
         <RelativeLayout
+            android:id="@+id/my_fee_re"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="15dp"
@@ -129,6 +133,7 @@
         </View>
 
         <RelativeLayout
+            android:id="@+id/my_about_as_re"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="15dp"
@@ -161,5 +166,17 @@
         </View>
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:text="退出"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:background="@drawable/shape_activity_seting_but"/>
 
 </LinearLayout>

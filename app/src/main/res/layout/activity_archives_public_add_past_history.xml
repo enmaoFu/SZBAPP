@@ -70,6 +70,7 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/archives_strat_date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -90,6 +91,7 @@
                 android:gravity="right"/>
 
             <TextView
+                android:id="@+id/archives_stop_date_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

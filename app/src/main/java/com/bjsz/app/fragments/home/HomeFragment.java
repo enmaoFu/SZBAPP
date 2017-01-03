@@ -1,5 +1,6 @@
 package com.bjsz.app.fragments.home;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -7,6 +8,7 @@ import android.widget.TextView;
 
 import com.bjsz.app.MyApplication;
 import com.bjsz.app.R;
+import com.bjsz.app.activity.home.ArchivesMessageCoreActivity;
 import com.bjsz.app.adapters.home.FragmentHomeAdapter;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.entity.home.HomeGridviewOptionEntity;
@@ -22,7 +24,7 @@ import java.util.Map;
  * @author enmaoFu
  * @date 2016-12-26
  */
-public class HomeFragment extends BaseFragment{
+public class HomeFragment extends BaseFragment implements View.OnClickListener{
 
     private ImageView right_img;//标题栏右边消息
     private TextView center_text;//标题栏中间标题
@@ -50,6 +52,7 @@ public class HomeFragment extends BaseFragment{
         home_grid = (GridView)findViewById(R.id.home_grid);
         fragmentHomeAdapter = new FragmentHomeAdapter(getActivity());
         home_grid.setAdapter(fragmentHomeAdapter);
+        right_img.setOnClickListener(this);
     }
 
     /**
@@ -98,4 +101,20 @@ public class HomeFragment extends BaseFragment{
 
     }
 
+    /**
+     * 事件监听
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+
+        Intent intent = new Intent();
+
+        switch (v.getId()){
+            case R.id.right_img:
+                intent.setClass(getActivity(), ArchivesMessageCoreActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }

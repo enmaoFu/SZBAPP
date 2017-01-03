@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F8F9"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#50BDFE">
+
+        <include layout="@layout/public_title_include" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_height="1.5px"
+        android:background="#E7E8EA"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/bom_re">
+    </View>
+
+    <RelativeLayout
+        android:id="@+id/bom_re"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#ffffff">
+
+        <EditText
+            android:id="@+id/my_fee_edx"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="请输入意见反馈"
+            android:textColorHint="#919191"
+            android:textSize="14sp"
+            android:paddingLeft="15sp"
+            android:layout_marginRight="110dp"
+            android:background="@null"
+            android:textCursorDrawable="@null"/>
+
+        <Button
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:text="发送"
+            android:background="@drawable/shape_activity_feedback_but"
+            android:textColor="#ffffff"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

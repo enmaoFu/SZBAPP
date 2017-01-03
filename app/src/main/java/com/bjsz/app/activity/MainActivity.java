@@ -1,5 +1,6 @@
 package com.bjsz.app.activity;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -51,8 +52,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     private int textcolor,textcolor1;//底部菜单字体颜色
 
-    private int relacolor,relacolor1;//底部菜单背景颜色
-
     @Override
     protected void bindViews() {
         setContentView(R.layout.activity_main);
@@ -84,6 +83,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
+        textcolor = Color.parseColor("#50BDFE");
+        textcolor1 = Color.parseColor("#505050");
         fm = getSupportFragmentManager();
         selectTab(0);
     }
@@ -113,11 +114,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 /*textcolor = Color.parseColor("#777777");
                 textcolor1 = Color.parseColor("#fa7121");
 
-                home_text.setTextColor(textcolor1);
-                data_text.setTextColor(textcolor);
-                archives_text.setTextColor(textcolor);
-                my_text.setTextColor(textcolor);
-
                 relacolor = Color.parseColor("#f4f4f4");
                 relacolor1 = Color.parseColor("#ffffff");
 
@@ -126,10 +122,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 archives.setBackgroundColor(relacolor1);
                 my.setBackgroundColor(relacolor1);*/
 
-                /*home_img.setBackgroundResource(R.drawable.shouyea);
-                problem_img.setBackgroundResource(R.drawable.lanmub);
-                live_img.setBackgroundResource(R.drawable.zhibob);
-                my_img.setBackgroundResource(R.drawable.wodeb);*/
+                home_text.setTextColor(textcolor);
+                data_text.setTextColor(textcolor1);
+                archives_text.setTextColor(textcolor1);
+                my_text.setTextColor(textcolor1);
+
+                home_img.setBackgroundResource(R.mipmap.ic_home_img_suc);
+                archives_img.setBackgroundResource(R.mipmap.ic_archives_img);
+                data_img.setBackgroundResource(R.mipmap.ic_data_img);
+                my_img.setBackgroundResource(R.mipmap.ic_my_img);
 
                 break;
 
@@ -144,11 +145,6 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 /*textcolor = Color.parseColor("#777777");
                 textcolor1 = Color.parseColor("#fa7121");
 
-                home_text.setTextColor(textcolor);
-                data_text.setTextColor(textcolor1);
-                archives_text.setTextColor(textcolor);
-                my_text.setTextColor(textcolor);
-
                 relacolor = Color.parseColor("#f4f4f4");
                 relacolor1 = Color.parseColor("#ffffff");
 
@@ -157,10 +153,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 archives.setBackgroundColor(relacolor1);
                 my.setBackgroundColor(relacolor1);*/
 
-                /*home_img.setBackgroundResource(R.drawable.shouyeb);
-                problem_img.setBackgroundResource(R.drawable.lanmua);
-                live_img.setBackgroundResource(R.drawable.zhibob);
-                my_img.setBackgroundResource(R.drawable.wodeb);*/
+                home_img.setBackgroundResource(R.mipmap.ic_home_img);
+                archives_img.setBackgroundResource(R.mipmap.ic_archives_img);
+                data_img.setBackgroundResource(R.mipmap.ic_data_img_suc);
+                my_img.setBackgroundResource(R.mipmap.ic_my_img);
+
+                home_text.setTextColor(textcolor1);
+                data_text.setTextColor(textcolor);
+                archives_text.setTextColor(textcolor1);
+                my_text.setTextColor(textcolor1);
 
                 break;
 
@@ -189,10 +190,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 archives.setBackgroundColor(relacolor);
                 my.setBackgroundColor(relacolor1);*/
 
-                /*home_img.setBackgroundResource(R.drawable.shouyeb);
-                problem_img.setBackgroundResource(R.drawable.lanmub);
-                live_img.setBackgroundResource(R.drawable.zhiboa);
-                my_img.setBackgroundResource(R.drawable.wodeb);*/
+                home_img.setBackgroundResource(R.mipmap.ic_home_img);
+                archives_img.setBackgroundResource(R.mipmap.ic_archives_img_suc);
+                data_img.setBackgroundResource(R.mipmap.ic_data_img);
+                my_img.setBackgroundResource(R.mipmap.ic_my_img);
+
+                home_text.setTextColor(textcolor1);
+                data_text.setTextColor(textcolor1);
+                archives_text.setTextColor(textcolor);
+                my_text.setTextColor(textcolor1);
 
                 break;
 
@@ -221,10 +227,15 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
                 archives.setBackgroundColor(relacolor1);
                 my.setBackgroundColor(relacolor);*/
 
-                /*home_img.setBackgroundResource(R.drawable.shouyeb);
-                problem_img.setBackgroundResource(R.drawable.lanmub);
-                live_img.setBackgroundResource(R.drawable.zhibob);
-                my_img.setBackgroundResource(R.drawable.wodea);*/
+                home_img.setBackgroundResource(R.mipmap.ic_home_img);
+                archives_img.setBackgroundResource(R.mipmap.ic_archives_img);
+                data_img.setBackgroundResource(R.mipmap.ic_data_img);
+                my_img.setBackgroundResource(R.mipmap.ic_my_img_suc);
+
+                home_text.setTextColor(textcolor1);
+                data_text.setTextColor(textcolor1);
+                archives_text.setTextColor(textcolor1);
+                my_text.setTextColor(textcolor);
 
                 break;
         }

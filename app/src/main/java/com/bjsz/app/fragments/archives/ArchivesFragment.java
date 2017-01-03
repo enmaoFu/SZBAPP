@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
+import com.bjsz.app.activity.archives.ArchivesPersonMessageActivity;
 import com.bjsz.app.activity.archives.ArchivesPublicQueryPastHistoryActivity;
 import com.bjsz.app.adapters.archives.MyViewPagerAdapter;
 import com.bjsz.app.adapters.archives.ViewpagerArchivewAdapter;
@@ -47,6 +48,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     private List<ViewpagerArchivewEntity> viewpagerArchivewEntityArrayListha = new ArrayList<>();//数据集
     private ViewpagerArchivewAdapter viewpagerArchivewAdapterha;//适配器
 
+    private RelativeLayout archives_person_msg_re;//个人信息
     private RelativeLayout apmh_jws;//既往史
     private RelativeLayout apmh_jzs;//家族史
     private RelativeLayout apmh_ycbs;//遗传病史
@@ -66,6 +68,8 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initView() {
         center_text = (TextView)findViewById(R.id.center_text);
+        archives_person_msg_re = (RelativeLayout)findViewById(R.id.archives_person_msg_re);
+        archives_person_msg_re.setOnClickListener(this);
     }
 
     /**
@@ -94,6 +98,16 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
      */
     @Override
     public void onClick(View v) {
+
+        Intent intent = new Intent();
+
+        switch (v.getId()){
+            case R.id.archives_person_msg_re:
+                intent.setClass(getActivity(), ArchivesPersonMessageActivity.class);
+                startActivity(intent);
+                break;
+        }
+
     }
 
     /**

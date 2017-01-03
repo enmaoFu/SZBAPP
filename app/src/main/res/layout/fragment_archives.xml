@@ -17,6 +17,7 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/archives_person_msg_re"
         android:layout_width="match_parent"
         android:layout_height="95dp"
         android:background="#ffffff">

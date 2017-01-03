@@ -40,4 +40,8 @@ dependencies {
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.2.0'
     //日志框架
     compile 'com.orhanobut:logger:1.15'
+    //开关
+    compile 'com.github.zcweng:switch-button:0.0.2@aar'
+    //各种选择器
+    compile 'cn.qqtheme.framework:WheelPicker:latest.release'
 }

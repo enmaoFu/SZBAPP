@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F8F9"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="北京时诊科技有限公司"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp"
+        android:textColor="#ffffff"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:id="@+id/lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_login_bg_img"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_login_logo_img"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="时诊宝"
+            android:textColor="#50BDFE"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:layout_marginTop="10dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="80dp">
+
+            <ImageView
+                android:id="@+id/login_username_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_login_number_img"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/login_username_edx"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/login_username_img"
+                android:hint="手机号"
+                android:textColor="#999999"
+                android:paddingLeft="10dp"
+                android:textSize="15sp"
+                android:background="@null"
+                android:textCursorDrawable="@null"/>
+
+            <View
+                android:layout_height="1.5px"
+                android:background="#EAEAEA"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true">
+            </View>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp">
+
+            <ImageView
+                android:id="@+id/login_code_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_login_code_img"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/login_code_edx"
+                android:layout_width="150dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/login_code_img"
+                android:hint="验证码"
+                android:textColor="#999999"
+                android:paddingLeft="10dp"
+                android:textSize="15sp"
+                android:background="@null"
+                android:textCursorDrawable="@null"/>
+
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:text="发送验证码"
+                android:textSize="15sp"
+                android:textColor="#50BDFE"
+                android:background="@drawable/shape_activity_login_code_but"/>
+
+            <View
+                android:layout_height="1.5px"
+                android:background="#EAEAEA"
+                android:layout_width="match_parent"
+                android:layout_alignParentBottom="true">
+            </View>
+
+        </RelativeLayout>
+
+        <Button
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:text="登陆"
+        android:textColor="#ffffff"
+        android:textSize="15sp"
+        android:background="@drawable/shape_activity_login_suc_but"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

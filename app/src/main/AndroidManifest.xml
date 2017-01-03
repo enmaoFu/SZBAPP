@@ -6,7 +6,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/base_frame_ic_launcher"
+        android:icon="@mipmap/ic_my_bbout_us_img"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -17,6 +17,20 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <!-- 登陆页面 -->
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- 首页，消息中心页面 -->
+        <activity
+            android:name=".activity.home.ArchivesMessageCoreActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
 
         <!-- 健康档案 通用查看个人病里 既往史，家族史，遗传病史，页面 -->
@@ -33,9 +47,30 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <!-- 健康档案 个人信息页面 -->
+        <activity
+            android:name=".activity.archives.ArchivesPersonMessageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
         <!-- 个人中心 设置页面 -->
         <activity
             android:name=".activity.my.MySetingActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- 个人中心 关于我们页面 -->
+        <activity
+            android:name=".activity.my.MyAboutUsActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- 个人中心 意见反馈页面 -->
+        <activity
+            android:name=".activity.my.MyFeedbackActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>

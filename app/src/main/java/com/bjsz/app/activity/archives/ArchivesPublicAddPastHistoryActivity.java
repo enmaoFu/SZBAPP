@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
 import com.bjsz.app.base.BaseActivity;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
+
+import cn.qqtheme.framework.picker.TimePicker;
 
 /**
  * 公共的添加个人病史里 既往史，家族史，遗传病史页面
@@ -29,8 +30,10 @@ public class ArchivesPublicAddPastHistoryActivity extends BaseActivity implement
      */
     private TextView arc_one_add_left;//添加项第一栏左边的名称
     private TextView arc_to_add_left;//添加项第二栏左边的名称
-    private LinearLayout arc_to_add_left_lin;//添加项第二栏右边的选择时间
     private ImageView arc_to_add_left_img;//添加项第二栏右边的箭头图标
+    private LinearLayout arc_to_add_left_lin;//添加项第二栏右边的选择时间
+    private TextView archives_strat_date_text;//开始时间
+    private TextView archives_stop_date_text;//结束时间
 
     /**
      * 初始化视图
@@ -52,6 +55,10 @@ public class ArchivesPublicAddPastHistoryActivity extends BaseActivity implement
         arc_to_add_left = (TextView)findViewById(R.id.arc_to_add_left);
         arc_to_add_left_lin = (LinearLayout)findViewById(R.id.arc_to_add_left_lin);
         arc_to_add_left_img = (ImageView)findViewById(R.id.arc_to_add_left_img);
+        archives_strat_date_text = (TextView)findViewById(R.id.archives_strat_date_text);
+        archives_stop_date_text = (TextView)findViewById(R.id.archives_stop_date_text);
+        archives_strat_date_text.setOnClickListener(this);
+        archives_stop_date_text.setOnClickListener(this);
         left_img.setOnClickListener(this);
     }
 
@@ -99,6 +106,34 @@ public class ArchivesPublicAddPastHistoryActivity extends BaseActivity implement
         switch (v.getId()){
             case R.id.left_img:
                 backView();
+                break;
+            case R.id.archives_strat_date_text:
+                TimePicker pickerStart = new TimePicker(this, TimePicker.HOUR_24);
+                pickerStart.setRangeStart(0, 0);//00:00
+                pickerStart.setRangeEnd(23, 00);//23:00
+                pickerStart.setTopLineVisible(false);
+                pickerStart.setOnTimePickListener(new TimePicker.OnTimePickListener() {
+                    @Override
+                    public void onTimePicked(String hour, String minute) {
+                        //showToast(hour + ":" + minute);
+                        archives_strat_date_text.setText(hour + ":" + minute);
+                    }
+                });
+                pickerStart.show();
+                break;
+            case R.id.archives_stop_date_text:
+                TimePicker pickerEnd = new TimePicker(this, TimePicker.HOUR_24);
+                pickerEnd.setRangeStart(0, 0);//00:00
+                pickerEnd.setRangeEnd(23, 00);//23:00
+                pickerEnd.setTopLineVisible(false);
+                pickerEnd.setOnTimePickListener(new TimePicker.OnTimePickListener() {
+                    @Override
+                    public void onTimePicked(String hour, String minute) {
+                        //showToast(hour + ":" + minute);
+                        archives_stop_date_text.setText(hour + ":" + minute);
+                    }
+                });
+                pickerEnd.show();
                 break;
         }
     }

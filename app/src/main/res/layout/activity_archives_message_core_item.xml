@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="#F4F8F9">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/shape_activity_msg_core_re">
+
+        <ImageView
+            android:id="@+id/archives_msg_core_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_archives_msg_core_img"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/archives_msg_core_img"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/archives_msg_core_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="您有新的测量结果等待确认"
+                android:textSize="14sp"
+                android:textColor="#343434"
+                android:ellipsize="end"
+                android:maxEms="12"
+                android:singleLine="true"/>
+
+            <TextView
+                android:id="@+id/archives_msg_core_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="血压 测量结果：89/168mmHg"
+                android:textSize="14sp"
+                android:textColor="#5C5C5C"
+                android:layout_alignParentBottom="true"
+                android:ellipsize="end"
+                android:maxEms="12"
+                android:singleLine="true"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/archives_msg_core_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14:30"
+            android:textSize="14sp"
+            android:textColor="#5C5C5C"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
