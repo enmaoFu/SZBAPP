@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- 测试 -->
+
 
         <!-- 主页面 -->
         <activity
@@ -33,6 +33,13 @@
         <!-- 应用首页，消息中心页面 -->
         <activity
             android:name=".activity.home.ArchivesMessageCoreActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- 应用首页，消息详情页面 -->
+        <activity
+            android:name=".activity.home.ArchivesMessageDetailsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>

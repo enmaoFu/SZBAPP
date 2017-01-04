@@ -1,6 +1,8 @@
 package com.bjsz.app.activity.home;
 
+import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,6 +49,16 @@ public class ArchivesMessageCoreActivity extends BaseActivity implements View.On
         archivesMessageCoreAdapter = new ArchivesMessageCoreAdapter(this);
         archives_msg_code_list.setAdapter(archivesMessageCoreAdapter);
         left_img.setOnClickListener(this);
+        archives_msg_code_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent();
+                intent.setClass(ArchivesMessageCoreActivity.this,ArchivesMessageDetailsActivity.class);
+                startActivity(intent);
+
+            }
+        });
     }
 
     /**
@@ -65,7 +77,7 @@ public class ArchivesMessageCoreActivity extends BaseActivity implements View.On
         left_img.setVisibility(View.VISIBLE);
         center_text.setVisibility(View.VISIBLE);
         left_img.setImageResource(R.mipmap.ic_left_img);
-        center_text.setText("信息中心");
+        center_text.setText("消息中心");
         View topView = findViewById(R.id.lin);
         BaseImmersedStatusbarUtils.initAfterSetContentView(this, topView);
     }

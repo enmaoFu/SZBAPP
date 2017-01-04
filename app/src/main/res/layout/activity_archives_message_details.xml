@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/base"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F8F9">
+
+    <LinearLayout
+        android:id="@+id/lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#50BDFE">
+
+        <include layout="@layout/public_title_include" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_below="@+id/lin"
+        android:background="@mipmap/test1"/>
+
+    <RelativeLayout
+        android:id="@+id/archives_message_details_re"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/shape_activity_archives_message_details_web">
+
+        <com.bjsz.app.views.BaseSzbScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:text="如果在众人六神无主之时，
+你能镇定自若而不是人云亦云；
+
+如果在被众人猜忌怀疑时，
+你能自信如常而不去枉加辩论；
+
+如果你有梦想，又能不迷失自我；
+如果你有神思，又不至于走火入魔；
+
+如果你在成功之中能不忘形于色，
+而在灾难之后也勇于咀嚼苦果；
+
+如果听到自己说出的奥妙，
+被无赖歪曲成面目全非的魔术而不生怨艾；
+
+如果看到自己追求的美好，
+受天灾破灭为一堆零碎的瓦砾，也不肯放弃；
+
+如果你辛苦劳作，已功成名就，
+为了新的目标，你依旧冒险一搏，哪怕功名成乌有；
+
+如果你跟村夫交谈而不变谦恭之态，
+和王侯散步而不露谄媚之颜；
+
+如果他人的爱憎左右不了你的正气；
+如果你和任何人为伍都能卓然独立；
+
+如果昏惑的骚扰动摇不了你的意志，
+你能等自己平心静气再做答时……
+
+那么，你的修养就会如天地般博大——
+而你，就是个真正的男子汉。
+
+如果听到自己说出的奥妙，
+被无赖歪曲成面目全非的魔术而不生怨艾；
+
+如果看到自己追求的美好，
+受天灾破灭为一堆零碎的瓦砾，也不肯放弃；
+
+如果你辛苦劳作，已功成名就，
+为了新的目标，你依旧冒险一搏，哪怕功名成乌有；
+
+如果你跟村夫交谈而不变谦恭之态，
+和王侯散步而不露谄媚之颜；
+
+如果他人的爱憎左右不了你的正气；
+如果你和任何人为伍都能卓然独立；
+
+如果昏惑的骚扰动摇不了你的意志，
+你能等自己平心静气再做答时……
+
+那么，你的修养就会如天地般博大——
+而你，就是个真正的男子汉。"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:gravity="center"/>
+
+        </com.bjsz.app.views.BaseSzbScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
