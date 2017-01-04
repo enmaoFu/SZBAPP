@@ -8,7 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
-import com.bjsz.app.activity.data.DataPublicTestingPresentationDetailsActivity;
+import com.bjsz.app.activity.data.DataBloodPressureDetailsActivity;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 import com.orhanobut.logger.Logger;
@@ -137,56 +137,65 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         switch (v.getId()){
             case R.id.data_heart_pulse_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.putExtra("key",VALUE_PUBLIC);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
+                //intent.putExtra("key",VALUE_PUBLIC);
                 startActivity(intent);
                 break;
 
             case R.id.data_blood_pressure_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
                 intent.putExtra("key",VALUE_PUBLIC);
                 startActivity(intent);
                 break;
 
             case R.id.data_oxygen_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.putExtra("key",VALUE_PUBLIC);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
+                //intent.putExtra("key",VALUE_PUBLIC);
                 startActivity(intent);
                 break;
 
             case R.id.data_blood_sugar_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.putExtra("key",VALUE_PUBLIC);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
+                //intent.putExtra("key",VALUE_PUBLIC);
                 startActivity(intent);
                 break;
 
             case R.id.data_temperature_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
                 intent.putExtra("key",VALUE_PUBLIC);
-                startActivity(intent);
+                //startActivity(intent);
                 break;
 
             case R.id.data_uric_acid_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.putExtra("key",VALUE_PUBLIC);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
+                //intent.putExtra("key",VALUE_PUBLIC);
                 startActivity(intent);
                 break;
 
             case R.id.data_cholesterol_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.putExtra("key",VALUE_PUBLIC);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
+                //intent.putExtra("key",VALUE_PUBLIC);
                 startActivity(intent);
                 break;
 
             case R.id.data_urine_routine_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.putExtra("key",VALUE_URINE_ROUTINE);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
+                //intent.putExtra("key",VALUE_URINE_ROUTINE);
                 startActivity(intent);
                 break;
 
             case R.id.data_ecg_re:
-                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.putExtra("key",VALUE_ECG);
+                //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
+                //intent.putExtra("key",VALUE_ECG);
                 startActivity(intent);
                 break;
         }

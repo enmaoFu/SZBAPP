@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#F4F8F9"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#50BDFE">
+
+        <include layout="@layout/public_title_include" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:background="@mipmap/ic_my_bg_img">
+
+        <TextView
+            android:id="@+id/data_blood_pressure_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="121"
+            android:textStyle="bold"
+            android:textSize="40sp"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="测量条数"
+            android:textColor="#ffffff"
+            android:layout_marginTop="5dp"
+            android:textSize="16sp"
+            android:layout_below="@+id/data_blood_pressure_number"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView" />
+
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F4F8F9"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="测量时间"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#353535"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="高压mmHg"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#353535"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="低压mmHg"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#353535"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="脉率次/分"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="#353535"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <ExpandableListView
+        android:id="@id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

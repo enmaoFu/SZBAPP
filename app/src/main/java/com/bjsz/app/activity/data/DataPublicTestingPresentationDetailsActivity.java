@@ -1,6 +1,5 @@
 package com.bjsz.app.activity.data;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -82,7 +81,9 @@ public class DataPublicTestingPresentationDetailsActivity extends BaseActivity i
      */
     @Override
     protected void initData() {
-        Bundle bundle = this.getIntent().getExtras();
+        initGridview();
+        initListview();
+        /*Bundle bundle = this.getIntent().getExtras();
         keyValue = bundle.getString("key");
         switch (keyValue){
             case VALUE_PUBLIC:
@@ -98,7 +99,7 @@ public class DataPublicTestingPresentationDetailsActivity extends BaseActivity i
                 initGridview();
                 initListview();
                 break;
-        }
+        }*/
 
     }
 

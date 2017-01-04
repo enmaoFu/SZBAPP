@@ -19,10 +19,16 @@
             </intent-filter>
         </activity>
 
+        <!--测试-->
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
 
         <!-- 主页面 -->
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.data.DataBloodPressureDetailsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
