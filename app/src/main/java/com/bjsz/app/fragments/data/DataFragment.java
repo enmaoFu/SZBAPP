@@ -1,11 +1,14 @@
 package com.bjsz.app.fragments.data;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
+import com.bjsz.app.activity.data.DataPublicTestingPresentationDetailsActivity;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 import com.orhanobut.logger.Logger;
@@ -15,11 +18,31 @@ import com.orhanobut.logger.Logger;
  * @author enmaoFu
  * @date 2016-12-26
  */
-public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,View.OnClickListener {
 
     private TextView center_text;//标题栏中间标题
 
     private SwipeRefreshLayout swipeLayout;//下拉刷新控件
+
+    private RelativeLayout data_heart_pulse_re;//心脉
+    private RelativeLayout data_blood_pressure_re;//血压
+    private RelativeLayout data_oxygen_re;//血氧
+    private RelativeLayout data_blood_sugar_re;//血糖
+    private RelativeLayout data_temperature_re;//体温
+    private RelativeLayout data_uric_acid_re;//尿酸
+    private RelativeLayout data_cholesterol_re;//胆固醇
+    private RelativeLayout data_urine_routine_re;//尿常规
+    private RelativeLayout data_ecg_re;//心电
+
+    /**
+     * 传递给健康数据通用检测报告详情页面
+     * 默认为1 表示通用的
+     * 2 表示尿常规
+     * 3 表示心电
+     */
+    private static final String VALUE_PUBLIC = "1";
+    private static final String VALUE_URINE_ROUTINE = "2";
+    private static final String VALUE_ECG = "3";
 
     /**
      * 初始化布局
@@ -37,6 +60,26 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     protected void initView() {
         center_text = (TextView)findViewById(R.id.center_text);
         swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipeLayout);
+
+        data_heart_pulse_re = (RelativeLayout)findViewById(R.id.data_heart_pulse_re);
+        data_blood_pressure_re = (RelativeLayout)findViewById(R.id.data_blood_pressure_re);
+        data_oxygen_re = (RelativeLayout)findViewById(R.id.data_oxygen_re);
+        data_blood_sugar_re = (RelativeLayout)findViewById(R.id.data_blood_sugar_re);
+        data_temperature_re = (RelativeLayout)findViewById(R.id.data_temperature_re);
+        data_uric_acid_re = (RelativeLayout)findViewById(R.id.data_uric_acid_re);
+        data_cholesterol_re = (RelativeLayout)findViewById(R.id.data_cholesterol_re);
+        data_urine_routine_re = (RelativeLayout)findViewById(R.id.data_urine_routine_re);
+        data_ecg_re = (RelativeLayout)findViewById(R.id.data_ecg_re);
+
+        data_heart_pulse_re.setOnClickListener(this);
+        data_blood_pressure_re.setOnClickListener(this);
+        data_oxygen_re.setOnClickListener(this);
+        data_blood_sugar_re.setOnClickListener(this);
+        data_temperature_re.setOnClickListener(this);
+        data_uric_acid_re.setOnClickListener(this);
+        data_cholesterol_re.setOnClickListener(this);
+        data_urine_routine_re.setOnClickListener(this);
+        data_ecg_re.setOnClickListener(this);
     }
 
     /**
@@ -81,5 +124,71 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 swipeLayout.setRefreshing(false);//完成刷新，关闭刷新
             }
         }, 5000);
+    }
+
+    /**
+     * 事件监听
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+
+        Intent intent = new Intent();
+
+        switch (v.getId()){
+            case R.id.data_heart_pulse_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_PUBLIC);
+                startActivity(intent);
+                break;
+
+            case R.id.data_blood_pressure_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_PUBLIC);
+                startActivity(intent);
+                break;
+
+            case R.id.data_oxygen_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_PUBLIC);
+                startActivity(intent);
+                break;
+
+            case R.id.data_blood_sugar_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_PUBLIC);
+                startActivity(intent);
+                break;
+
+            case R.id.data_temperature_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_PUBLIC);
+                startActivity(intent);
+                break;
+
+            case R.id.data_uric_acid_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_PUBLIC);
+                startActivity(intent);
+                break;
+
+            case R.id.data_cholesterol_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_PUBLIC);
+                startActivity(intent);
+                break;
+
+            case R.id.data_urine_routine_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_URINE_ROUTINE);
+                startActivity(intent);
+                break;
+
+            case R.id.data_ecg_re:
+                intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
+                intent.putExtra("key",VALUE_ECG);
+                startActivity(intent);
+                break;
+        }
     }
 }

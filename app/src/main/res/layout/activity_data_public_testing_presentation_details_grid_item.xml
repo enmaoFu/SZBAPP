@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/re_w"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/shape_activity_data_public_testing_item_re"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:id="@+id/re_l"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/shape_activity_data_public_testing_item_re1"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/re_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="118"
+                android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:maxEms="3"
+                android:singleLine="true"
+                android:ellipsize="end"  />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/re_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="高压mmHg"
+        android:layout_gravity="center"
+        android:textSize="14sp"
+        android:textColor="#323232"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>
