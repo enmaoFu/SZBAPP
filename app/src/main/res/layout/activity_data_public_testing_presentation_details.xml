@@ -28,7 +28,8 @@
             <RelativeLayout
                 android:id="@+id/data_public_testing_top"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
                 
                 <RelativeLayout
                     android:id="@+id/data_public_testing_top_title"
