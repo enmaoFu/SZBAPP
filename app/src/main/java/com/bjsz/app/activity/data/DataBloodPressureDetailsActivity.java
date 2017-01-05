@@ -104,7 +104,7 @@ public class DataBloodPressureDetailsActivity extends BaseActivity implements Vi
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         //图标设置在右边
-        exlist_lol.setIndicatorBounds(dm.widthPixels-60, dm.widthPixels);// 设置指示图标的位置
+        exlist_lol.setIndicatorBounds(dm.widthPixels-120, dm.widthPixels);// 设置指示图标的位置
 
         //数据准备
         gData = new ArrayList<DataBloodPressureDetailsGroupEntity>();
