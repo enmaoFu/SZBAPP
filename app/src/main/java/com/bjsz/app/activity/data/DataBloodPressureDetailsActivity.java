@@ -1,69 +1,72 @@
 package com.bjsz.app.activity.data;
 
-import android.app.ExpandableListActivity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bjsz.app.R;
+import com.bjsz.app.adapters.data.DataBloodPressureDetailsAdapter;
+import com.bjsz.app.base.BaseActivity;
+import com.bjsz.app.entity.data.DataBloodPressureDetailsChildeEntity;
+import com.bjsz.app.entity.data.DataBloodPressureDetailsGroupEntity;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 血压详情页面
  * @author enmaoFu
  * @date 2017-01-04
  */
-public class DataBloodPressureDetailsActivity extends ExpandableListActivity implements View.OnClickListener{
+public class DataBloodPressureDetailsActivity extends BaseActivity implements View.OnClickListener{
 
     private ImageView left_img;//标题栏左边返回
     private TextView center_text;//标题栏中间标题
     private TextView right_text;//标题栏右边分析
 
-    /**
-     * 创建一级条目容器
-     */
-    List<Map<String, String>> gruops = new ArrayList<Map<String, String>>();
-    /**
-     * 存放内容, 以便显示在列表中
-     */
-    List<List<Map<String, String>>> childs = new ArrayList<List<Map<String, String>>>();
+    private ArrayList<DataBloodPressureDetailsGroupEntity> gData = null;
+    private ArrayList<ArrayList<DataBloodPressureDetailsChildeEntity>> iData = null;
+    private ArrayList<DataBloodPressureDetailsChildeEntity> lData = null;
+    private ExpandableListView exlist_lol;
+    private DataBloodPressureDetailsAdapter myAdapter = null;
 
+    /**
+     * 初始化视图
+     */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        super.onCreate(savedInstanceState);
+    protected void bindViews() {
         setContentView(R.layout.activity_data_blood_pressure_details);
-        initView();
-        initActionBar();
-        setListData();
     }
 
     /**
      * 初始化组件
      */
+    @Override
     public void initView(){
-
         left_img = (ImageView)findViewById(R.id.left_img);
         center_text = (TextView)findViewById(R.id.center_text);
         right_text = (TextView)findViewById(R.id.right_text);
+        exlist_lol = (ExpandableListView)findViewById(R.id.exlist_lol);
         left_img.setOnClickListener(this);
+        right_text.setOnClickListener(this);
+    }
 
+    /**
+     * 初始化数据
+     */
+    @Override
+    protected void initData() {
+        initExpandableListView();
     }
 
     /**
      * 初始化标题栏
      */
+    @Override
     public void initActionBar() {
         left_img.setVisibility(View.VISIBLE);
         center_text.setVisibility(View.VISIBLE);
@@ -73,7 +76,6 @@ public class DataBloodPressureDetailsActivity extends ExpandableListActivity imp
         right_text.setText("分析");
         View topView = findViewById(R.id.lin);
         BaseImmersedStatusbarUtils.initAfterSetContentView(this, topView);
-
     }
 
     /**
@@ -82,110 +84,76 @@ public class DataBloodPressureDetailsActivity extends ExpandableListActivity imp
      */
     @Override
     public void onClick(View v) {
+
+        Intent intent = new Intent();
+
         switch (v.getId()){
             case R.id.left_img:
-                finish();
-                overridePendingTransition(0, R.anim.base_frame_anim_back_right_out);
+                backView();
+                break;
+            case R.id.right_text:
+                intent.setClass(this,DataHealthyAnalysisActivity.class);
+                startActivity(intent);
                 break;
         }
     }
 
-    /**
-     * 设置列表内容
-     */
-    public void setListData() {
+    public void initExpandableListView(){
 
+        // 得到屏幕的大小
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         //图标设置在右边
-        getExpandableListView().setIndicatorBounds(dm.widthPixels-115, dm.widthPixels); // 设置指示图标的位置
+        exlist_lol.setIndicatorBounds(dm.widthPixels-60, dm.widthPixels);// 设置指示图标的位置
 
-        // 创建二个一级条目标题
-        Map<String, String> title_1 = new HashMap<String, String>();
-        Map<String, String> title_2 = new HashMap<String, String>();
-        Map<String, String> title_3 = new HashMap<String, String>();
-        title_1.put("group", "林炳文");
-        title_2.put("group", "文炳林");
-        gruops.add(title_1);
-        gruops.add(title_2);
+        //数据准备
+        gData = new ArrayList<DataBloodPressureDetailsGroupEntity>();
+        iData = new ArrayList<ArrayList<DataBloodPressureDetailsChildeEntity>>();
+        gData.add(new DataBloodPressureDetailsGroupEntity("2014-02-12"));
+        gData.add(new DataBloodPressureDetailsGroupEntity("2017-01-05"));
+        gData.add(new DataBloodPressureDetailsGroupEntity("2016-09-01"));
 
-        // 创建二级条目内容
-        // 内容一
-        Map<String, String> title_1_content_1 = new HashMap<String, String>();
-        Map<String, String> title_1_content_2 = new HashMap<String, String>();
-        Map<String, String> title_1_content_3 = new HashMap<String, String>();
-        title_1_content_1.put("child", "工人");
-        title_1_content_2.put("child", "学生");
-        title_1_content_3.put("child", "农民");
+        lData = new ArrayList<DataBloodPressureDetailsChildeEntity>();
 
-        List<Map<String, String>> childs_1 = new ArrayList<Map<String, String>>();
-        childs_1.add(title_1_content_1);
-        childs_1.add(title_1_content_2);
-        childs_1.add(title_1_content_3);
+        //AD组
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:30","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:30","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:30","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:30","112","60","68"));
+        iData.add(lData);
+        //AP组
+        lData = new ArrayList<DataBloodPressureDetailsChildeEntity>();
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:40","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:40","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:40","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:40","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:40","112","60","68"));
+        iData.add(lData);
+        //TANK组
+        lData = new ArrayList<DataBloodPressureDetailsChildeEntity>();
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:50","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:50","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:50","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:50","112","60","68"));
+        lData.add(new DataBloodPressureDetailsChildeEntity("16:50","112","60","68"));
+        iData.add(lData);
 
-        // 内容二
-        Map<String, String> title_2_content_1 = new HashMap<String, String>();
-        Map<String, String> title_2_content_2 = new HashMap<String, String>();
-        Map<String, String> title_2_content_3 = new HashMap<String, String>();
-        title_2_content_1.put("child", "猩猩");
-        title_2_content_2.put("child", "老虎");
-        title_2_content_3.put("child", "狮子");
-        List<Map<String, String>> childs_2 = new ArrayList<Map<String, String>>();
-        childs_2.add(title_2_content_1);
-        childs_2.add(title_2_content_2);
-        childs_2.add(title_2_content_3);
+        myAdapter = new DataBloodPressureDetailsAdapter(gData,iData,this);
+        exlist_lol.setAdapter(myAdapter);
 
-        childs.add(childs_1);
-        childs.add(childs_2);
+        //为列表设置点击事件
+        exlist_lol.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Toast.makeText(DataBloodPressureDetailsActivity.this, "你点击了：" + iData.get(groupPosition).get(childPosition).getTextChild_one(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(DataBloodPressureDetailsActivity.this,DataPublicTestingPresentationDetailsActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        });
 
-        /**
-         * 创建ExpandableList的Adapter容器 参数: 1.上下文 2.一级集合 3.一级样式文件 4. 一级条目键值
-         * 5.一级显示控件名 6. 二级集合 7. 二级样式 8.二级条目键值 9.二级显示控件名
-         *
-         */
-        SimpleExpandableListAdapter sela = new SimpleExpandableListAdapter(
-                this, gruops, R.layout.activity_data_blood_pressure_details_groups, new String[] { "group" },
-                new int[] { R.id.textGroup }, childs, R.layout.activity_data_blood_pressure_details_childs,
-                new String[] { "child" }, new int[] { R.id.textChild });
-        // 加入列表
-        setListAdapter(sela);
-    }
 
-    /**
-     * 列表内容按下
-     */
-    @Override
-    public boolean onChildClick(ExpandableListView parent, View v,
-                                int groupPosition, int childPosition, long id) {
-        Toast.makeText(
-                DataBloodPressureDetailsActivity.this,
-                "您选择了"
-                        + gruops.get(groupPosition).toString()
-                        + "子编号"
-                        + childs.get(groupPosition).get(childPosition)
-                        .toString(), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent();
-        intent.setClass(this, DataPublicTestingPresentationDetailsActivity.class);
-        startActivity(intent);
-        return super.onChildClick(parent, v, groupPosition, childPosition, id);
-    }
-
-    /**
-     * 二级标题按下
-     */
-    @Override
-    public boolean setSelectedChild(int groupPosition, int childPosition,
-                                    boolean shouldExpandGroup) {
-        return super.setSelectedChild(groupPosition, childPosition,
-                shouldExpandGroup);
-    }
-
-    /**
-     * 一级标题按下
-     */
-    @Override
-    public void setSelectedGroup(int groupPosition) {
-        super.setSelectedGroup(groupPosition);
     }
 
 }
