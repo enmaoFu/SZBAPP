@@ -44,4 +44,6 @@ dependencies {
     compile 'com.github.zcweng:switch-button:0.0.2@aar'
     //各种选择器
     compile 'cn.qqtheme.framework:WheelPicker:latest.release'
+    //气泡
+    compile 'com.daasuu:BubbleLayout:1.0.0'
 }

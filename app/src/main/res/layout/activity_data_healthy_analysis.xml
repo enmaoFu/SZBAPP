@@ -16,6 +16,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/data_healthy_analysis_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -153,7 +154,7 @@
 
             </LinearLayout>
 
-            <!--<RelativeLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_activity_healthy_analysis_re"
@@ -161,8 +162,39 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp">
 
+                <TextView
+                    android:id="@+id/data_healthy_analysis_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="近七天血压"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:textSize="17sp"
+                    android:textColor="#3A3A3A"/>
 
-            </RelativeLayout>-->
+                <TextView
+                    android:id="@+id/data_healthy_analysis_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:textColor="#50BDFE"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"/>
+
+                <com.bjsz.app.views.BaseLyListView
+                    android:id="@+id/data_healthy_analysis_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_margin="10dp"
+                    android:scrollbars="none"
+                    android:divider="@null"
+                    android:layout_below="@+id/data_healthy_analysis_day">
+                </com.bjsz.app.views.BaseLyListView>
+                
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:minHeight="80dp"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true">
+
+        <LinearLayout
+            android:id="@+id/data_healthy_analysis_itme_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/data_healthy_analysis_itme_date_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="01-01"
+                android:textSize="14sp"
+                android:textColor="#50BDFE"
+                android:layout_gravity="right"/>
+
+            <TextView
+                android:id="@+id/data_healthy_analysis_itme_date_to"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017"
+                android:textSize="12sp"
+                android:textColor="#50BDFE"
+                android:layout_gravity="right"/>
+
+            <TextView
+                android:id="@+id/data_healthy_analysis_itme_date_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017"
+                android:textSize="12sp"
+                android:textColor="#50BDFE"
+                android:layout_gravity="right"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/data_healthy_analysis_itme_xg"
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:layout_toRightOf="@+id/data_healthy_analysis_itme_date"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true">
+
+            <View
+                android:layout_height="80dp"
+                android:background="#50BDFE"
+                android:layout_width="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true">
+            </View>
+
+            <TextView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/shape_activity_healthy_analysis_itme_text"/>
+
+        </RelativeLayout>
+
+        <com.daasuu.bl.BubbleLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="8dp"
+            app:bl_arrowHeight="8dp"
+            app:bl_arrowPosition="20dp"
+            app:bl_arrowWidth="8dp"
+            app:bl_bubbleColor="#50BDFE"
+            app:bl_cornersRadius="8dp"
+            app:bl_arrowDirection="left"
+            android:layout_toRightOf="@+id/data_healthy_analysis_itme_xg"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp">
+
+            <TextView
+                android:id="@+id/data_healthy_analysis_itme_text"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="4dp"
+                android:text="BubbleLayout"
+                android:textColor="#ffffff"
+                android:textSize="13sp"
+                android:gravity="center"/>
+
+        </com.daasuu.bl.BubbleLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

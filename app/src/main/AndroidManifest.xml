@@ -84,6 +84,13 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <!-- 健康数据，健康分析页面，更多 -->
+        <activity
+            android:name=".activity.data.DataHealthyAnalysisMoreActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
         <!-- 健康数据，血压详情页面页面 -->
         <activity
             android:name=".activity.data.DataBloodPressureDetailsActivity"
