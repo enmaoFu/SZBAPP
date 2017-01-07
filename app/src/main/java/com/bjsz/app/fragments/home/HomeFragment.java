@@ -13,6 +13,7 @@ import com.bjsz.app.adapters.home.FragmentHomeAdapter;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.entity.home.HomeGridviewOptionEntity;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
+import com.bjsz.app.views.BaseRiseNumberTextView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,6 +34,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private List<HomeGridviewOptionEntity> homeGridviewOptionArrayList = new ArrayList<>();//数据集
     private FragmentHomeAdapter fragmentHomeAdapter;//适配器
 
+    private BaseRiseNumberTextView home_total_number;
+
     /**
      * 初始化布局
      * @return
@@ -50,6 +53,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         right_img = (ImageView)findViewById(R.id.right_img);
         center_text = (TextView)findViewById(R.id.center_text);
         home_grid = (GridView)findViewById(R.id.home_grid);
+        home_total_number = (BaseRiseNumberTextView)findViewById(R.id.home_total_number);
         fragmentHomeAdapter = new FragmentHomeAdapter(getActivity());
         home_grid.setAdapter(fragmentHomeAdapter);
         right_img.setOnClickListener(this);
@@ -60,6 +64,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
      */
     @Override
     protected void initData() {
+        initBaseRiseNumberTextView();
         initGridview();
     }
 
@@ -117,4 +122,23 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 break;
         }
     }
+
+    public void initBaseRiseNumberTextView(){
+
+        // 设置数据
+        home_total_number.withNumber(300);
+        // 设置动画播放时间
+        home_total_number.setDuration(5000);
+        // 开始播放动画
+        home_total_number.start();
+        // 监听动画播放结束
+        home_total_number.setOnEndListener(new BaseRiseNumberTextView.EndListener() {
+
+            @Override
+            public void onEndFinish() {
+                showToast("数字增长完毕");
+            }
+        });
+    }
+
 }
