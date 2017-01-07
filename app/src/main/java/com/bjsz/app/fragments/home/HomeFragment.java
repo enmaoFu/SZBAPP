@@ -141,4 +141,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         });
     }
 
+    /**
+     * 因为切换fragment的时候，会进行销毁调用oeDestroy方法，所以在这里要对动画进行取消
+     * 否则因为切换后动画还在进行，当监听结束后对该页面进行UI操作是，因为该fragment已被销毁，所以会报空指针异常
+     */
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //取消动画
+        home_total_number.cancel();
+    }
+
 }

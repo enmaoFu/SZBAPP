@@ -15,6 +15,7 @@ import java.text.DecimalFormat;
  * @author enmaoFu
  * @date 2017-01-07
  */
+
 public class BaseRiseNumberTextView extends TextView implements IRiseNumber {
 
     private static final int STOPPED = 0;
@@ -42,6 +43,8 @@ public class BaseRiseNumberTextView extends TextView implements IRiseNumber {
 
     final static int[] sizeTable = { 9, 99, 999, 9999, 99999, 999999, 9999999,
             99999999, 999999999, Integer.MAX_VALUE };
+
+    private ValueAnimator valueAnimatorint;
 
     /**
      * 构造方法
@@ -109,11 +112,11 @@ public class BaseRiseNumberTextView extends TextView implements IRiseNumber {
      */
     private void runInt() {
 
-        ValueAnimator valueAnimator = ValueAnimator.ofInt((int) fromNumber,
+        valueAnimatorint = ValueAnimator.ofInt((int) fromNumber,
                 (int) number);
-        valueAnimator.setDuration(duration);
+        valueAnimatorint.setDuration(duration);
 
-        valueAnimator
+        valueAnimatorint
                 .addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                     @Override
                     public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -128,7 +131,7 @@ public class BaseRiseNumberTextView extends TextView implements IRiseNumber {
                         }
                     }
                 });
-        valueAnimator.start();
+        valueAnimatorint.start();
     }
 
     static int sizeOfInt(int x) {
@@ -157,6 +160,14 @@ public class BaseRiseNumberTextView extends TextView implements IRiseNumber {
             else
                 runFloat();
         }
+    }
+
+    /**
+     * 取消动画
+     */
+    @Override
+    public void cancel() {
+        valueAnimatorint.cancel();
     }
 
     /**

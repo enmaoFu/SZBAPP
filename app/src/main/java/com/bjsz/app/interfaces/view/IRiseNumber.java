@@ -15,6 +15,11 @@ public interface IRiseNumber {
     public void start();
 
     /**
+     * 取消动画
+     */
+    public void cancel();
+
+    /**
      * 设置小数
      *
      * @param number
