@@ -152,4 +152,85 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         home_total_number.cancel();
     }
 
+    /**
+     * 测试JSON
+     * 三个实体类分别是
+     *
+     * public class A {
+
+       private int status;
+
+       private String msg;
+
+       private List<B> data;
+
+      }
+     *
+     *
+     * public class B {
+
+       private String a;
+
+       private String b;
+
+       private String c;
+
+       private List<C> days;
+
+       private String d;
+
+      }
+
+     *
+     *
+     * public class C {
+
+       private String a;
+
+       private String b;
+
+       private String c;
+
+        private String d;
+
+      }
+     *
+     */
+    /*public void json(){
+
+        A a = new A();
+        List<B> listb = new ArrayList<>();
+        List<C> listc = new ArrayList<>();
+        B b = new B();
+        C c = new C();
+        C c1 = new C();
+
+        c.setA("a");
+        c.setB("b");
+        c.setC("c");
+        c.setD("d");
+        c1.setA("a");
+        c1.setB("b");
+        c1.setC("c");
+        c1.setD("d");
+        listc.add(c);
+        listc.add(c1);
+
+        b.setA("a");
+        b.setB("bb");
+        b.setC("c");
+        b.setD("d");
+        b.setDays(listc);
+        listb.add(b);
+
+        a.setStatus(0);
+        a.setMsg("测试");
+        a.setData(listb);
+
+        Gson gson = new Gson();
+        String result = gson.toJson(a);
+        Logger.v(result);
+
+    }*/
+
 }
