@@ -119,7 +119,6 @@ public abstract class BaseActivity extends Activity {
 
         //定制OkHttp  设置超时时间和拦截器
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        //OkHttp进行添加拦截器loggingInterceptor
         .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .build();

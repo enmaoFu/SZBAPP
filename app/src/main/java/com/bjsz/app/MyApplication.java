@@ -22,7 +22,6 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         /**
          * init将TAG初始化
          * logLevel 默认是FULL，打印日志

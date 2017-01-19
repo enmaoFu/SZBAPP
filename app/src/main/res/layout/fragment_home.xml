@@ -66,7 +66,6 @@
                     android:id="@+id/home_total_number_left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="338"
                     android:textSize="20sp"
                     android:textColor="#ffffff"
                     android:layout_centerHorizontal="true"/>
@@ -91,7 +90,6 @@
                     android:id="@+id/home_total_number_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="338"
                     android:textSize="20sp"
                     android:textColor="#ffffff"
                     android:layout_centerHorizontal="true"/>

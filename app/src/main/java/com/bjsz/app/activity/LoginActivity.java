@@ -15,8 +15,12 @@ import com.bjsz.app.interfaces.retrofit.service.ApiService;
 import com.bjsz.app.utils.BaseCountDownTimer;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 import com.bjsz.app.utils.BaseNetworkJudge;
+import com.bjsz.app.utils.BasePreference;
 import com.bjsz.app.utils.BaseVerification;
 import com.orhanobut.logger.Logger;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,7 +38,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private Button login_code_but;//发送验证码
     private Button login_but;//登陆
 
-    private BaseNetworkJudge net = new BaseNetworkJudge(LoginActivity.this);
+    private BaseNetworkJudge net = new BaseNetworkJudge(LoginActivity.this);//网络判断
+    private BasePreference basePreference;//本地存储
 
     /**
      * 初始化视图
@@ -62,7 +67,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      */
     @Override
     protected void initData() {
-
+        basePreference = new BasePreference(LoginActivity.this);
     }
 
     /**
@@ -80,45 +85,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      */
     @Override
     public void onClick(View v) {
-        final Intent intent = new Intent();
         String username;
         final String code;
         boolean flag;
         switch (v.getId()){
             case R.id.login_code_but:
-                showDialog();
                 username = login_username_edx.getText().toString().trim();
                 flag = BaseVerification.isMobileNO(username);
                 if(!username.equals("") && username != null){
                     if(flag == true){
-                        boolean flags = net.isNetworkConnected(this);
-                        if(flags == true){
-                            ApiService as = initRetrofit(URL);
-                            Call<CodeReturnData> call = as.getCode(username);
-                            call.enqueue(new Callback<CodeReturnData>() {
-                                @Override
-                                public void onResponse(Call<CodeReturnData> call, Response<CodeReturnData> response) {
-                                    int status = response.body().getStatus();
-                                    if(status == 0){
-                                        hideDialog();
-                                        timer.start();
-                                        showToast("发送验证码成功，请查收");
-                                        Logger.v(response.body().getData().getCode()+"验证码...");
-                                    }else{
-                                        showToast("发送验证码失败，请重试");
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<CodeReturnData> call, Throwable t) {
-                                    hideDialog();
-                                    Logger.v("发送验证码请求失败"+t.getMessage());
-                                    showToast("服务器发生错误，请等待修复");
-                                }
-                            });
-                        }else{
-                            showToast("发送验证码失败，请检查网络");
-                        }
+                        netWorkGetCode(username);
                     }else{
                         showToast("请输入正确的手机号");
                     }
@@ -130,59 +106,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 username = login_username_edx.getText().toString().trim();
                 code = login_code_edx.getText().toString().toString();
                 flag = BaseVerification.isMobileNO(username);
-
-                /*Retrofit retrofit = new Retrofit.Builder()
-                        //使用自定义的mGsonConverterFactory
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(URL)
-                        .build();
-                ApiService as = retrofit.create(ApiService.class);
-                Call<LoginData> news = as.getLogin(username,code);
-                news.enqueue(new Callback<LoginData>() {
-                    @Override
-                    public void onResponse(Call<LoginData> call, Response<LoginData> response) {
-                        Logger.v("返回"+response.body().getMsg());
-                    }
-
-                    @Override
-                    public void onFailure(Call<LoginData> call, Throwable t) {
-                        Logger.v("登陆请求失败"+t.getMessage());
-                        showToast("服务器发生错误，请等待修复");
-                    }
-                });*/
-
-                boolean flags = net.checkNetworkAvailable();
-                if(flags == true){
-                    ApiService as = initRetrofit(URL);
-                    Logger.v("输入的"+username+"  "+code);
-                    Call<LoginData> call = as.getLogin(username,code);
-                    call.enqueue(new Callback<LoginData>() {
-                        @Override
-                        public void onResponse(Call<LoginData> call, Response<LoginData> response) {
-                            Logger.v("返回"+response.body().getMsg());
-                        }
-
-                        @Override
-                        public void onFailure(Call<LoginData> call, Throwable t) {
-                            Logger.v("登陆请求失败"+t.getMessage());
-                            showToast("服务器发生错误，请等待修复");
-                        }
-                    });
-                }else{
-                    showToast("登陆失败，请检查网络");
-                }
-
-                /*if(!username.equals("") && username != null){
+                if(!username.equals("") && username != null){
                     if(flag == true){
                         if(!code.equals("") && code != null){
-
-                            *//*if(username.equals("13452523216") && code.equals("1234")){
-                                intent.setClass(this,MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }else{
-                                showToast("手机号或验证码错误");
-                            }*//*
+                            netWorkLogin(username,code);
                         }else{
                             showToast("验证码不能为空");
                         }
@@ -191,8 +118,123 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                     }
                 }else{
                     showToast("手机号不能为空");
-                }*/
+                }
                 break;
+        }
+    }
+
+    /**
+     * 发送验证码
+     */
+    public void netWorkGetCode(String parameter){
+        boolean flags = net.isNetworkConnected(this);
+        if(flags == true){
+            showDialog();
+            ApiService as = initRetrofit(URL);
+            Call<CodeReturnData> call = as.getCode(parameter);
+            call.enqueue(new Callback<CodeReturnData>() {
+                @Override
+                public void onResponse(Call<CodeReturnData> call, Response<CodeReturnData> response) {
+                    int status = response.body().getStatus();
+                    if(status == 0){
+                        hideDialog();
+                        timer.start();
+                        showToast("发送验证码成功，请查收");
+                        Logger.v(response.body().getData().getCode()+"验证码...");
+                    }else{
+                        hideDialog();
+                        showToast("发送验证码失败，请重试");
+                    }
+                    Logger.v("验证码"+response.body().getStatus());
+                }
+
+                @Override
+                public void onFailure(Call<CodeReturnData> call, Throwable t) {
+                    if (t instanceof SocketTimeoutException) {
+                        hideDialog();
+                        showToast("网络超时，请检查您的网络状态");
+                    } else if (t instanceof ConnectException) {
+                        hideDialog();
+                        showToast("网络中断，请检查您的网络状态");
+                    } else {
+                        hideDialog();
+                        showToast("服务器发生错误，请等待修复");
+                    }
+                    Logger.v("发送验证码请求失败"+t.getMessage());
+                }
+            });
+        }else{
+            showToast("无网络连接，无法发送验证码");
+        }
+    }
+
+    /**
+     *
+     */
+    public void netWorkLogin(String parameterPhone,String parameterCode){
+        boolean flags = net.checkNetworkAvailable();
+        final Intent intent = new Intent();
+        if(flags == true){
+            showDialog();
+            ApiService as = initRetrofit(URL);
+            Call<LoginData> call = as.getLogin(parameterPhone,parameterCode);
+            call.enqueue(new Callback<LoginData>() {
+                @Override
+                public void onResponse(Call<LoginData> call, Response<LoginData> response) {
+                    int status = response.body().getStatus();
+                    if(status == 0){
+                        hideDialog();
+                        /**
+                         * 获取个人基本信息，保存到本地
+                         */
+                        String name = response.body().getData().getPersonMessage().getName();//姓名
+                        String sex = response.body().getData().getPersonMessage().getSex();//性别
+                        String age = response.body().getData().getPersonMessage().getAge();//年龄
+                        String phoneNumber = response.body().getData().getPhoneNumber();//手机号
+                        String identityId = response.body().getData().getPersonMessage().getIdentityId();//身份证号
+                        String healthyKey = response.body().getData().getHealthyKey();//获取数据key
+                        basePreference.setString("name",name);
+                        basePreference.setString("sex",sex);
+                        basePreference.setString("age",age);
+                        basePreference.setString("phoneNumber",phoneNumber);
+                        basePreference.setString("identityId",identityId);
+                        basePreference.setString("healthyKey",healthyKey);
+                        /**
+                         * 获取首页三个检测数据，保存到本地
+                         */
+                        String total = response.body().getData().getMeasureNumber().getTotal();//总测量条数
+                        String today = response.body().getData().getMeasureNumber().getToday();//今日测量条数
+                        String abnormal = response.body().getData().getMeasureNumber().getAbnormal();//异常测量条数
+                        basePreference.setString("total",total);
+                        basePreference.setString("today",today);
+                        basePreference.setString("abnormal",abnormal);
+                        intent.setClass(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        hideDialog();
+                        showToast("验证码错误，登陆失败");
+                    }
+                    Logger.v("登陆"+response.body().getStatus());
+                }
+
+                @Override
+                public void onFailure(Call<LoginData> call, Throwable t) {
+                    if (t instanceof SocketTimeoutException) {
+                        hideDialog();
+                        showToast("网络超时，请检查您的网络状态");
+                    } else if (t instanceof ConnectException) {
+                        hideDialog();
+                        showToast("网络中断，请检查您的网络状态");
+                    } else {
+                        hideDialog();
+                        showToast("服务器发生错误，请等待修复");
+                    }
+                    Logger.v("登陆请求失败"+t.getMessage());
+                }
+            });
+        }else{
+            showToast("无网络连接，无法登陆");
         }
     }
 
@@ -223,4 +265,5 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         super.onDestroy();
         timer.cancel();
     }
+
 }

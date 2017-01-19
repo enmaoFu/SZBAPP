@@ -13,6 +13,7 @@ import com.bjsz.app.adapters.home.FragmentHomeAdapter;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.entity.home.HomeGridviewOptionEntity;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
+import com.bjsz.app.utils.BasePreference;
 import com.bjsz.app.views.BaseRiseNumberTextView;
 
 import java.util.ArrayList;
@@ -34,7 +35,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private List<HomeGridviewOptionEntity> homeGridviewOptionArrayList = new ArrayList<>();//数据集
     private FragmentHomeAdapter fragmentHomeAdapter;//适配器
 
-    private BaseRiseNumberTextView home_total_number;
+    private BaseRiseNumberTextView home_total_number;//数字动画view
+    private TextView home_total_number_left;//今日测量条数
+    private TextView home_total_number_right;//异常测量条数
+    private BasePreference basePreference;//本地存储
 
     /**
      * 初始化布局
@@ -54,6 +58,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         center_text = (TextView)findViewById(R.id.center_text);
         home_grid = (GridView)findViewById(R.id.home_grid);
         home_total_number = (BaseRiseNumberTextView)findViewById(R.id.home_total_number);
+        home_total_number_left = (TextView)findViewById(R.id.home_total_number_left);
+        home_total_number_right = (TextView)findViewById(R.id.home_total_number_right);
         fragmentHomeAdapter = new FragmentHomeAdapter(getActivity());
         home_grid.setAdapter(fragmentHomeAdapter);
         right_img.setOnClickListener(this);
@@ -64,7 +70,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
      */
     @Override
     protected void initData() {
-        initBaseRiseNumberTextView();
+        basePreference = new BasePreference(getActivity());
+        String total = basePreference.getString("total");
+        String today = basePreference.getString("today");
+        String abnormal = basePreference.getString("abnormal");
+        int number = Integer.parseInt(total);
+        initBaseRiseNumberTextView(number);
+        home_total_number_left.setText(today);
+        home_total_number_right.setText(abnormal);
         initGridview();
     }
 
@@ -123,10 +136,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         }
     }
 
-    public void initBaseRiseNumberTextView(){
+    public void initBaseRiseNumberTextView(int number){
 
         // 设置数据
-        home_total_number.withNumber(300);
+        home_total_number.withNumber(number);
         // 设置动画播放时间
         home_total_number.setDuration(5000);
         // 开始播放动画
@@ -136,7 +149,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
 
             @Override
             public void onEndFinish() {
-                showToast("数字增长完毕");
+                showToast("总数量增长完毕");
             }
         });
     }
