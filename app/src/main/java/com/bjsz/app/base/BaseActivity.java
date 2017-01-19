@@ -116,9 +116,11 @@ public abstract class BaseActivity extends Activity {
      * response.body().getA(); 请求成功获取User实体类里的A属性数据
      */
     public ApiService initRetrofit(String url){
-        //设置超时时间
+
+        //定制OkHttp  设置超时时间和拦截器
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+        //OkHttp进行添加拦截器loggingInterceptor
+        .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()

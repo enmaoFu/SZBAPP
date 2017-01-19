@@ -1,5 +1,12 @@
 package com.bjsz.app.interfaces.retrofit.service;
 
+import com.bjsz.app.entity.returndata.CodeReturnData;
+import com.bjsz.app.entity.returndata.LoginData;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
 /**
  * 将HTTP API改造成java接口
  * 更多示例与官方资料
@@ -64,5 +71,19 @@ public interface ApiService {
     /*@FormUrlEncoded
     @POST("query")
     Call<PostQueryInfo> postFromTest(@Field("type") String type, @Field("postid") String postid);*/
+
+    /**
+     * 获取验证码
+     * @param phoneNumber
+     * @return
+     */
+    @GET("send_sms")
+    Call<CodeReturnData> getCode(@Query("phoneNumber") String phoneNumber);
+
+    /**
+     * 登陆
+     */
+    @GET("login")
+    Call<LoginData> getLogin(@Query("phoneNumber") String phoneNumber, @Query("verCode") String verCode);
 
 }
