@@ -9,6 +9,8 @@ public class LoginExpandPersonMessageDate {
 
     //private String headImage;//头像地址 暂时不从服务器获取，本地默认一个
 
+    private String uid;//uid
+
     private String name;//姓名
 
     private String sex;//性别
@@ -26,6 +28,14 @@ public class LoginExpandPersonMessageDate {
     public void setHeadImage(String headImage) {
         this.headImage = headImage;
     }*/
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     public String getName() {
         return name;

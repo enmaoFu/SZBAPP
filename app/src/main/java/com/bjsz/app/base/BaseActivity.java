@@ -18,6 +18,7 @@ import com.bjsz.app.interfaces.retrofit.service.ApiService;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -116,11 +117,13 @@ public abstract class BaseActivity extends Activity {
      * response.body().getA(); 请求成功获取User实体类里的A属性数据
      */
     public ApiService initRetrofit(String url){
-
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         //定制OkHttp  设置超时时间和拦截器
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        .connectTimeout(10000L, TimeUnit.MILLISECONDS)
+                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .addInterceptor(logging)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)

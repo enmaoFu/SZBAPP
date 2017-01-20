@@ -187,12 +187,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         /**
                          * 获取个人基本信息，保存到本地
                          */
+                        String uid = response.body().getData().getPersonMessage().getUid();//uid
                         String name = response.body().getData().getPersonMessage().getName();//姓名
                         String sex = response.body().getData().getPersonMessage().getSex();//性别
                         String age = response.body().getData().getPersonMessage().getAge();//年龄
                         String phoneNumber = response.body().getData().getPhoneNumber();//手机号
                         String identityId = response.body().getData().getPersonMessage().getIdentityId();//身份证号
                         String healthyKey = response.body().getData().getHealthyKey();//获取数据key
+                        basePreference.setString("uid",uid);
                         basePreference.setString("name",name);
                         basePreference.setString("sex",sex);
                         basePreference.setString("age",age);

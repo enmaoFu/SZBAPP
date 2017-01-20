@@ -2,13 +2,16 @@ package com.bjsz.app.activity.my;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
+import com.bjsz.app.activity.LoginActivity;
 import com.bjsz.app.base.BaseActivity;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
+import com.bjsz.app.utils.BasePreference;
 import com.orhanobut.logger.Logger;
 import com.suke.widget.SwitchButton;
 
@@ -25,6 +28,9 @@ public class MySetingActivity extends BaseActivity implements View.OnClickListen
     private SwitchButton switch_button;//开关
     private RelativeLayout my_about_as_re;//关于我们
     private RelativeLayout my_fee_re;//意见反馈
+    private Button seting_logout;//退出
+
+    private BasePreference basePreference;//本地存储
 
     /**
      * 初始化视图
@@ -44,9 +50,11 @@ public class MySetingActivity extends BaseActivity implements View.OnClickListen
         switch_button = (SwitchButton)findViewById(R.id.switch_button);
         my_about_as_re = (RelativeLayout)findViewById(R.id.my_about_as_re);
         my_fee_re = (RelativeLayout)findViewById(R.id.my_fee_re);
+        seting_logout = (Button)findViewById(R.id.seting_logout);
         left_img.setOnClickListener(this);
         my_about_as_re.setOnClickListener(this);
         my_fee_re.setOnClickListener(this);
+        seting_logout.setOnClickListener(this);
         initSwitchButton();
     }
 
@@ -55,7 +63,7 @@ public class MySetingActivity extends BaseActivity implements View.OnClickListen
      */
     @Override
     protected void initData() {
-
+        basePreference = new BasePreference(MySetingActivity.this);
     }
 
     /**
@@ -91,6 +99,10 @@ public class MySetingActivity extends BaseActivity implements View.OnClickListen
             case R.id.my_fee_re:
                 intent.setClass(this,MyFeedbackActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.seting_logout:
+                basePreference.removePreference();
+                showToast("移除缓存数据成功...");
                 break;
         }
     }
