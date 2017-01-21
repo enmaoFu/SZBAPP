@@ -1,5 +1,7 @@
 package com.bjsz.app.entity.returndata;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 登陆返回JSON实体类 测量数据
  * @author enmaoFu
@@ -7,10 +9,13 @@ package com.bjsz.app.entity.returndata;
  */
 public class LoginExpandMeasureNumberDate {
 
+    @Expose
     private String total;//总测量条数
 
+    @Expose
     private String today;//进入测量条数
 
+    @Expose
     private String abnormal;//异常测量条数
 
     public String getTotal() {

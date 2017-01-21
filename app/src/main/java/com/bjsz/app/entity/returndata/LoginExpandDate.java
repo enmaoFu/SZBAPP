@@ -1,5 +1,7 @@
 package com.bjsz.app.entity.returndata;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 登陆返回JSON实体类
  * @author enmaoFu
@@ -7,8 +9,10 @@ package com.bjsz.app.entity.returndata;
  */
 public class LoginExpandDate {
 
+    @Expose
     private LoginExpandPersonMessageDate personMessage;//个人信息
 
+    @Expose
     private LoginExpandMeasureNumberDate measureNumber;//测量信息
 
     private String healthyKey;//获取数据key

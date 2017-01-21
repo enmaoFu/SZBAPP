@@ -1,5 +1,7 @@
 package com.bjsz.app.entity.returndata;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 登陆返回JSON实体类
  * @author enmaoFu
@@ -7,6 +9,7 @@ package com.bjsz.app.entity.returndata;
  */
 public class LoginData extends BaseData{
 
+    @Expose
     private LoginExpandDate data;//data数据
 
     public LoginExpandDate getData() {

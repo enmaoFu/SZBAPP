@@ -2,6 +2,7 @@ package com.bjsz.app.activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private Button login_code_but;//发送验证码
     private Button login_but;//登陆
 
-    private BaseNetworkJudge net = new BaseNetworkJudge(LoginActivity.this);//网络判断
+    private BaseNetworkJudge net;//网络判断
     private BasePreference basePreference;//本地存储
 
     /**
@@ -68,6 +69,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void initData() {
         basePreference = new BasePreference(LoginActivity.this);
+        net = new BaseNetworkJudge(LoginActivity.this);
     }
 
     /**
@@ -169,7 +171,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     }
 
     /**
-     *
+     * 登陆
      */
     public void netWorkLogin(String parameterPhone,String parameterCode){
         boolean flags = net.checkNetworkAvailable();
@@ -190,14 +192,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         String uid = response.body().getData().getPersonMessage().getUid();//uid
                         String name = response.body().getData().getPersonMessage().getName();//姓名
                         String sex = response.body().getData().getPersonMessage().getSex();//性别
-                        String age = response.body().getData().getPersonMessage().getAge();//年龄
                         String phoneNumber = response.body().getData().getPhoneNumber();//手机号
-                        String identityId = response.body().getData().getPersonMessage().getIdentityId();//身份证号
+                        String identityId = response.body().getData().getPersonMessage().getIdentityid();//身份证号
                         String healthyKey = response.body().getData().getHealthyKey();//获取数据key
+
+                        //从身份证获取出生日期，计算年龄
+                        String cardnum = identityId.substring(6,10);
+                        int age = Integer.parseInt(cardnum);
+                        //获取现在年份
+                        Time time = new Time("GMT+8");
+                        time.setToNow();
+                        //计算年龄
+                        int cardnum_age = time.year-age;
+
                         basePreference.setString("uid",uid);
                         basePreference.setString("name",name);
                         basePreference.setString("sex",sex);
-                        basePreference.setString("age",age);
+                        basePreference.setString("age",cardnum_age+"");//因为年龄计算出来是Int类型，此处加一个""变成字符串
                         basePreference.setString("phoneNumber",phoneNumber);
                         basePreference.setString("identityId",identityId);
                         basePreference.setString("healthyKey",healthyKey);

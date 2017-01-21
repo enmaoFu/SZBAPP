@@ -30,12 +30,13 @@
             android:textColor="#505050"
             android:textSize="15sp"/>
 
+        <!--android:text="请输入您的真实姓名"-->
         <TextView
+            android:id="@+id/archives_person_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="请输入您的真实姓名"
             android:textColor="#ACACAC"
             android:textSize="15sp"
             android:layout_toLeftOf="@+id/archives_name_img"
@@ -73,12 +74,13 @@
             android:textColor="#505050"
             android:textSize="15sp"/>
 
+        <!--android:text="请选择性别"-->
         <TextView
+            android:id="@+id/archives_person_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="请选择性别"
             android:textColor="#ACACAC"
             android:textSize="15sp"
             android:layout_toLeftOf="@+id/archives_sex_img"
@@ -116,12 +118,13 @@
             android:textColor="#505050"
             android:textSize="15sp"/>
 
+        <!--android:text="请输入年龄"-->
         <TextView
+            android:id="@+id/archives_person_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="请输入年龄"
             android:textColor="#ACACAC"
             android:textSize="15sp"
             android:layout_toLeftOf="@+id/archives_age_img"
@@ -159,12 +162,13 @@
             android:textColor="#505050"
             android:textSize="15sp"/>
 
+        <!--android:text="请输入您的手机号"-->
         <TextView
+            android:id="@+id/archives_person_phoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="请输入您的手机号"
             android:textColor="#ACACAC"
             android:textSize="15sp"
             android:layout_toLeftOf="@+id/archives_phone_img"
@@ -202,12 +206,13 @@
             android:textColor="#505050"
             android:textSize="15sp"/>
 
+        <!--android:text="请输入身份证号"-->
         <TextView
+            android:id="@+id/archives_person_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="请输入身份证号"
             android:textColor="#ACACAC"
             android:textSize="15sp"
             android:layout_toLeftOf="@+id/archives_number_img"

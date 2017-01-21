@@ -2,6 +2,7 @@ package com.bjsz.app.interfaces.retrofit.service;
 
 import com.bjsz.app.entity.returndata.CodeReturnData;
 import com.bjsz.app.entity.returndata.LoginData;
+import com.bjsz.app.entity.returndata.archives.EssentialInformationData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -85,5 +86,11 @@ public interface ApiService {
      */
     @GET("login")
     Call<LoginData> getLogin(@Query("phoneNumber") String phoneNumber, @Query("verCode") String verCode);
+
+    /**
+     * 获取个人基本信息
+     */
+    @GET("user_info")
+    Call<EssentialInformationData> getPersonMessage(@Query("uid") String uid);
 
 }

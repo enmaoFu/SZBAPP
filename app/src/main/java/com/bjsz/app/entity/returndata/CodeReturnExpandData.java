@@ -1,5 +1,7 @@
 package com.bjsz.app.entity.returndata;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 获取验证码返回JSON实体类
  * @author enmaoFu
@@ -7,6 +9,7 @@ package com.bjsz.app.entity.returndata;
  */
 public class CodeReturnExpandData {
 
+    @Expose
     private String code;//验证码
 
     public String getCode() {

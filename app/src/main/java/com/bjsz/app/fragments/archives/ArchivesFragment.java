@@ -17,17 +17,29 @@ import com.bjsz.app.adapters.archives.MyViewPagerAdapter;
 import com.bjsz.app.adapters.archives.ViewpagerArchivewAdapter;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.entity.archives.ViewpagerArchivewEntity;
+import com.bjsz.app.entity.returndata.archives.EssentialInformationData;
+import com.bjsz.app.interfaces.BaseInterface;
+import com.bjsz.app.interfaces.retrofit.service.ApiService;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
+import com.bjsz.app.utils.BaseNetworkJudge;
+import com.bjsz.app.utils.BasePreference;
+import com.orhanobut.logger.Logger;
 
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 健康档案
  * @author enmaoFu
  * @date 2016-12-26
  */
-public class ArchivesFragment extends BaseFragment implements View.OnClickListener{
+public class ArchivesFragment extends BaseFragment implements View.OnClickListener,BaseInterface{
 
     private TextView center_text;//标题栏中间标题
 
@@ -53,6 +65,11 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     private RelativeLayout apmh_jzs;//家族史
     private RelativeLayout apmh_ycbs;//遗传病史
 
+    private TextView one_name;//姓名
+    private TextView one_sex_age;//性别，年龄
+    private BasePreference basePreference;//本地存储
+    private BaseNetworkJudge net;//网络判断
+
     /**
      * 初始化布局
      * @return
@@ -69,6 +86,8 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     protected void initView() {
         center_text = (TextView)findViewById(R.id.center_text);
         archives_person_msg_re = (RelativeLayout)findViewById(R.id.archives_person_msg_re);
+        one_name = (TextView)findViewById(R.id.one_name);
+        one_sex_age = (TextView)findViewById(R.id.one_sex_age);
         archives_person_msg_re.setOnClickListener(this);
     }
 
@@ -77,6 +96,8 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
      */
     @Override
     protected void initData() {
+        basePreference = new BasePreference(getActivity());
+        net = new BaseNetworkJudge(getActivity());
         InitTextView();
         InitViewPager();
     }
@@ -143,7 +164,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         apmh_jzs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_jzs);
         apmh_ycbs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_ycbs);
 
-        initEssentialInformation();
+        initNetWorkGetCodeGetEssentialInformation();
         initHabitsAndCustoms();
         apmhOnclick();
 
@@ -269,24 +290,65 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     }
 
     /**
-     * 初始化健康档案基本信息
+     * 获取健康档案基本信息，并设置
      */
-    public void initEssentialInformation(){
+    public void initNetWorkGetCodeGetEssentialInformation(){
+        String name = basePreference.getString("name");//姓名
+        String age = basePreference.getString("age");//年龄
+        String sex = basePreference.getString("sex");//性别
+        one_name.setText(name);
+        one_sex_age.setText(sex+" "+age);
+        boolean flags = net.isNetworkConnected(getActivity());
+        if(flags == true){
+            String uid = basePreference.getString("uid");//uid
+            ApiService as = initRetrofit(URL);
+            Call<EssentialInformationData> call = as.getPersonMessage(uid);
+            call.enqueue(new Callback<EssentialInformationData>() {
+                @Override
+                public void onResponse(Call<EssentialInformationData> call, Response<EssentialInformationData> response) {
+                    int status = response.body().getStatus();
+                    if(status == 0){
+                        String height = response.body().getData().getHeight();//身高
+                        String weight = response.body().getData().getWeight();//体重
 
-        viewpagerArchivewEntityArrayList.clear();
+                        viewpagerArchivewEntityArrayList.clear();
 
-        ViewpagerArchivewEntity viewpagerArchivewEntity = null;
+                        ViewpagerArchivewEntity viewpagerArchivewEntityHeight = null;
+                        viewpagerArchivewEntityHeight = new ViewpagerArchivewEntity("身高",height.substring(0,height.length()-3)+"cm",0);
 
-        for(int i = 0; i < 3; i++){
+                        ViewpagerArchivewEntity viewpagerArchivewEntityWeight = null;
+                        viewpagerArchivewEntityWeight = new ViewpagerArchivewEntity("体重",weight.substring(0,weight.length()-3)+"kg",0);
 
-            viewpagerArchivewEntity = new ViewpagerArchivewEntity("身高","170cm",0);
+                        viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntityHeight);
+                        viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntityWeight);
 
-            viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntity);
+                        viewpagerArchivewAdapter.setItems(viewpagerArchivewEntityArrayList);
+                        Logger.v("有信息");
+                    }else{
+                        showToast("获取身高体重失败，请重试");
+                    }
 
+                }
+
+                @Override
+                public void onFailure(Call<EssentialInformationData> call, Throwable t) {
+                    if (t instanceof SocketTimeoutException) {
+                        hideDialog();
+                        showToast("网络超时，请检查您的网络状态");
+                    } else if (t instanceof ConnectException) {
+                        hideDialog();
+                        showToast("网络中断，请检查您的网络状态");
+                    } else {
+                        hideDialog();
+                        showToast("服务器发生错误，请等待修复");
+                    }
+                    Logger.v("获取个人信息失败"+t.getMessage());
+                }
+            });
+
+        }else{
+            showToast("获取身高体重失败，请检查网络并下拉刷新");
         }
-
-        viewpagerArchivewAdapter.setItems(viewpagerArchivewEntityArrayList);
-
     }
 
     /**

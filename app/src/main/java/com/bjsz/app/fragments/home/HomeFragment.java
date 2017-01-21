@@ -71,13 +71,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     @Override
     protected void initData() {
         basePreference = new BasePreference(getActivity());
-        String total = basePreference.getString("total");
-        String today = basePreference.getString("today");
-        String abnormal = basePreference.getString("abnormal");
-        int number = Integer.parseInt(total);
-        initBaseRiseNumberTextView(number);
-        home_total_number_left.setText(today);
-        home_total_number_right.setText(abnormal);
+        setNumber();
         initGridview();
     }
 
@@ -152,6 +146,34 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
                 showToast("总数量增长完毕");
             }
         });
+    }
+
+    /**
+     * 设置三条测量数据
+     */
+    public void setNumber(){
+        String total = basePreference.getString("total");
+        String today = basePreference.getString("today");
+        String abnormal = basePreference.getString("abnormal");
+        if(today.equals("")){
+            initBaseRiseNumberTextView(0);
+        }else{
+            int number = Integer.parseInt(total);
+            initBaseRiseNumberTextView(number);
+        }
+
+        if(today.equals("")){
+            home_total_number_left.setText(0);
+        }else{
+            home_total_number_left.setText(today);
+        }
+
+        if(abnormal.equals("")){
+            home_total_number_right.setText(0);
+        }else{
+            home_total_number_right.setText(abnormal);
+        }
+
     }
 
     /**

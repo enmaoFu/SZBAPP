@@ -1,5 +1,7 @@
 package com.bjsz.app.entity.returndata;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 登陆返回JSON实体类 个人信息
  * @author enmaoFu
@@ -9,17 +11,23 @@ public class LoginExpandPersonMessageDate {
 
     //private String headImage;//头像地址 暂时不从服务器获取，本地默认一个
 
+    @Expose
     private String uid;//uid
 
+    @Expose
     private String name;//姓名
 
+    @Expose
     private String sex;//性别
 
+    @Expose
     private String age;//年龄
 
+    @Expose
     private String phoneNumber;//手机号
 
-    private String identityId;//身份证号
+    @Expose
+    private String identityid;//身份证号
 
     /*public String getHeadImage() {
         return headImage;
@@ -69,11 +77,11 @@ public class LoginExpandPersonMessageDate {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getIdentityId() {
-        return identityId;
+    public String getIdentityid() {
+        return identityid;
     }
 
-    public void setIdentityId(String identityId) {
-        this.identityId = identityId;
+    public void setIdentityid(String identityid) {
+        this.identityid = identityid;
     }
 }

@@ -1,6 +1,7 @@
 package com.bjsz.app.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,12 +11,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.bjsz.app.R;
 import com.bjsz.app.dialogs.WaitDialog;
 import com.bjsz.app.interfaces.retrofit.service.ApiService;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -87,10 +90,13 @@ public abstract class BaseFragment extends Fragment {
      * 设置Retrofit
      */
     public ApiService initRetrofit(String url){
-        //设置超时时间
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        //定制OkHttp  设置超时时间和拦截器
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .connectTimeout(10000L, TimeUnit.MILLISECONDS)
                 .readTimeout(10000L, TimeUnit.MILLISECONDS)
+                .addInterceptor(logging)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(url)
@@ -148,6 +154,18 @@ public abstract class BaseFragment extends Fragment {
         imeManager.showSoftInputFromInputMethod(getActivity().getWindow()
                         .getDecorView().getWindowToken(),
                 InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+        getActivity().overridePendingTransition(R.anim.base_frame_anim_slide_right_in, R.anim.base_frame_anim_slide_right_out);
+    }
+
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.base_frame_anim_slide_right_in, R.anim.base_frame_anim_slide_right_out);
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.bjsz.app.entity.returndata;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 返回JSON基础实体类
  * @author enmaoFu
@@ -7,8 +9,10 @@ package com.bjsz.app.entity.returndata;
  */
 public class BaseData {
 
+    @Expose
     private int status;//返回状态码
 
+    @Expose
     private String msg;//返回信息
 
     public int getStatus() {
