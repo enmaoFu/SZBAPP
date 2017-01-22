@@ -3,6 +3,7 @@ package com.bjsz.app.interfaces.retrofit.service;
 import com.bjsz.app.entity.returndata.CodeReturnData;
 import com.bjsz.app.entity.returndata.LoginData;
 import com.bjsz.app.entity.returndata.archives.EssentialInformationData;
+import com.bjsz.app.entity.returndata.archives.LifeHabitData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -92,5 +93,11 @@ public interface ApiService {
      */
     @GET("user_info")
     Call<EssentialInformationData> getPersonMessage(@Query("uid") String uid);
+
+    /**
+     * 获取生活习惯
+     */
+    @GET("user_habits")
+    Call<LifeHabitData> getLifeHabit(@Query("uid") String uid);
 
 }

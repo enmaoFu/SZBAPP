@@ -18,6 +18,7 @@ import com.bjsz.app.adapters.archives.ViewpagerArchivewAdapter;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.entity.archives.ViewpagerArchivewEntity;
 import com.bjsz.app.entity.returndata.archives.EssentialInformationData;
+import com.bjsz.app.entity.returndata.archives.LifeHabitData;
 import com.bjsz.app.interfaces.BaseInterface;
 import com.bjsz.app.interfaces.retrofit.service.ApiService;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
@@ -69,6 +70,11 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     private TextView one_sex_age;//性别，年龄
     private BasePreference basePreference;//本地存储
     private BaseNetworkJudge net;//网络判断
+    /*
+     获取生活习惯开关，判断是否从网络获取，默认第一次从网络获取
+     */
+    private boolean getHabitsAndCustomsFlag;
+    private String uid;//本地获取的uid
 
     /**
      * 初始化布局
@@ -96,6 +102,10 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
      */
     @Override
     protected void initData() {
+        /**
+         * 第一次进入这个页面和生活习惯viewpager的时候从网络获取
+         */
+        getHabitsAndCustomsFlag = true;
         basePreference = new BasePreference(getActivity());
         net = new BaseNetworkJudge(getActivity());
         InitTextView();
@@ -165,7 +175,6 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         apmh_ycbs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_ycbs);
 
         initNetWorkGetCodeGetEssentialInformation();
-        initHabitsAndCustoms();
         apmhOnclick();
 
     }
@@ -281,6 +290,17 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                 textView1.setTextColor(Color.parseColor("#323232"));
                 textView2.setTextColor(Color.parseColor("#51BEFF"));
                 textView3.setTextColor(Color.parseColor("#323232"));
+                /**
+                 * 从网络获取后，改为false
+                 * 只要这个fragment不销毁，在这个页面的三个viewpager之间跳转
+                 * 就不会重复从网络获取，省流量
+                 */
+                if(getHabitsAndCustomsFlag){
+                    initHabitsAndCustoms();
+                    getHabitsAndCustomsFlag = false;
+                }else{
+                    return;
+                }
             } else if(number == 2){
                 textView1.setTextColor(Color.parseColor("#323232"));
                 textView2.setTextColor(Color.parseColor("#323232"));
@@ -300,7 +320,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         one_sex_age.setText(sex+" "+age);
         boolean flags = net.isNetworkConnected(getActivity());
         if(flags == true){
-            String uid = basePreference.getString("uid");//uid
+            uid = basePreference.getString("uid");//uid
             ApiService as = initRetrofit(URL);
             Call<EssentialInformationData> call = as.getPersonMessage(uid);
             call.enqueue(new Callback<EssentialInformationData>() {
@@ -323,11 +343,9 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                         viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntityWeight);
 
                         viewpagerArchivewAdapter.setItems(viewpagerArchivewEntityArrayList);
-                        Logger.v("有信息");
                     }else{
                         showToast("获取身高体重失败，请重试");
                     }
-
                 }
 
                 @Override
@@ -352,23 +370,57 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     }
 
     /**
-     * 初始化健康档案生活习惯
+     * 获取健康档案生活习惯，并设置
      */
     public void initHabitsAndCustoms(){
+        boolean flags = net.isNetworkConnected(getActivity());
+        if(flags == true){
+            ApiService as = initRetrofit(URL);
+            Call<LifeHabitData> call = as.getLifeHabit(uid);
+            call.enqueue(new Callback<LifeHabitData>() {
+                @Override
+                public void onResponse(Call<LifeHabitData> call, Response<LifeHabitData> response) {
+                    int status = response.body().getStatus();
+                    if(status == 0){
 
-        viewpagerArchivewEntityArrayListha.clear();
+                        viewpagerArchivewEntityArrayListha.clear();
 
-        ViewpagerArchivewEntity viewpagerArchivewEntity = null;
+                        ViewpagerArchivewEntity viewpagerArchivewEntity = null;
 
-        for(int i = 0; i < 6; i++){
+                        for(int i = 0; i < response.body().getData().size(); i++){
 
-            viewpagerArchivewEntity = new ViewpagerArchivewEntity("饮食是否规律","是",0);
+                            viewpagerArchivewEntity = new ViewpagerArchivewEntity(response.body().getData().get(i).getTitle(),
+                                    response.body().getData().get(i).getContent(),0);
 
-            viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntity);
+                            viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntity);
 
+                        }
+
+                        viewpagerArchivewAdapterha.setItems(viewpagerArchivewEntityArrayListha);
+
+                    }else{
+                        showToast("获取生活习惯失败，请重试");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LifeHabitData> call, Throwable t) {
+                    if (t instanceof SocketTimeoutException) {
+                        hideDialog();
+                        showToast("网络超时，请检查您的网络状态");
+                    } else if (t instanceof ConnectException) {
+                        hideDialog();
+                        showToast("网络中断，请检查您的网络状态");
+                    } else {
+                        hideDialog();
+                        showToast("服务器发生错误，请等待修复");
+                    }
+                    Logger.v("获取生活习惯失败"+t.getMessage());
+                }
+            });
+        }else{
+            showToast("获取生活习惯失败，请检查网络并下拉刷新");
         }
-
-        viewpagerArchivewAdapterha.setItems(viewpagerArchivewEntityArrayListha);
 
     }
 
