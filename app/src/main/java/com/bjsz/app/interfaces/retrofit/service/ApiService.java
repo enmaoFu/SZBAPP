@@ -3,7 +3,9 @@ package com.bjsz.app.interfaces.retrofit.service;
 import com.bjsz.app.entity.returndata.CodeReturnData;
 import com.bjsz.app.entity.returndata.LoginData;
 import com.bjsz.app.entity.returndata.archives.EssentialInformationData;
+import com.bjsz.app.entity.returndata.archives.FamilyhistoryData;
 import com.bjsz.app.entity.returndata.archives.LifeHabitData;
+import com.bjsz.app.entity.returndata.archives.MedicalhistoryData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -99,5 +101,17 @@ public interface ApiService {
      */
     @GET("user_habits")
     Call<LifeHabitData> getLifeHabit(@Query("uid") String uid);
+
+    /**
+     * 获取个人病史里（既往史）的接口
+     */
+    @GET("user_illness")
+    Call<MedicalhistoryData> getMedicalhistory(@Query("uid") String uid, @Query("key") String key);
+
+    /**
+     * 获取个人病史里（家族史）的接口
+     */
+    @GET("user_illness")
+    Call<FamilyhistoryData> getFamilyhistory(@Query("uid") String uid, @Query("key") String key);
 
 }

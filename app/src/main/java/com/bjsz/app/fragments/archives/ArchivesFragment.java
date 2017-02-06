@@ -64,7 +64,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     private RelativeLayout archives_person_msg_re;//个人信息
     private RelativeLayout apmh_jws;//既往史
     private RelativeLayout apmh_jzs;//家族史
-    private RelativeLayout apmh_ycbs;//遗传病史
+    //private RelativeLayout apmh_ycbs;//遗传病史
 
     private TextView one_name;//姓名
     private TextView one_sex_age;//性别，年龄
@@ -172,9 +172,9 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
 
         apmh_jws = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_jws);
         apmh_jzs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_jzs);
-        apmh_ycbs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_ycbs);
+        //apmh_ycbs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_ycbs);
 
-        initNetWorkGetCodeGetEssentialInformation();
+        NetworkGetCodeGetEssentialInformation();
         apmhOnclick();
 
     }
@@ -200,15 +200,6 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
             public void onClick(View v) {
                 intent.setClass(getActivity(), ArchivesPublicQueryPastHistoryActivity.class);
                 intent.putExtra("key","jzs");
-                startActivity(intent);
-            }
-        });
-
-        apmh_ycbs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                intent.setClass(getActivity(), ArchivesPublicQueryPastHistoryActivity.class);
-                intent.putExtra("key","ycbs");
                 startActivity(intent);
             }
         });
@@ -296,7 +287,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                  * 就不会重复从网络获取，省流量
                  */
                 if(getHabitsAndCustomsFlag){
-                    initHabitsAndCustoms();
+                    NetworkHabitsAndCustoms();
                     getHabitsAndCustomsFlag = false;
                 }else{
                     return;
@@ -312,7 +303,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     /**
      * 获取健康档案基本信息，并设置
      */
-    public void initNetWorkGetCodeGetEssentialInformation(){
+    public void NetworkGetCodeGetEssentialInformation(){
         String name = basePreference.getString("name");//姓名
         String age = basePreference.getString("age");//年龄
         String sex = basePreference.getString("sex");//性别
@@ -372,7 +363,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     /**
      * 获取健康档案生活习惯，并设置
      */
-    public void initHabitsAndCustoms(){
+    public void NetworkHabitsAndCustoms(){
         boolean flags = net.isNetworkConnected(getActivity());
         if(flags == true){
             ApiService as = initRetrofit(URL);
