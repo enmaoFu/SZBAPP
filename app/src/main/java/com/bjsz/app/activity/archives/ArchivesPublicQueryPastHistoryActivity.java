@@ -131,9 +131,17 @@ public class ArchivesPublicQueryPastHistoryActivity extends BaseActivity impleme
                 backView();
                 break;
             case R.id.right_text:
-                intent.setClass(this,ArchivesPublicAddPastHistoryActivity.class);
-                intent.putExtra("key",keyValue);
-                startActivity(intent);
+                switch (keyValue){
+                    case "jws":
+                        intent.setClass(this,ArchivestMedicalhistoryAddPastHistoryActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case "jzs":
+                        intent.setClass(this,ArchivesFamilyhistoryAddPastHistoryActivity.class);
+                        startActivity(intent);
+                        break;
+                }
                 break;
 
         }

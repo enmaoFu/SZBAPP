@@ -62,9 +62,16 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <!-- 健康档案 公共的添加个人病史里 既往史，家族史，遗传病史页面 -->
+        <!-- 健康档案 添加个人病史里 既往史页面 -->
         <activity
-            android:name=".activity.archives.ArchivesPublicAddPastHistoryActivity"
+            android:name=".activity.archives.ArchivestMedicalhistoryAddPastHistoryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- 健康档案 添加个人病史里 家族史页面 -->
+        <activity
+            android:name=".activity.archives.ArchivesFamilyhistoryAddPastHistoryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>
