@@ -11,8 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
+import com.bjsz.app.activity.archives.ArchivesFamilyhistoryQueryPastHistoryActivity;
+import com.bjsz.app.activity.archives.ArchivesMedicalhistoryQueryPastHistoryActivity;
 import com.bjsz.app.activity.archives.ArchivesPersonMessageActivity;
-import com.bjsz.app.activity.archives.ArchivesPublicQueryPastHistoryActivity;
 import com.bjsz.app.adapters.archives.MyViewPagerAdapter;
 import com.bjsz.app.adapters.archives.ViewpagerArchivewAdapter;
 import com.bjsz.app.base.BaseFragment;
@@ -70,10 +71,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
     private TextView one_sex_age;//性别，年龄
     private BasePreference basePreference;//本地存储
     private BaseNetworkJudge net;//网络判断
-    /*
-     获取生活习惯开关，判断是否从网络获取，默认第一次从网络获取
-     */
-    private boolean getHabitsAndCustomsFlag;
+
     private String uid;//本地获取的uid
 
     /**
@@ -105,9 +103,13 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         /**
          * 第一次进入这个页面和生活习惯viewpager的时候从网络获取
          */
-        getHabitsAndCustomsFlag = true;
         basePreference = new BasePreference(getActivity());
         net = new BaseNetworkJudge(getActivity());
+        String name = basePreference.getString("name");//姓名
+        String age = basePreference.getString("age");//年龄
+        String sex = basePreference.getString("sex");//性别
+        one_name.setText(name);
+        one_sex_age.setText(sex+" "+age);
         InitTextView();
         InitViewPager();
     }
@@ -174,7 +176,40 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         apmh_jzs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_jzs);
         //apmh_ycbs = (RelativeLayout) archives_person_medical_history.findViewById(R.id.apmh_ycbs);
 
-        NetworkGetCodeGetEssentialInformation();
+        /**
+         * 判断是否已经从网络获取并缓存
+         * 如果没有缓存就从网络获取，已有缓存就直接获取缓存数据
+         */
+        String identificationPerson = basePreference.getString("identificationPerson");
+        if(identificationPerson.equals("")){
+            NetworkGetCodeGetEssentialInformation();
+        }else{
+            String height = basePreference.getString("height");//身高
+            String weight = basePreference.getString("weight");//体重
+
+            if(height.equals("")){
+                ViewpagerArchivewEntity viewpagerArchivewEntityHeight = null;
+                viewpagerArchivewEntityHeight = new ViewpagerArchivewEntity("身高","",0);
+                viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntityHeight);
+            }else{
+                ViewpagerArchivewEntity viewpagerArchivewEntityHeight = null;
+                viewpagerArchivewEntityHeight = new ViewpagerArchivewEntity("身高",height+"cm",0);
+                viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntityHeight);
+            }
+
+            if(weight.equals("")){
+                ViewpagerArchivewEntity viewpagerArchivewEntityWeight = null;
+                viewpagerArchivewEntityWeight = new ViewpagerArchivewEntity("体重","",0);
+                viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntityWeight);
+            }else{
+                ViewpagerArchivewEntity viewpagerArchivewEntityWeight = null;
+                viewpagerArchivewEntityWeight = new ViewpagerArchivewEntity("体重",weight+"kg",0);
+                viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntityWeight);
+            }
+
+            viewpagerArchivewAdapter.setItems(viewpagerArchivewEntityArrayList);
+
+        }
         apmhOnclick();
 
     }
@@ -189,8 +224,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         apmh_jws.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(getActivity(), ArchivesPublicQueryPastHistoryActivity.class);
-                intent.putExtra("key","jws");
+                intent.setClass(getActivity(), ArchivesMedicalhistoryQueryPastHistoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -198,8 +232,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         apmh_jzs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent.setClass(getActivity(), ArchivesPublicQueryPastHistoryActivity.class);
-                intent.putExtra("key","jzs");
+                intent.setClass(getActivity(), ArchivesFamilyhistoryQueryPastHistoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -282,15 +315,94 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                 textView2.setTextColor(Color.parseColor("#51BEFF"));
                 textView3.setTextColor(Color.parseColor("#323232"));
                 /**
-                 * 从网络获取后，改为false
-                 * 只要这个fragment不销毁，在这个页面的三个viewpager之间跳转
-                 * 就不会重复从网络获取，省流量
+                 * 判断是否已经从网络获取并缓存
+                 * 如果没有缓存就从网络获取，已有缓存就直接获取缓存数据
                  */
-                if(getHabitsAndCustomsFlag){
+                String identificationHabit = basePreference.getString("identificationHabit");
+                if(identificationHabit.equals("")) {
                     NetworkHabitsAndCustoms();
-                    getHabitsAndCustomsFlag = false;
                 }else{
-                    return;
+                    String smoking = basePreference.getString("smoking");
+                    String drinkWine = basePreference.getString("drinkWine");
+                    String diet = basePreference.getString("diet");
+                    String sleep = basePreference.getString("sleep");
+                    String defecation = basePreference.getString("defecation");
+                    String medication = basePreference.getString("medication");
+
+                    viewpagerArchivewEntityArrayListha.clear();
+
+                    if(smoking.equals("")){
+                        ViewpagerArchivewEntity viewpagerArchivewEntitycy = null;
+                        viewpagerArchivewEntitycy = new ViewpagerArchivewEntity("日抽烟量",
+                                "",0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntitycy);
+                    }else{
+                        ViewpagerArchivewEntity viewpagerArchivewEntitycy = null;
+                        viewpagerArchivewEntitycy = new ViewpagerArchivewEntity("日抽烟量",
+                                smoking,0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntitycy);
+                    }
+
+                    if(drinkWine.equals("")){
+                        ViewpagerArchivewEntity viewpagerArchivewEntityyj = null;
+                        viewpagerArchivewEntityyj = new ViewpagerArchivewEntity("日饮酒量",
+                                "",0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntityyj);
+                    }else{
+                        ViewpagerArchivewEntity viewpagerArchivewEntityyj = null;
+                        viewpagerArchivewEntityyj = new ViewpagerArchivewEntity("日饮酒量",
+                                drinkWine,0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntityyj);
+                    }
+
+                    if(diet.equals("")){
+                        ViewpagerArchivewEntity viewpagerArchivewEntityys = null;
+                        viewpagerArchivewEntityys = new ViewpagerArchivewEntity("饮食是否规律",
+                                "",0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntityys);
+                    }else{
+                        ViewpagerArchivewEntity viewpagerArchivewEntityys = null;
+                        viewpagerArchivewEntityys = new ViewpagerArchivewEntity("饮食是否规律",
+                                diet,0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntityys);
+                    }
+
+                    if(sleep.equals("")){
+                        ViewpagerArchivewEntity viewpagerArchivewEntitysm = null;
+                        viewpagerArchivewEntitysm = new ViewpagerArchivewEntity("睡眠是否规律",
+                                "",0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntitysm);
+                    }else{
+                        ViewpagerArchivewEntity viewpagerArchivewEntitysm = null;
+                        viewpagerArchivewEntitysm = new ViewpagerArchivewEntity("睡眠是否规律",
+                                sleep,0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntitysm);
+                    }
+
+                    if(defecation.equals("")){
+                        ViewpagerArchivewEntity viewpagerArchivewEntitypb = null;
+                        viewpagerArchivewEntitypb = new ViewpagerArchivewEntity("大小便是否规律",
+                                "",0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntitypb);
+                    }else{
+                        ViewpagerArchivewEntity viewpagerArchivewEntitypb = null;
+                        viewpagerArchivewEntitypb = new ViewpagerArchivewEntity("大小便是否规律",
+                                defecation,0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntitypb);
+                    }
+
+                    if(medication.equals("")){
+                        ViewpagerArchivewEntity viewpagerArchivewEntityfy = null;
+                        viewpagerArchivewEntityfy = new ViewpagerArchivewEntity("是否长期服用止痛药或安眠药",
+                                "",0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntityfy);
+                    }else{
+                        ViewpagerArchivewEntity viewpagerArchivewEntityfy = null;
+                        viewpagerArchivewEntityfy = new ViewpagerArchivewEntity("是否长期服用止痛药或安眠药",
+                                medication,0);
+                        viewpagerArchivewEntityArrayListha.add(viewpagerArchivewEntityfy);
+                    }
+                    viewpagerArchivewAdapterha.setItems(viewpagerArchivewEntityArrayListha);
                 }
             } else if(number == 2){
                 textView1.setTextColor(Color.parseColor("#323232"));
@@ -304,11 +416,6 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
      * 获取健康档案基本信息，并设置
      */
     public void NetworkGetCodeGetEssentialInformation(){
-        String name = basePreference.getString("name");//姓名
-        String age = basePreference.getString("age");//年龄
-        String sex = basePreference.getString("sex");//性别
-        one_name.setText(name);
-        one_sex_age.setText(sex+" "+age);
         boolean flags = net.isNetworkConnected(getActivity());
         if(flags == true){
             uid = basePreference.getString("uid");//uid
@@ -334,6 +441,12 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                         viewpagerArchivewEntityArrayList.add(viewpagerArchivewEntityWeight);
 
                         viewpagerArchivewAdapter.setItems(viewpagerArchivewEntityArrayList);
+
+                        //网络获取成功后，缓存进SP文件里
+                        basePreference.setString("height",height.substring(0,height.length()-3));//身高
+                        basePreference.setString("weight",weight.substring(0,weight.length()-3));//体重
+                        basePreference.setString("identificationPerson","1");//表示已缓存基本信息身高体重
+
                     }else{
                         showToast("获取身高体重失败，请重试");
                     }
@@ -342,13 +455,10 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                 @Override
                 public void onFailure(Call<EssentialInformationData> call, Throwable t) {
                     if (t instanceof SocketTimeoutException) {
-                        hideDialog();
                         showToast("网络超时，请检查您的网络状态");
                     } else if (t instanceof ConnectException) {
-                        hideDialog();
                         showToast("网络中断，请检查您的网络状态");
                     } else {
-                        hideDialog();
                         showToast("服务器发生错误，请等待修复");
                     }
                     Logger.v("获取个人信息失败"+t.getMessage());
@@ -389,6 +499,15 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
 
                         viewpagerArchivewAdapterha.setItems(viewpagerArchivewEntityArrayListha);
 
+                        ////网络获取成功后，缓存进SP文件里
+                        basePreference.setString("smoking",response.body().getData().get(0).getContent());//日抽烟量
+                        basePreference.setString("drinkWine",response.body().getData().get(1).getContent());//日饮酒量
+                        basePreference.setString("diet",response.body().getData().get(2).getContent());//饮食是否规律
+                        basePreference.setString("sleep",response.body().getData().get(3).getContent());//睡眠是否规律
+                        basePreference.setString("defecation",response.body().getData().get(4).getContent());//大小便是否规律
+                        basePreference.setString("medication",response.body().getData().get(5).getContent());//是否长期服用止痛药或安眠药
+                        basePreference.setString("identificationHabit","1");//表示已缓存生活习惯数据
+
                     }else{
                         showToast("获取生活习惯失败，请重试");
                     }
@@ -397,13 +516,10 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                 @Override
                 public void onFailure(Call<LifeHabitData> call, Throwable t) {
                     if (t instanceof SocketTimeoutException) {
-                        hideDialog();
                         showToast("网络超时，请检查您的网络状态");
                     } else if (t instanceof ConnectException) {
-                        hideDialog();
                         showToast("网络中断，请检查您的网络状态");
                     } else {
-                        hideDialog();
                         showToast("服务器发生错误，请等待修复");
                     }
                     Logger.v("获取生活习惯失败"+t.getMessage());

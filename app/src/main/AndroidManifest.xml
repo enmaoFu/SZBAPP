@@ -55,9 +55,16 @@
 
 
         <!-- 健康档案 -->
-        <!-- 健康档案 通用查看个人病里 既往史，家族史，遗传病史，页面 -->
+        <!-- 健康档案 通用查看个人病里 既往史页面 -->
         <activity
-            android:name=".activity.archives.ArchivesPublicQueryPastHistoryActivity"
+            android:name=".activity.archives.ArchivesMedicalhistoryQueryPastHistoryActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- 健康档案 通用查看个人病里 家族史页面 -->
+        <activity
+            android:name=".activity.archives.ArchivesFamilyhistoryQueryPastHistoryActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>

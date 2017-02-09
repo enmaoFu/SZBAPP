@@ -15,6 +15,7 @@ import com.bjsz.app.fragments.archives.ArchivesFragment;
 import com.bjsz.app.fragments.data.DataFragment;
 import com.bjsz.app.fragments.home.HomeFragment;
 import com.bjsz.app.fragments.my.MyFragment;
+import com.bjsz.app.utils.BasePreference;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -52,6 +53,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     private int textcolor,textcolor1;//底部菜单字体颜色
 
+    private BasePreference basePreference;//本地存储
+
     @Override
     protected void bindViews() {
         setContentView(R.layout.activity_main);
@@ -83,8 +86,11 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
+        basePreference = new BasePreference(this);
         textcolor = Color.parseColor("#50BDFE");
         textcolor1 = Color.parseColor("#505050");
+        /*basePreference.setString("identificationPerson","0");//表示未缓存基本信息身高体重
+        basePreference.setString("identificationHabit","0");//表示未缓存生活习惯数据*/
         fm = getSupportFragmentManager();
         selectTab(0);
     }

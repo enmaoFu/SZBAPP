@@ -14,7 +14,7 @@ import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
 import com.bjsz.app.views.ActivityArchivesAddDialogView;
 
 /**
- * 公共的添加个人病史里 既往史，家族史，遗传病史页面
+ * 添加个人病史里 家族史页面
  * @author enmaoFu
  * @date 2016-12-30
  */

@@ -136,7 +136,7 @@ public abstract class BaseActivity extends Activity {
     /**
      * 显示对话框
      */
-    public void showDialog() {
+    public void baseShowDialog() {
         if (dialog != null) {
             dialog.dismiss();
             dialog = null;
@@ -150,7 +150,7 @@ public abstract class BaseActivity extends Activity {
     /**
      * 隐藏对话框
      */
-    public void hideDialog() {
+    public void baseHideDialog() {
         if (dialog != null) {
             dialog.dismiss();
         }

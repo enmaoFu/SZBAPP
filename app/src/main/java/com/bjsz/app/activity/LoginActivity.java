@@ -131,7 +131,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void netWorkGetCode(String parameter){
         boolean flags = net.isNetworkConnected(this);
         if(flags == true){
-            showDialog();
+            baseShowDialog();
             ApiService as = initRetrofit(URL);
             Call<CodeReturnData> call = as.getCode(parameter);
             call.enqueue(new Callback<CodeReturnData>() {
@@ -139,12 +139,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 public void onResponse(Call<CodeReturnData> call, Response<CodeReturnData> response) {
                     int status = response.body().getStatus();
                     if(status == 0){
-                        hideDialog();
+                        baseHideDialog();
                         timer.start();
                         showToast("发送验证码成功，请查收");
                         Logger.v(response.body().getData().getCode()+"验证码...");
                     }else{
-                        hideDialog();
+                        baseHideDialog();
                         showToast("发送验证码失败，请重试");
                     }
                     Logger.v("验证码"+response.body().getStatus());
@@ -153,13 +153,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 @Override
                 public void onFailure(Call<CodeReturnData> call, Throwable t) {
                     if (t instanceof SocketTimeoutException) {
-                        hideDialog();
+                        baseHideDialog();
                         showToast("网络超时，请检查您的网络状态");
                     } else if (t instanceof ConnectException) {
-                        hideDialog();
+                        baseHideDialog();
                         showToast("网络中断，请检查您的网络状态");
                     } else {
-                        hideDialog();
+                        baseHideDialog();
                         showToast("服务器发生错误，请等待修复");
                     }
                     Logger.v("发送验证码请求失败"+t.getMessage());
@@ -177,7 +177,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         boolean flags = net.checkNetworkAvailable();
         final Intent intent = new Intent();
         if(flags == true){
-            showDialog();
+            baseShowDialog();
             ApiService as = initRetrofit(URL);
             Call<LoginData> call = as.getLogin(parameterPhone,parameterCode);
             call.enqueue(new Callback<LoginData>() {
@@ -185,7 +185,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 public void onResponse(Call<LoginData> call, Response<LoginData> response) {
                     int status = response.body().getStatus();
                     if(status == 0){
-                        hideDialog();
+                        baseHideDialog();
                         /**
                          * 获取个人基本信息，保存到本地
                          */
@@ -225,7 +225,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                         startActivity(intent);
                         finish();
                     }else{
-                        hideDialog();
+                        baseHideDialog();
                         showToast("验证码错误，登陆失败");
                     }
                     Logger.v("登陆"+response.body().getStatus());
@@ -234,13 +234,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 @Override
                 public void onFailure(Call<LoginData> call, Throwable t) {
                     if (t instanceof SocketTimeoutException) {
-                        hideDialog();
+                        baseHideDialog();
                         showToast("网络超时，请检查您的网络状态");
                     } else if (t instanceof ConnectException) {
-                        hideDialog();
+                        baseHideDialog();
                         showToast("网络中断，请检查您的网络状态");
                     } else {
-                        hideDialog();
+                        baseHideDialog();
                         showToast("服务器发生错误，请等待修复");
                     }
                     Logger.v("登陆请求失败"+t.getMessage());
