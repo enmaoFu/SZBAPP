@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -16,7 +17,7 @@
     </LinearLayout>
     
     <RelativeLayout
-        android:id="@+id/addjr"
+        android:id="@+id/addgx"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
@@ -27,10 +28,10 @@
             android:textColor="#323232"
             android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"
-            android:text="添加家人名字"/>
+            android:text="添加患病人关系"/>
 
         <TextView
-            android:id="@+id/msgjr"
+            android:id="@+id/msggx"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
@@ -90,6 +91,144 @@
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_height="1.5px"
+        android:background="#F5F5F5"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+    </View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/sf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#323232"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="是否治愈："/>
+
+        <TextView
+            android:id="@+id/isCheckText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#323232"
+            android:layout_centerVertical="true"
+            android:text="未治愈"
+            android:layout_toRightOf="@+id/sf"/>
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/switch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            app:sb_checkline_color="#ffffff"
+            app:sb_checked_color="#4EBEFE"
+            android:layout_marginRight="15dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_height="1.5px"
+        android:background="#F5F5F5"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+    </View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#323232"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="请选择患病时间"/>
+
+        <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/archives_strat_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="患病时间"
+                android:textColor="#363636"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/if_hr"
+        android:layout_height="1.5px"
+        android:background="#F5F5F5"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:visibility="gone">
+    </View>
+
+    <RelativeLayout
+        android:id="@+id/if_cure"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#323232"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:text="请选择治愈时间"/>
+
+        <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/archives_stop_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="治愈时间"
+                android:textColor="#363636"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right"/>
+
+        </LinearLayout>
 
     </RelativeLayout>
 

@@ -2,6 +2,7 @@ package com.bjsz.app.interfaces.retrofit.service;
 
 import com.bjsz.app.entity.returndata.CodeReturnData;
 import com.bjsz.app.entity.returndata.LoginData;
+import com.bjsz.app.entity.returndata.archives.AddFamilyhistoryData;
 import com.bjsz.app.entity.returndata.archives.AddMedicalhistoryData;
 import com.bjsz.app.entity.returndata.archives.EssentialInformationData;
 import com.bjsz.app.entity.returndata.archives.FamilyhistoryData;
@@ -121,5 +122,13 @@ public interface ApiService {
     @GET("user_anamnesis")
     Call<AddMedicalhistoryData> getAddMedicalhistoryMesssage(@Query("uid") String uid, @Query("illness") String illness, @Query("cure") String cure,
                                                              @Query("sicken_time") String sicken_time,@Query("cure_time") String cure_time);
+
+    /**
+     * 添加家族史
+     */
+    @GET("user_family")
+    Call<AddFamilyhistoryData> getAddFamilyhistoryMessage(@Query("uid") String uid, @Query("illness") String illness, @Query("cure") String cure,
+                                                          @Query("sicken_time") String sicken_time, @Query("cure_time") String cure_time,
+                                                          @Query("relation") String relation);
 
 }

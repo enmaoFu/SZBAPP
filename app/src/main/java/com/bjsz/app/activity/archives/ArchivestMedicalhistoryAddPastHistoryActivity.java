@@ -161,7 +161,6 @@ public class ArchivestMedicalhistoryAddPastHistoryActivity extends BaseActivity 
                 showDialog();
                 break;
             case R.id.right_text:
-                uid = basePreference.getString("uid");
                 AddMedicalhistory();
                 /*Logger.v("用户ID"+uid+"--"+"疾病名称"+msg.getText().toString().trim()+"--"+"是否治愈"+isCheck+"--"+
                         "患病时间"+archives_strat_date_text.getText().toString().toString()+"--"+"治愈时间"+archives_stop_date_text.getText().toString().toString());*/
@@ -202,6 +201,12 @@ public class ArchivestMedicalhistoryAddPastHistoryActivity extends BaseActivity 
 
     }
 
+    /**
+     * 网络添加既往史
+     * @param diseaseName
+     * @param archivesStartDate
+     * @param archivewStopDate
+     */
     public void NetworkAddMedicalhistory(String diseaseName,String archivesStartDate,String archivewStopDate){
         boolean flag = net.isNetworkConnected(this);
         if(flag == true){
@@ -230,7 +235,6 @@ public class ArchivestMedicalhistoryAddPastHistoryActivity extends BaseActivity 
                         baseHideDialog();
                         //关闭Activity
                         ArchivestMedicalhistoryAddPastHistoryActivity.this.finish();
-
                     }else{
                         baseHideDialog();
                         showToast("添加既往史失败，请重试");

@@ -117,9 +117,25 @@ public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity 
                 break;
             case R.id.right_text:
                 intent.setClass(this,ArchivesFamilyhistoryAddPastHistoryActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
                 break;
 
+        }
+    }
+
+    /**
+     * 添加家族史回调函数
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(data != null){
+            String relation = data.getExtras().getString("relation");
+            String illness = data.getExtras().getString("illness");
+            ArchivesPublicQueryPastHistoryEntity apqpEntity = null;
+            apqpEntity = new ArchivesPublicQueryPastHistoryEntity(relation,illness);
+            archivesPublicQueryPastHistoryEntityArrayList.add(apqpEntity);
+            archivesPublicQueryPastHistoryAdapter.notifyDataSetChanged();
+            showToast("添加家族史成功");
         }
     }
 
