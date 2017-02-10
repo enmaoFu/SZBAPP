@@ -8,6 +8,8 @@ import com.bjsz.app.entity.returndata.archives.EssentialInformationData;
 import com.bjsz.app.entity.returndata.archives.FamilyhistoryData;
 import com.bjsz.app.entity.returndata.archives.LifeHabitData;
 import com.bjsz.app.entity.returndata.archives.MedicalhistoryData;
+import com.bjsz.app.entity.returndata.my.FeedbackData;
+import com.bjsz.app.entity.returndata.my.MechanismData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -130,5 +132,17 @@ public interface ApiService {
     Call<AddFamilyhistoryData> getAddFamilyhistoryMessage(@Query("uid") String uid, @Query("illness") String illness, @Query("cure") String cure,
                                                           @Query("sicken_time") String sicken_time, @Query("cure_time") String cure_time,
                                                           @Query("relation") String relation);
+
+    /**
+     * 我的机构
+     */
+    @GET("user_gov_info")
+    Call<MechanismData> getMyMechanism(@Query("phoneNumber") String phoneNumber);
+
+    /**
+     * 问题反馈
+     */
+    @GET("user_problem_feedback")
+    Call<FeedbackData> netWorkFeedback(@Query("phoneNumber") String phoneNumber, @Query("content") String content);
 
 }

@@ -10,17 +10,30 @@ import com.bjsz.app.R;
 import com.bjsz.app.adapters.my.MyMyMechanismAdapter;
 import com.bjsz.app.base.BaseActivity;
 import com.bjsz.app.entity.my.MyMyMechanismEntity;
+import com.bjsz.app.entity.returndata.my.MechanismData;
+import com.bjsz.app.entity.returndata.my.MechanismExpandData;
+import com.bjsz.app.interfaces.BaseInterface;
+import com.bjsz.app.interfaces.retrofit.service.ApiService;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
+import com.bjsz.app.utils.BaseNetworkJudge;
+import com.bjsz.app.utils.BasePreference;
+import com.orhanobut.logger.Logger;
 
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 我的机构页面
  * @author enmaoFu
  * @date 2016-01-03
  */
-public class MyMyMechanismActivity extends BaseActivity implements OnClickListener{
+public class MyMyMechanismActivity extends BaseActivity implements OnClickListener,BaseInterface{
 
     private ImageView left_img;//标题栏左边返回
     private TextView center_text;//标题栏中间标题
@@ -28,6 +41,9 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
     private ListView my_my_mec_list;//listview
     private List<MyMyMechanismEntity> myMyMechanismEntities = new ArrayList<>();//数据集
     private MyMyMechanismAdapter myMyMechanismAdapter;//适配器
+
+    private BaseNetworkJudge net;//网络判断
+    private BasePreference basePreference;//本地存储
 
     /**
      * 初始化视图
@@ -55,7 +71,9 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
      */
     @Override
     protected void initData() {
-        initListview();
+        basePreference = new BasePreference(MyMyMechanismActivity.this);
+        net = new BaseNetworkJudge(MyMyMechanismActivity.this);
+        netWorkMyChanism();
     }
 
     /**
@@ -85,22 +103,57 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
     }
 
     /**
-     * 初始化我的机构List列表
+     * 获取我的机构
      */
-    public void initListview(){
+    public void netWorkMyChanism(){
+        boolean flag = net.isNetworkConnected(this);
+        if(flag == true){
+            baseShowDialog();
+            String numberPhoen = basePreference.getString("phoneNumber");
+            ApiService as = initRetrofit(URL);
+            Call<MechanismData> call = as.getMyMechanism(numberPhoen);
+            call.enqueue(new Callback<MechanismData>() {
+                @Override
+                public void onResponse(Call<MechanismData> call, Response<MechanismData> response) {
+                    int status = response.body().getStatus();
+                    if(status == 0){
+                        List<MechanismExpandData> data = response.body().getData();
+                        if(data.isEmpty()){
+                            baseHideDialog();
+                            showToast("暂时没有已检测过的机构");
+                        }else{
+                            baseHideDialog();
+                            MyMyMechanismEntity myMyMechanismEntity = null;
+                            for(int i = 0; i < data.size(); i++){
+                                myMyMechanismEntity = new MyMyMechanismEntity(data.get(i).getName(),data.get(i).getAddress(),R.mipmap.ic_my_my_mechanism_img);
+                                myMyMechanismEntities.add(myMyMechanismEntity);
+                            }
+                            myMyMechanismAdapter.setItems(myMyMechanismEntities);
+                        }
+                    }else{
+                        baseHideDialog();
+                        showToast("获取我的机构失败");
+                    }
+                }
 
-        MyMyMechanismEntity myMyMechanismEntity = null;
-
-        for(int i =0; i < 20; i++){
-
-            myMyMechanismEntity = new MyMyMechanismEntity("虎溪街道卫生所","重庆市沙坪坝区大学城虎溪",R.mipmap.ic_my_my_mechanism_img);
-
-            myMyMechanismEntities.add(myMyMechanismEntity);
-
+                @Override
+                public void onFailure(Call<MechanismData> call, Throwable t) {
+                    if (t instanceof SocketTimeoutException) {
+                        baseHideDialog();
+                        showToast("网络超时，请检查您的网络状态");
+                    } else if (t instanceof ConnectException) {
+                        baseHideDialog();
+                        showToast("网络中断，请检查您的网络状态");
+                    } else {
+                        baseHideDialog();
+                        showToast("服务器发生错误，请等待修复");
+                    }
+                    Logger.v("我的机构获取失败"+t.getMessage());
+                }
+            });
+        }else{
+            showToast("获取我的机构失败，请检查网络并下拉刷新");
         }
-
-        myMyMechanismAdapter.setItems(myMyMechanismEntities);
-
     }
 
 }

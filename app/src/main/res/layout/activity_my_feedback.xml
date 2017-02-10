@@ -5,16 +5,6 @@
     android:background="#F4F8F9"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/lin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#50BDFE">
-
-        <include layout="@layout/public_title_include" />
-
-    </LinearLayout>
-
     <RelativeLayout
         android:id="@+id/bom_re"
         android:layout_width="match_parent"
@@ -36,5 +26,17 @@
             android:textCursorDrawable="@null"/>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#50BDFE"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <include layout="@layout/public_title_include" />
+
+    </LinearLayout>
 
 </RelativeLayout>
