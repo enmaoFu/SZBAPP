@@ -143,7 +143,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
 
             @Override
             public void onEndFinish() {
-                showToast("总数量增长完毕");
+                //showToast("总数量增长完毕");
             }
         });
     }
