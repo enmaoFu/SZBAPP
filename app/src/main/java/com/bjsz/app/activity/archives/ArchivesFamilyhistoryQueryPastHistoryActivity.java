@@ -3,6 +3,7 @@ package com.bjsz.app.activity.archives;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -35,7 +36,7 @@ import retrofit2.Response;
  * @author enmaoFu
  * @date 2016-12-30
  */
-public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity implements View.OnClickListener,BaseInterface{
+public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity implements View.OnClickListener,BaseInterface,SwipeRefreshLayout.OnRefreshListener{
 
     private ImageView left_img;//标题栏左边返回
     private TextView center_text;//标题栏中间标题
@@ -46,6 +47,8 @@ public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity 
     private ArchivesPublicQueryPastHistoryAdapter archivesPublicQueryPastHistoryAdapter;//适配器
 
     private RelativeLayout query_ycbs_title;//遗传病史需要的头部标题
+
+    private SwipeRefreshLayout swipeLayout;//下拉刷新控件
 
     private BaseNetworkJudge net;//网络判断
     private BasePreference basePreference;//本地存储
@@ -72,6 +75,7 @@ public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity 
         aaqqh_list.setDividerHeight(2);
         query_ycbs_title = (RelativeLayout)findViewById(R.id.query_ycbs_title);
         archivesPublicQueryPastHistoryAdapter = new ArchivesPublicQueryPastHistoryAdapter(this);
+        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipeLayout);
         aaqqh_list.setAdapter(archivesPublicQueryPastHistoryAdapter);
         left_img.setOnClickListener(this);
         right_text.setOnClickListener(this);
@@ -84,6 +88,7 @@ public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity 
     protected void initData() {
         net = new BaseNetworkJudge(this);
         basePreference = new BasePreference(this);
+        initSwipeRefreshLayout();
         initList();
     }
 
@@ -154,6 +159,7 @@ public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity 
     public void NetworkGetFamilyhistory(){
         boolean flags = net.isNetworkConnected(this);
         if(flags == true){
+            swipeLayout.setRefreshing(true);
             uid = basePreference.getString("uid");//uid
             ApiService as = initRetrofit(URL);
             Call<FamilyhistoryData> call = as.getFamilyhistory(uid,"jz");
@@ -172,7 +178,10 @@ public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity 
                         }
                         archivesPublicQueryPastHistoryAdapter.setItems(archivesPublicQueryPastHistoryEntityArrayList);
 
+                        swipeLayout.setRefreshing(false);
+
                     }else{
+                        swipeLayout.setRefreshing(false);
                         showToast("获取家族史失败，请重试");
                     }
                 }
@@ -180,10 +189,13 @@ public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity 
                 @Override
                 public void onFailure(Call<FamilyhistoryData> call, Throwable t) {
                     if (t instanceof SocketTimeoutException) {
+                        swipeLayout.setRefreshing(false);
                         showToast("网络超时，请检查您的网络状态");
                     } else if (t instanceof ConnectException) {
+                        swipeLayout.setRefreshing(false);
                         showToast("网络中断，请检查您的网络状态");
                     } else {
+                        swipeLayout.setRefreshing(false);
                         showToast("服务器发生错误，请等待修复");
                     }
                     Logger.v("获取家族史信息失败"+t.getMessage());
@@ -194,4 +206,16 @@ public class ArchivesFamilyhistoryQueryPastHistoryActivity extends BaseActivity 
         }
     }
 
+    /**
+     * 初始化设置下拉刷新
+     */
+    public void initSwipeRefreshLayout(){
+        swipeLayout.setColorSchemeResources(R.color.colorSwipeLayout);
+        swipeLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        NetworkGetFamilyhistory();
+    }
 }

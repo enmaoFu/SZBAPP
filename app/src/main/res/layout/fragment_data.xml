@@ -59,9 +59,9 @@
                         android:textSize="15sp"/>
 
                     <TextView
+                        android:id="@+id/bmi_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:textSize="15sp"
@@ -105,9 +105,9 @@
                         android:textSize="15sp"/>
 
                     <TextView
+                        android:id="@+id/xy_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:textSize="15sp"
@@ -151,9 +151,9 @@
                         android:textSize="15sp"/>
 
                     <TextView
+                        android:id="@+id/yx_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:textSize="15sp"
@@ -197,9 +197,9 @@
                         android:textSize="15sp"/>
 
                     <TextView
+                        android:id="@+id/xt_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:textSize="15sp"
@@ -243,9 +243,9 @@
                         android:textSize="15sp"/>
 
                     <TextView
+                        android:id="@+id/tw_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:textSize="15sp"
@@ -298,14 +298,13 @@
                         android:id="@+id/imageView" />
 
                     <TextView
+                        android:id="@+id/ns_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="110bpm"
                         android:textSize="15sp"
                         android:textColor="#939393"
                         android:layout_alignTop="@+id/imageView"
-                        android:layout_centerHorizontal="true"
-                        android:id="@+id/textView2" />
+                        android:layout_centerHorizontal="true" />
 
                 </RelativeLayout>
 
@@ -337,9 +336,9 @@
                         android:textSize="15sp"/>
 
                     <TextView
+                        android:id="@+id/dg_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="110bpm"
                         android:layout_centerVertical="true"
                         android:layout_centerHorizontal="true"
                         android:textSize="15sp"

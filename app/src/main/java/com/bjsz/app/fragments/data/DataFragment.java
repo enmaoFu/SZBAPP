@@ -1,7 +1,6 @@
 package com.bjsz.app.fragments.data;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -10,15 +9,27 @@ import android.widget.TextView;
 import com.bjsz.app.R;
 import com.bjsz.app.activity.data.DataBloodPressureDetailsActivity;
 import com.bjsz.app.base.BaseFragment;
+import com.bjsz.app.entity.returndata.data.HealthyData;
+import com.bjsz.app.interfaces.BaseInterface;
+import com.bjsz.app.interfaces.retrofit.service.ApiService;
 import com.bjsz.app.utils.BaseImmersedStatusbarUtils;
+import com.bjsz.app.utils.BaseNetworkJudge;
+import com.bjsz.app.utils.BasePreference;
 import com.orhanobut.logger.Logger;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 健康数据
  * @author enmaoFu
  * @date 2016-12-26
  */
-public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,View.OnClickListener {
+public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,View.OnClickListener,BaseInterface {
 
     private TextView center_text;//标题栏中间标题
 
@@ -33,6 +44,18 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private RelativeLayout data_cholesterol_re;//胆固醇
     private RelativeLayout data_urine_routine_re;//尿常规
     private RelativeLayout data_ecg_re;//心电
+
+    private BaseNetworkJudge net;//网络判断
+    private BasePreference basePreference;//本地存储
+    private String uid;//用户ID
+
+    private TextView bmi_number;//心脉
+    private TextView xy_number;//血压
+    private TextView xt_number;//血糖
+    private TextView yx_number;//血氧
+    private TextView tw_number;//体温
+    private TextView ns_number;//尿酸
+    private TextView dg_number;//胆固醇
 
     /**
      * 传递给健康数据通用检测报告详情页面
@@ -70,6 +93,13 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         data_cholesterol_re = (RelativeLayout)findViewById(R.id.data_cholesterol_re);
         data_urine_routine_re = (RelativeLayout)findViewById(R.id.data_urine_routine_re);
         data_ecg_re = (RelativeLayout)findViewById(R.id.data_ecg_re);
+        bmi_number = (TextView)findViewById(R.id.bmi_number);
+        xy_number = (TextView)findViewById(R.id.xy_number);
+        xt_number = (TextView)findViewById(R.id.xt_number);
+        yx_number = (TextView)findViewById(R.id.yx_number);
+        tw_number = (TextView)findViewById(R.id.tw_number);
+        ns_number = (TextView)findViewById(R.id.ns_number);
+        dg_number = (TextView)findViewById(R.id.dg_number);
 
         data_heart_pulse_re.setOnClickListener(this);
         data_blood_pressure_re.setOnClickListener(this);
@@ -87,7 +117,10 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
      */
     @Override
     protected void initData() {
+        basePreference = new BasePreference(getActivity());
+        net = new BaseNetworkJudge(getActivity());
         initSwipeRefreshLayout();
+        netWorkGetHealthyData();
     }
 
     /**
@@ -105,25 +138,24 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
      * 初始化设置下拉刷新
      */
     public void initSwipeRefreshLayout(){
-
         swipeLayout.setColorSchemeResources(R.color.colorSwipeLayout);
         swipeLayout.setOnRefreshListener(this);
-
     }
 
     public void onRefresh() {
         Logger.v("刷新...");
+        netWorkGetHealthyData();
         /**
          * 模拟刷新 5秒后完成刷新(实际会是在网络请求中,届时将会取消此模拟)
          * 因为android是单线程，更新UI必须在UI线程中
          * 而Handler本身是在UI线程中的，所以直接在这里更新UI不会导致程序崩溃
-         */
+         *//*
         new Handler().postDelayed(new Runnable(){
             public void run() {
                 //execute the task
                 swipeLayout.setRefreshing(false);//完成刷新，关闭刷新
             }
-        }, 5000);
+        }, 5000);*/
     }
 
     /**
@@ -200,4 +232,98 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 break;
         }
     }
+
+    /**
+     * 获取健康数据
+     */
+    public void netWorkGetHealthyData(){
+
+        final boolean flag = net.isNetworkConnected(getActivity());
+        if(flag == true){
+            swipeLayout.setRefreshing(true);
+            uid = basePreference.getString("uid");//用户ID
+            ApiService as = initRetrofit(URL);
+            Call<HealthyData> call = as.getHealthyData(uid,"healthyData");
+            call.enqueue(new Callback<HealthyData>() {
+                @Override
+                public void onResponse(Call<HealthyData> call, Response<HealthyData> response) {
+                    int status = response.body().getStatus();
+                    if(status == 0){
+
+                        if(response.body().getData().getBmi().getHeight().equals("")){
+                            bmi_number.setText(""+","+response.body().getData().getBmi().getWeight());
+                        }else if(response.body().getData().getBmi().getWeight().equals("")){
+                            bmi_number.setText(response.body().getData().getBmi().getHeight()+","+"");
+                        }else{
+                            bmi_number.setText(response.body().getData().getBmi().getHeight()+","+response.body().getData().getBmi().getWeight());
+                        }
+
+                        if(response.body().getData().getXy().getSys().equals("")){
+                            xy_number.setText(""+","+response.body().getData().getXy().getDia());
+                        }else if(response.body().getData().getXy().getDia().equals("")){
+                            xy_number.setText(response.body().getData().getXy().getSys()+","+"");
+                        }else{
+                            xy_number.setText(response.body().getData().getXy().getSys()+","+response.body().getData().getXy().getDia());
+                        }
+
+                        if(response.body().getData().getXt().getGlu().equals("")){
+                            xt_number.setText("");
+                        }else{
+                            xt_number.setText(response.body().getData().getXt().getGlu());
+                        }
+
+                        if(response.body().getData().getYx().getSpo2().equals("")){
+                            yx_number.setText(""+","+response.body().getData().getYx().getPr());
+                        }else if(response.body().getData().getYx().getPr().equals("")){
+                            yx_number.setText(response.body().getData().getYx().getSpo2()+","+"");
+                        }else{
+                            yx_number.setText(response.body().getData().getYx().getSpo2()+","+response.body().getData().getYx().getPr());
+                        }
+
+                        if(response.body().getData().getTw().getTemp().equals("")){
+                            tw_number.setText("");
+                        }else{
+                            tw_number.setText(response.body().getData().getTw().getTemp());
+                        }
+
+                        if(response.body().getData().getNs().getUa().equals("")){
+                            ns_number.setText("");
+                        }else{
+                            ns_number.setText(response.body().getData().getNs().getUa());
+                        }
+
+                        if(response.body().getData().getDg().getChol().equals("")){
+                            dg_number.setText("");
+                        }else{
+                            dg_number.setText(response.body().getData().getDg().getChol());
+                        }
+                        swipeLayout.setRefreshing(false);
+
+                    }else{
+                        swipeLayout.setRefreshing(false);
+                        showToast("获取健康数据失败，请重试");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<HealthyData> call, Throwable t) {
+                    if (t instanceof SocketTimeoutException) {
+                        swipeLayout.setRefreshing(false);
+                        showToast("网络超时，请检查您的网络状态");
+                    } else if (t instanceof ConnectException) {
+                        swipeLayout.setRefreshing(false);
+                        showToast("网络中断，请检查您的网络状态");
+                    } else {
+                        swipeLayout.setRefreshing(false);
+                        showToast("服务器发生错误，请等待修复");
+                    }
+                    Logger.v("获取健康数据失败"+t.getMessage());
+                }
+            });
+        }else{
+            showToast("无网络连接，获取健康数据失败");
+        }
+
+    }
+
 }

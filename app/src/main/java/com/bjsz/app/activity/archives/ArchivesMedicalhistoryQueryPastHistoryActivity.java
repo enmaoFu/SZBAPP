@@ -3,6 +3,7 @@ package com.bjsz.app.activity.archives;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -35,7 +36,7 @@ import retrofit2.Response;
  * @author enmaoFu
  * @date 2016-12-30
  */
-public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity implements View.OnClickListener,BaseInterface{
+public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity implements View.OnClickListener,BaseInterface,SwipeRefreshLayout.OnRefreshListener{
 
     private ImageView left_img;//标题栏左边返回
     private TextView center_text;//标题栏中间标题
@@ -44,6 +45,8 @@ public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity
     private ListView aaqqh_list;//listview
     private List<ArchivesPublicQueryPastHistoryEntity> archivesPublicQueryPastHistoryEntityArrayList = new ArrayList<>();//数据集
     private ArchivesPublicQueryPastHistoryAdapter archivesPublicQueryPastHistoryAdapter;//适配器
+
+    private SwipeRefreshLayout swipeLayout;//下拉刷新控件
 
     private RelativeLayout query_ycbs_title;//遗传病史需要的头部标题
 
@@ -71,6 +74,7 @@ public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity
         aaqqh_list.setDivider(new ColorDrawable(Color.parseColor("#F4F8F9")));
         aaqqh_list.setDividerHeight(2);
         query_ycbs_title = (RelativeLayout)findViewById(R.id.query_ycbs_title);
+        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipeLayout);
         archivesPublicQueryPastHistoryAdapter = new ArchivesPublicQueryPastHistoryAdapter(this);
         aaqqh_list.setAdapter(archivesPublicQueryPastHistoryAdapter);
         left_img.setOnClickListener(this);
@@ -84,6 +88,7 @@ public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity
     protected void initData() {
         net = new BaseNetworkJudge(this);
         basePreference = new BasePreference(this);
+        initSwipeRefreshLayout();
         initList();
     }
 
@@ -154,6 +159,7 @@ public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity
     public void NetworkGetMedicalhistory(){
         boolean flags = net.isNetworkConnected(this);
         if(flags == true){
+            swipeLayout.setRefreshing(true);
             uid = basePreference.getString("uid");//uid
             ApiService as = initRetrofit(URL);
             Call<MedicalhistoryData> call = as.getMedicalhistory(uid,"jw");
@@ -172,7 +178,10 @@ public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity
                         }
                         archivesPublicQueryPastHistoryAdapter.setItems(archivesPublicQueryPastHistoryEntityArrayList);
 
+                        swipeLayout.setRefreshing(false);
+
                     }else{
+                        swipeLayout.setRefreshing(false);
                         showToast("获取既往史失败，请重试");
                     }
                 }
@@ -180,10 +189,13 @@ public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity
                 @Override
                 public void onFailure(Call<MedicalhistoryData> call, Throwable t) {
                     if (t instanceof SocketTimeoutException) {
+                        swipeLayout.setRefreshing(false);
                         showToast("网络超时，请检查您的网络状态");
                     } else if (t instanceof ConnectException) {
+                        swipeLayout.setRefreshing(false);
                         showToast("网络中断，请检查您的网络状态");
                     } else {
+                        swipeLayout.setRefreshing(false);
                         showToast("服务器发生错误，请等待修复");
                     }
                     Logger.v("获取既往史信息失败"+t.getMessage());
@@ -194,4 +206,16 @@ public class ArchivesMedicalhistoryQueryPastHistoryActivity extends BaseActivity
         }
     }
 
+    /**
+     * 初始化设置下拉刷新
+     */
+    public void initSwipeRefreshLayout(){
+        swipeLayout.setColorSchemeResources(R.color.colorSwipeLayout);
+        swipeLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        NetworkGetMedicalhistory();
+    }
 }

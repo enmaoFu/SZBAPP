@@ -8,6 +8,7 @@ import com.bjsz.app.entity.returndata.archives.EssentialInformationData;
 import com.bjsz.app.entity.returndata.archives.FamilyhistoryData;
 import com.bjsz.app.entity.returndata.archives.LifeHabitData;
 import com.bjsz.app.entity.returndata.archives.MedicalhistoryData;
+import com.bjsz.app.entity.returndata.data.HealthyData;
 import com.bjsz.app.entity.returndata.my.FeedbackData;
 import com.bjsz.app.entity.returndata.my.MechanismData;
 
@@ -123,7 +124,7 @@ public interface ApiService {
      */
     @GET("user_anamnesis")
     Call<AddMedicalhistoryData> getAddMedicalhistoryMesssage(@Query("uid") String uid, @Query("illness") String illness, @Query("cure") String cure,
-                                                             @Query("sicken_time") String sicken_time,@Query("cure_time") String cure_time);
+                                                             @Query("sicken_time") String sicken_time, @Query("cure_time") String cure_time);
 
     /**
      * 添加家族史
@@ -144,5 +145,11 @@ public interface ApiService {
      */
     @GET("user_problem_feedback")
     Call<FeedbackData> netWorkFeedback(@Query("phoneNumber") String phoneNumber, @Query("content") String content);
+
+    /**
+     * 获取首页健康数据
+     */
+    @GET("user_lately_data")
+    Call<HealthyData> getHealthyData(@Query("uid") String uid, @Query("healthyKey") String healthyKey);
 
 }

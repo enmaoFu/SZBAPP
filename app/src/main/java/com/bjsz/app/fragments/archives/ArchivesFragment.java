@@ -186,7 +186,7 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
         }else{
             String height = basePreference.getString("height");//身高
             String weight = basePreference.getString("weight");//体重
-
+            viewpagerArchivewEntityArrayList.clear();
             if(height.equals("")){
                 ViewpagerArchivewEntity viewpagerArchivewEntityHeight = null;
                 viewpagerArchivewEntityHeight = new ViewpagerArchivewEntity("身高","",0);
@@ -330,7 +330,6 @@ public class ArchivesFragment extends BaseFragment implements View.OnClickListen
                     String medication = basePreference.getString("medication");
 
                     viewpagerArchivewEntityArrayListha.clear();
-
                     if(smoking.equals("")){
                         ViewpagerArchivewEntity viewpagerArchivewEntitycy = null;
                         viewpagerArchivewEntitycy = new ViewpagerArchivewEntity("日抽烟量",

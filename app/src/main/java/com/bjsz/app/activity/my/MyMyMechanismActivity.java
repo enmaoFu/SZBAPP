@@ -1,5 +1,6 @@
 package com.bjsz.app.activity.my;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ import retrofit2.Response;
  * @author enmaoFu
  * @date 2016-01-03
  */
-public class MyMyMechanismActivity extends BaseActivity implements OnClickListener,BaseInterface{
+public class MyMyMechanismActivity extends BaseActivity implements OnClickListener,BaseInterface,SwipeRefreshLayout.OnRefreshListener{
 
     private ImageView left_img;//标题栏左边返回
     private TextView center_text;//标题栏中间标题
@@ -41,6 +42,8 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
     private ListView my_my_mec_list;//listview
     private List<MyMyMechanismEntity> myMyMechanismEntities = new ArrayList<>();//数据集
     private MyMyMechanismAdapter myMyMechanismAdapter;//适配器
+
+    private SwipeRefreshLayout swipeLayout;//下拉刷新控件
 
     private BaseNetworkJudge net;//网络判断
     private BasePreference basePreference;//本地存储
@@ -63,6 +66,7 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
         my_my_mec_list = (ListView)findViewById(R.id.my_my_mec_list);
         myMyMechanismAdapter = new MyMyMechanismAdapter(this);
         my_my_mec_list.setAdapter(myMyMechanismAdapter);
+        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipeLayout);
         left_img.setOnClickListener(this);
     }
 
@@ -73,6 +77,7 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
     protected void initData() {
         basePreference = new BasePreference(MyMyMechanismActivity.this);
         net = new BaseNetworkJudge(MyMyMechanismActivity.this);
+        initSwipeRefreshLayout();
         netWorkMyChanism();
     }
 
@@ -108,7 +113,7 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
     public void netWorkMyChanism(){
         boolean flag = net.isNetworkConnected(this);
         if(flag == true){
-            baseShowDialog();
+            swipeLayout.setRefreshing(true);
             String numberPhoen = basePreference.getString("phoneNumber");
             ApiService as = initRetrofit(URL);
             Call<MechanismData> call = as.getMyMechanism(numberPhoen);
@@ -122,16 +127,17 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
                             baseHideDialog();
                             showToast("暂时没有已检测过的机构");
                         }else{
-                            baseHideDialog();
+                            myMyMechanismEntities.clear();
                             MyMyMechanismEntity myMyMechanismEntity = null;
                             for(int i = 0; i < data.size(); i++){
                                 myMyMechanismEntity = new MyMyMechanismEntity(data.get(i).getName(),data.get(i).getAddress(),R.mipmap.ic_my_my_mechanism_img);
                                 myMyMechanismEntities.add(myMyMechanismEntity);
                             }
                             myMyMechanismAdapter.setItems(myMyMechanismEntities);
+                            swipeLayout.setRefreshing(false);
                         }
                     }else{
-                        baseHideDialog();
+                        swipeLayout.setRefreshing(false);
                         showToast("获取我的机构失败");
                     }
                 }
@@ -139,13 +145,13 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
                 @Override
                 public void onFailure(Call<MechanismData> call, Throwable t) {
                     if (t instanceof SocketTimeoutException) {
-                        baseHideDialog();
+                        swipeLayout.setRefreshing(false);
                         showToast("网络超时，请检查您的网络状态");
                     } else if (t instanceof ConnectException) {
-                        baseHideDialog();
+                        swipeLayout.setRefreshing(false);
                         showToast("网络中断，请检查您的网络状态");
                     } else {
-                        baseHideDialog();
+                        swipeLayout.setRefreshing(false);
                         showToast("服务器发生错误，请等待修复");
                     }
                     Logger.v("我的机构获取失败"+t.getMessage());
@@ -156,4 +162,16 @@ public class MyMyMechanismActivity extends BaseActivity implements OnClickListen
         }
     }
 
+    /**
+     * 初始化设置下拉刷新
+     */
+    public void initSwipeRefreshLayout(){
+        swipeLayout.setColorSchemeResources(R.color.colorSwipeLayout);
+        swipeLayout.setOnRefreshListener(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        netWorkMyChanism();
+    }
 }
