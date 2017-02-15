@@ -38,7 +38,8 @@
                     android:background="@drawable/shape_fragment_data_re"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="15dp"
-                    android:layout_marginTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/data_heart_pulse_img"

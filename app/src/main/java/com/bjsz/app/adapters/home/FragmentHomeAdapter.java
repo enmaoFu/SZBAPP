@@ -35,10 +35,12 @@ public class FragmentHomeAdapter extends BaseAdapter<HomeGridviewOptionEntity>{
 
         ImageView home_girdview_itme_img = baseViewHolder.getView(R.id.home_girdview_itme_img);
         TextView home_girdview_itme_text = baseViewHolder.getView(R.id.home_girdview_itme_text);
+        TextView key = baseViewHolder.getView(R.id.key);
 
         HomeGridviewOptionEntity homeGridviewOption = itemList.get(position);
         home_girdview_itme_img.setImageResource(homeGridviewOption.getItme_img());
         home_girdview_itme_text.setText(homeGridviewOption.getItme_text());
+        key.setText(homeGridviewOption.getKey());
 
         return convertView;
     }

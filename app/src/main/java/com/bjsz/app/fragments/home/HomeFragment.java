@@ -2,12 +2,14 @@ package com.bjsz.app.fragments.home;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bjsz.app.MyApplication;
 import com.bjsz.app.R;
+import com.bjsz.app.activity.data.DataPublicDetailsActivity;
 import com.bjsz.app.activity.home.ArchivesMessageCoreActivity;
 import com.bjsz.app.adapters.home.FragmentHomeAdapter;
 import com.bjsz.app.base.BaseFragment;
@@ -73,6 +75,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         basePreference = new BasePreference(getActivity());
         setNumber();
         initGridview();
+        home_grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String key = homeGridviewOptionArrayList.get(position).getKey().toString().trim();
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",key);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
@@ -104,7 +116,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         while (it.hasNext()) {
 
             Map.Entry<Integer, String> entry = it.next();
-            homeGridviewOptionEntity = new HomeGridviewOptionEntity(entry.getKey(),entry.getValue());
+            homeGridviewOptionEntity = new HomeGridviewOptionEntity(entry.getKey(),entry.getValue().substring(0,entry.getValue().length()-1),
+                    entry.getValue().substring(entry.getValue().length()-1,entry.getValue().length()-0));
             homeGridviewOptionArrayList.add(homeGridviewOptionEntity);
 
         }

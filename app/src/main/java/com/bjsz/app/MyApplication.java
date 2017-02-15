@@ -61,15 +61,14 @@ public class MyApplication extends Application {
      * 初始化首页girdview map数据源
      */
     public void initHomeGridviewImageMap(){
-        homeGridviewImageMap.put(R.mipmap.ic_heart_pulse_img,"心脉");
-        homeGridviewImageMap.put(R.mipmap.ic_blood_pressure_img,"血压");
-        homeGridviewImageMap.put(R.mipmap.ic_oxygen_img,"血氧");
-        homeGridviewImageMap.put(R.mipmap.ic_blood_sugar_img,"血糖");
-        homeGridviewImageMap.put(R.mipmap.ic_temperature_img,"体温");
-        homeGridviewImageMap.put(R.mipmap.ic_uric_acid_img,"尿酸");
-        homeGridviewImageMap.put(R.mipmap.ic_cholesterol_img,"胆固醇");
-        homeGridviewImageMap.put(R.mipmap.ic_urine_routine_img,"尿常规");
-        homeGridviewImageMap.put(R.mipmap.ic_ecg_img,"心电");
+        homeGridviewImageMap.put(R.mipmap.ic_blood_pressure_img,"血压2");
+        homeGridviewImageMap.put(R.mipmap.ic_oxygen_img,"血氧4");
+        homeGridviewImageMap.put(R.mipmap.ic_blood_sugar_img,"血糖3");
+        homeGridviewImageMap.put(R.mipmap.ic_temperature_img,"体温5");
+        homeGridviewImageMap.put(R.mipmap.ic_uric_acid_img,"尿酸6");
+        homeGridviewImageMap.put(R.mipmap.ic_cholesterol_img,"胆固醇7");
+        homeGridviewImageMap.put(R.mipmap.ic_urine_routine_img,"尿常规8");
+        homeGridviewImageMap.put(R.mipmap.ic_ecg_img,"心电9");
 
     }
 

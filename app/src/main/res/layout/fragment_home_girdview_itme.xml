@@ -20,4 +20,11 @@
         android:layout_marginTop="3dp"
         android:layout_centerHorizontal="true"/>
 
+    <TextView
+        android:id="@+id/key"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/home_girdview_itme_text"
+        android:visibility="gone"/>
+
 </RelativeLayout>

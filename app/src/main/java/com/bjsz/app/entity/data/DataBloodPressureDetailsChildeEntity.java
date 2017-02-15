@@ -7,50 +7,39 @@ package com.bjsz.app.entity.data;
  */
 public class DataBloodPressureDetailsChildeEntity {
 
-    private String textChild_one;
+    private String key;
 
-    private String textChild_to;
+    private String textChild_left;
 
-    private String textChild_three;
+    private String textChild_right;
 
-    private String textChild_four;
-
-    public DataBloodPressureDetailsChildeEntity(String textChild_one, String textChild_to, String textChild_three, String textChild_four) {
-        this.textChild_one = textChild_one;
-        this.textChild_to = textChild_to;
-        this.textChild_three = textChild_three;
-        this.textChild_four = textChild_four;
+    public DataBloodPressureDetailsChildeEntity(String key, String textChild_left, String textChild_right) {
+        this.key = key;
+        this.textChild_left = textChild_left;
+        this.textChild_right = textChild_right;
     }
 
-    public String getTextChild_one() {
-        return textChild_one;
+    public String getKey() {
+        return key;
     }
 
-    public void setTextChild_one(String textChild_one) {
-        this.textChild_one = textChild_one;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public String getTextChild_to() {
-        return textChild_to;
+    public String getTextChild_left() {
+        return textChild_left;
     }
 
-    public void setTextChild_to(String textChild_to) {
-        this.textChild_to = textChild_to;
+    public void setTextChild_left(String textChild_left) {
+        this.textChild_left = textChild_left;
     }
 
-    public String getTextChild_three() {
-        return textChild_three;
+    public String getTextChild_right() {
+        return textChild_right;
     }
 
-    public void setTextChild_three(String textChild_three) {
-        this.textChild_three = textChild_three;
-    }
-
-    public String getTextChild_four() {
-        return textChild_four;
-    }
-
-    public void setTextChild_four(String textChild_four) {
-        this.textChild_four = textChild_four;
+    public void setTextChild_right(String textChild_right) {
+        this.textChild_right = textChild_right;
     }
 }

@@ -116,7 +116,7 @@
 
         <!-- 健康数据，血压详情页面页面 -->
         <activity
-            android:name=".activity.data.DataBloodPressureDetailsActivity"
+            android:name=".activity.data.DataPublicDetailsActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
         </activity>

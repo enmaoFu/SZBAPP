@@ -15,250 +15,261 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:scrollbars="none">
 
-            <RelativeLayout
-                android:id="@+id/data_public_testing_top"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
-                
+                android:orientation="vertical">
+
                 <RelativeLayout
-                    android:id="@+id/data_public_testing_top_title"
+                    android:id="@+id/data_public_testing_top"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="#50BDFE">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="检测时间:2017-01-01 18:30"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="15dp"
-                        android:textColor="#ffffff"
-                        android:textSize="12sp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="检测时长:00:47:36"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="15dp"
-                        android:textColor="#ffffff"
-                        android:textSize="12sp"/>
-
-                </RelativeLayout>
-
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_below="@+id/data_public_testing_top_title">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@mipmap/test"/>
-
-                </HorizontalScrollView>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_activity_data_public_testing_re"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:visibility="gone">
 
                     <RelativeLayout
-                        android:id="@+id/data_public_testing_title_one"
+                        android:id="@+id/data_public_testing_top_title"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="30dp"
+                        android:background="#50BDFE">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="测量结果"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:textStyle="bold"
-                            android:textSize="17sp"
-                            android:textColor="#3A3A3A"
-                            android:layout_centerVertical="true"/>
+                            android:text="检测时间:2017-01-01 18:30"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"
+                            android:textColor="#ffffff"
+                            android:textSize="12sp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="最新测量时间:14:25"
-                            android:layout_marginTop="10dp"
+                            android:text="检测时长:00:47:36"
+                            android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dp"
-                            android:textSize="12sp"
-                            android:textColor="#69C8FF"
-                            android:layout_centerVertical="true"/>
+                            android:layout_marginRight="15dp"
+                            android:textColor="#ffffff"
+                            android:textSize="12sp"/>
 
                     </RelativeLayout>
 
-                    <com.bjsz.app.views.BaseLyGridView
-                        android:id="@+id/data_public_testing_gridview"
+                    <HorizontalScrollView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_below="@+id/data_public_testing_top_title">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/test"/>
+
+                    </HorizontalScrollView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_activity_data_public_testing_re"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:id="@+id/data_public_testing_title_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="测量结果"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="17sp"
+                                android:textColor="#3A3A3A"
+                                android:layout_centerVertical="true"/>
+
+                            <TextView
+                                android:id="@+id/measure_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="最新测量时间:14:25"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="10dp"
+                                android:textSize="12sp"
+                                android:textColor="#69C8FF"
+                                android:layout_centerVertical="true"/>
+
+                        </RelativeLayout>
+
+                        <com.bjsz.app.views.BaseLyGridView
+                            android:id="@+id/data_public_testing_gridview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/data_public_testing_title_one"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:numColumns="3"
+                            android:columnWidth="20dp"
+                            android:verticalSpacing="20dp"
+                            android:scrollbars="none">
+                        </com.bjsz.app.views.BaseLyGridView>
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@mipmap/ic_data_public_testing_re_bg_img"
+                            android:layout_below="@+id/data_public_testing_gridview">
+                        </ImageView>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_activity_data_public_testing_re"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
+
+                    <TextView
+                        android:id="@+id/data_details_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="测量详情"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:textColor="#3A3A3A"/>
+
+                    <com.bjsz.app.views.BaseLyListView
+                        android:id="@+id/data_public_testing_listview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/data_public_testing_title_one"
+                        android:layout_below="@+id/data_details_text"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:numColumns="3"
-                        android:columnWidth="20dp"
-                        android:verticalSpacing="20dp"
-                        android:scrollbars="none">
-                    </com.bjsz.app.views.BaseLyGridView>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@mipmap/ic_data_public_testing_re_bg_img"
-                        android:layout_below="@+id/data_public_testing_gridview">
-                    </ImageView>
+                        android:scrollbars="none"
+                        android:divider="@null">
+                    </com.bjsz.app.views.BaseLyListView>
 
                 </RelativeLayout>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_activity_data_public_testing_re"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
-
-                <TextView
-                    android:id="@+id/data_details_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="测量详情"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:textColor="#3A3A3A"/>
-
-                <com.bjsz.app.views.BaseLyListView
-                    android:id="@+id/data_public_testing_listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/data_details_text"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:scrollbars="none"
-                    android:divider="@null">
-                </com.bjsz.app.views.BaseLyListView>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_activity_data_public_testing_prompt_re"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp">
 
                 <RelativeLayout
-                    android:id="@+id/data_public_testing_prompt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_activity_data_public_testing_prompt_re"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
 
-                    <ImageView
-                        android:id="@+id/data_public_testing_prompt_img"
-                        android:layout_width="21dp"
-                        android:layout_height="21dp"
-                        android:src="@mipmap/ic_data_public_testing_re_prompt_img"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_centerVertical="true"/>
+                    <RelativeLayout
+                        android:id="@+id/data_public_testing_prompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/data_public_testing_prompt_img"
+                            android:layout_width="21dp"
+                            android:layout_height="21dp"
+                            android:src="@mipmap/ic_data_public_testing_re_prompt_img"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_centerVertical="true"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="温馨提示"
+                            android:layout_toRightOf="@+id/data_public_testing_prompt_img"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:textColor="#FD512F"
+                            android:layout_centerVertical="true"/>
+
+                    </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/reminder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="温馨提示"
-                        android:layout_toRightOf="@+id/data_public_testing_prompt_img"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:textColor="#FD512F"
-                        android:layout_centerVertical="true"/>
+                        android:text="撒打算打算打算的撒阿萨德撒打算按时打算打算大神大神大神撒的撒按时打算打算"
+                        android:layout_below="@+id/data_public_testing_prompt"
+                        android:layout_marginLeft="36dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:textSize="14sp"
+                        android:textColor="#36322F"/>
 
                 </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="撒打算打算打算的撒阿萨德撒打算按时打算打算大神大神大神撒的撒按时打算打算"
-                    android:layout_below="@+id/data_public_testing_prompt"
-                    android:layout_marginLeft="36dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="14sp"
-                    android:textColor="#36322F"/>
+                    android:background="@drawable/shape_activity_data_public_testing_re"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginBottom="15dp">
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/data_details_proposal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="测量详情"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textStyle="bold"
+                        android:textSize="17sp"
+                        android:textColor="#3A3A3A"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_activity_data_public_testing_re"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="15dp">
+                    <TextView
+                        android:id="@+id/measure_details_msg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="撒打算打算打算的撒阿萨德撒打算按时打算打算大神大神大神撒的撒按时打算打算"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="14sp"
+                        android:layout_below="@+id/data_details_proposal"
+                        android:textColor="#36322F"/>
 
-                <TextView
-                    android:id="@+id/data_details_proposal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="测量详情"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:textStyle="bold"
-                    android:textSize="17sp"
-                    android:textColor="#3A3A3A"/>
+                </RelativeLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="撒打算打算打算的撒阿萨德撒打算按时打算打算大神大神大神撒的撒按时打算打算"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="5dp"
-                    android:textSize="14sp"
-                    android:layout_below="@+id/data_details_proposal"
-                    android:textColor="#36322F"/>
+            </LinearLayout>
 
-            </RelativeLayout>
+        </ScrollView>
 
-        </LinearLayout>
-
-    </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

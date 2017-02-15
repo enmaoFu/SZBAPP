@@ -1,6 +1,5 @@
 package com.bjsz.app.adapters.data;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +21,10 @@ public class DataBloodPressureDetailsAdapter extends BaseExpandableListAdapter {
 
     private ArrayList<DataBloodPressureDetailsGroupEntity> gData;
     private ArrayList<ArrayList<DataBloodPressureDetailsChildeEntity>> iData;
-    private Context mContext;
 
-    public DataBloodPressureDetailsAdapter(ArrayList<DataBloodPressureDetailsGroupEntity> gData, ArrayList<ArrayList<DataBloodPressureDetailsChildeEntity>> iData, Context mContext) {
+    public DataBloodPressureDetailsAdapter(ArrayList<DataBloodPressureDetailsGroupEntity> gData, ArrayList<ArrayList<DataBloodPressureDetailsChildeEntity>> iData) {
         this.gData = gData;
         this.iData = iData;
-        this.mContext = mContext;
     }
 
     @Override
@@ -91,18 +88,16 @@ public class DataBloodPressureDetailsAdapter extends BaseExpandableListAdapter {
             convertView = LayoutInflater.from(parent.getContext()).inflate(
                     R.layout.activity_data_blood_pressure_details_childs, null);
             itemHolder = new ViewHolderItem();
-            itemHolder.textChild_one = (TextView) convertView.findViewById(R.id.textChild_one);
-            itemHolder.textChild_to = (TextView) convertView.findViewById(R.id.textChild_to);
-            itemHolder.textChild_three = (TextView) convertView.findViewById(R.id.textChild_three);
-            itemHolder.textChild_four = (TextView) convertView.findViewById(R.id.textChild_four);
+            itemHolder.key = (TextView)convertView.findViewById(R.id.key);
+            itemHolder.textChild_left = (TextView) convertView.findViewById(R.id.textChild_left);
+            itemHolder.textChild_right = (TextView) convertView.findViewById(R.id.textChild_right);
             convertView.setTag(itemHolder);
         }else{
             itemHolder = (ViewHolderItem) convertView.getTag();
         }
-        itemHolder.textChild_one.setText(iData.get(groupPosition).get(childPosition).getTextChild_one());
-        itemHolder.textChild_to.setText(iData.get(groupPosition).get(childPosition).getTextChild_to());
-        itemHolder.textChild_three.setText(iData.get(groupPosition).get(childPosition).getTextChild_three());
-        itemHolder.textChild_four.setText(iData.get(groupPosition).get(childPosition).getTextChild_four());
+        itemHolder.key.setText(iData.get(groupPosition).get(childPosition).getKey());
+        itemHolder.textChild_left.setText(iData.get(groupPosition).get(childPosition).getTextChild_left());
+        itemHolder.textChild_right.setText(iData.get(groupPosition).get(childPosition).getTextChild_right());
         return convertView;
     }
 
@@ -117,10 +112,9 @@ public class DataBloodPressureDetailsAdapter extends BaseExpandableListAdapter {
     }
 
     private static class ViewHolderItem{
-        private TextView textChild_one;
-        private TextView textChild_to;
-        private TextView textChild_three;
-        private TextView textChild_four;
+        private TextView key;
+        private TextView textChild_left;
+        private TextView textChild_right;
     }
 
 }

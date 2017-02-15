@@ -7,7 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.R;
-import com.bjsz.app.activity.data.DataBloodPressureDetailsActivity;
+import com.bjsz.app.activity.data.DataPublicDetailsActivity;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.entity.returndata.data.HealthyData;
 import com.bjsz.app.interfaces.BaseInterface;
@@ -49,7 +49,6 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private BasePreference basePreference;//本地存储
     private String uid;//用户ID
 
-    private TextView bmi_number;//心脉
     private TextView xy_number;//血压
     private TextView xt_number;//血糖
     private TextView yx_number;//血氧
@@ -59,13 +58,23 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     /**
      * 传递给健康数据通用检测报告详情页面
-     * 默认为1 表示通用的
-     * 2 表示尿常规
-     * 3 表示心电
+     * 2 表示血压
+     * 3 表示血糖
+     * 4 表示血氧
+     * 5 表示体温
+     * 6 表示尿酸
+     * 7 表示胆固醇
+     * 8 表示尿常规
+     * 9 表示心电
      */
-    private static final String VALUE_PUBLIC = "1";
-    private static final String VALUE_URINE_ROUTINE = "2";
-    private static final String VALUE_ECG = "3";
+    private static final String VALUE_BLOOD_PRESSURE = "2";
+    private static final String VALUE_BLOOD_SUGAR = "3";
+    private static final String VALUE_OXYGEN = "4";
+    private static final String VALUE_TEMPERATURE = "5";
+    private static final String VALUE_URIC_ACID = "6";
+    private static final String VALUE_CHOLESTEROL = "7";
+    private static final String VALUE_URINE_ROUTINE = "8";
+    private static final String VALUE_ECG = "9";
 
     /**
      * 初始化布局
@@ -93,7 +102,6 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         data_cholesterol_re = (RelativeLayout)findViewById(R.id.data_cholesterol_re);
         data_urine_routine_re = (RelativeLayout)findViewById(R.id.data_urine_routine_re);
         data_ecg_re = (RelativeLayout)findViewById(R.id.data_ecg_re);
-        bmi_number = (TextView)findViewById(R.id.bmi_number);
         xy_number = (TextView)findViewById(R.id.xy_number);
         xt_number = (TextView)findViewById(R.id.xt_number);
         yx_number = (TextView)findViewById(R.id.yx_number);
@@ -170,64 +178,64 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         switch (v.getId()){
             case R.id.data_heart_pulse_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
                 //intent.putExtra("key",VALUE_PUBLIC);
                 startActivity(intent);
                 break;
 
             case R.id.data_blood_pressure_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
-                intent.putExtra("key",VALUE_PUBLIC);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",VALUE_BLOOD_PRESSURE);
                 startActivity(intent);
                 break;
 
             case R.id.data_oxygen_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
-                //intent.putExtra("key",VALUE_PUBLIC);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",VALUE_OXYGEN);
                 startActivity(intent);
                 break;
 
             case R.id.data_blood_sugar_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
-                //intent.putExtra("key",VALUE_PUBLIC);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",VALUE_BLOOD_SUGAR);
                 startActivity(intent);
                 break;
 
             case R.id.data_temperature_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
-                intent.putExtra("key",VALUE_PUBLIC);
-                //startActivity(intent);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",VALUE_TEMPERATURE);
+                startActivity(intent);
                 break;
 
             case R.id.data_uric_acid_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
-                //intent.putExtra("key",VALUE_PUBLIC);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",VALUE_URIC_ACID);
                 startActivity(intent);
                 break;
 
             case R.id.data_cholesterol_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
-                //intent.putExtra("key",VALUE_PUBLIC);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",VALUE_CHOLESTEROL);
                 startActivity(intent);
                 break;
 
             case R.id.data_urine_routine_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
-                //intent.putExtra("key",VALUE_URINE_ROUTINE);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",VALUE_URINE_ROUTINE);
                 startActivity(intent);
                 break;
 
             case R.id.data_ecg_re:
                 //intent.setClass(getActivity(), DataPublicTestingPresentationDetailsActivity.class);
-                intent.setClass(getActivity(), DataBloodPressureDetailsActivity.class);
-                //intent.putExtra("key",VALUE_ECG);
+                intent.setClass(getActivity(), DataPublicDetailsActivity.class);
+                intent.putExtra("key",VALUE_ECG);
                 startActivity(intent);
                 break;
         }
@@ -249,14 +257,6 @@ public class DataFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 public void onResponse(Call<HealthyData> call, Response<HealthyData> response) {
                     int status = response.body().getStatus();
                     if(status == 0){
-
-                        if(response.body().getData().getBmi().getHeight().equals("")){
-                            bmi_number.setText(""+","+response.body().getData().getBmi().getWeight());
-                        }else if(response.body().getData().getBmi().getWeight().equals("")){
-                            bmi_number.setText(response.body().getData().getBmi().getHeight()+","+"");
-                        }else{
-                            bmi_number.setText(response.body().getData().getBmi().getHeight()+","+response.body().getData().getBmi().getWeight());
-                        }
 
                         if(response.body().getData().getXy().getSys().equals("")){
                             xy_number.setText(""+","+response.body().getData().getXy().getDia());

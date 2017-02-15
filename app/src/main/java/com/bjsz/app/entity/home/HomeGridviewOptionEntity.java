@@ -11,9 +11,12 @@ public class HomeGridviewOptionEntity {
 
     private String itme_text;
 
-    public HomeGridviewOptionEntity(int itme_img, String itme_text) {
+    private String key;
+
+    public HomeGridviewOptionEntity(int itme_img, String itme_text, String key) {
         this.itme_img = itme_img;
         this.itme_text = itme_text;
+        this.key = key;
     }
 
     public int getItme_img() {
@@ -30,5 +33,13 @@ public class HomeGridviewOptionEntity {
 
     public void setItme_text(String itme_text) {
         this.itme_text = itme_text;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
