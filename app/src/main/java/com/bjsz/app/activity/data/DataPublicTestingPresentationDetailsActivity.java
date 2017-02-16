@@ -250,7 +250,7 @@ public class DataPublicTestingPresentationDetailsActivity extends BaseActivity i
                 }
             });
         }else{
-            showToast("获取检测报告失败，请重试");
+            showToast("无网络连接，获取检测报告失败");
         }
 
     }

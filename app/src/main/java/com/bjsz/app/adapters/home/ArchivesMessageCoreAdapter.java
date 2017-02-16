@@ -37,12 +37,14 @@ public class ArchivesMessageCoreAdapter extends BaseAdapter<ArchivesMessageCoreE
         TextView archives_msg_core_title = baseViewHolder.getView(R.id.archives_msg_core_title);
         TextView archives_msg_core_content = baseViewHolder.getView(R.id.archives_msg_core_content);
         TextView archives_msg_core_date = baseViewHolder.getView(R.id.archives_msg_core_date);
+        TextView key = baseViewHolder.getView(R.id.key);
 
         ArchivesMessageCoreEntity archivesMessageCoreEntity = itemList.get(position);
         archives_msg_core_img.setImageResource(archivesMessageCoreEntity.getArchives_msg_core_img());
         archives_msg_core_title.setText(archivesMessageCoreEntity.getArchives_msg_core_title());
         archives_msg_core_content.setText(archivesMessageCoreEntity.getArchives_msg_core_content());
         archives_msg_core_date.setText(archivesMessageCoreEntity.getArchives_msg_core_date());
+        key.setText(archivesMessageCoreEntity.getKey());
 
         return convertView;
     }

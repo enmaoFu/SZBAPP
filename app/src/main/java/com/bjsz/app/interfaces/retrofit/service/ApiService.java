@@ -13,6 +13,8 @@ import com.bjsz.app.entity.returndata.data.CategoryDetailsData;
 import com.bjsz.app.entity.returndata.data.HealthyAnalysisData;
 import com.bjsz.app.entity.returndata.data.HealthyData;
 import com.bjsz.app.entity.returndata.data.SevenTimesMoreData;
+import com.bjsz.app.entity.returndata.home.NoticeMessageData;
+import com.bjsz.app.entity.returndata.home.NoticeMessageDetailsData;
 import com.bjsz.app.entity.returndata.my.FeedbackData;
 import com.bjsz.app.entity.returndata.my.MechanismData;
 
@@ -179,4 +181,17 @@ public interface ApiService {
      */
     @GET("user_more_analysis_data")
     Call<SevenTimesMoreData> getSevenTimesMoreData(@Query("dataName") String dataName, @Query("phoneNumber") String phoneNumber);
+
+    /**
+     * 获取通知消息
+     */
+    @GET("user_notice_info")
+    Call<NoticeMessageData> getNoticeMessage(@Query("phoneNumber") String phoneNumber);
+
+    /**
+     * 获取消息通知详情
+     */
+    @GET("user_notice_details")
+    Call<NoticeMessageDetailsData> getNoticeMessageDetails(@Query("key") String key);
+
 }
