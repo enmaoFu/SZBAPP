@@ -10,7 +10,9 @@ import com.bjsz.app.entity.returndata.archives.LifeHabitData;
 import com.bjsz.app.entity.returndata.archives.MedicalhistoryData;
 import com.bjsz.app.entity.returndata.data.CategoryData;
 import com.bjsz.app.entity.returndata.data.CategoryDetailsData;
+import com.bjsz.app.entity.returndata.data.HealthyAnalysisData;
 import com.bjsz.app.entity.returndata.data.HealthyData;
+import com.bjsz.app.entity.returndata.data.SevenTimesMoreData;
 import com.bjsz.app.entity.returndata.my.FeedbackData;
 import com.bjsz.app.entity.returndata.my.MechanismData;
 
@@ -166,4 +168,15 @@ public interface ApiService {
     @GET("user_data_info")
     Call<CategoryDetailsData> getCategoryDetailsData(@Query("phoneNumber") String phoneNumber, @Query("dataName") String dataName, @Query("key") String key);
 
+    /**
+     * 获取健康分析
+     */
+    @GET("user_analysis_data")
+    Call<HealthyAnalysisData> getHealthyAnalysisData(@Query("dataName") String dataName, @Query("phoneNumber") String phoneNumber);
+
+    /**
+     * 获取健康分析近七次更多
+     */
+    @GET("user_more_analysis_data")
+    Call<SevenTimesMoreData> getSevenTimesMoreData(@Query("dataName") String dataName, @Query("phoneNumber") String phoneNumber);
 }

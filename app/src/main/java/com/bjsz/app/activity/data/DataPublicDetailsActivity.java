@@ -34,7 +34,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * 健康分析检测报告通用详情页面
+ * 健康分析检测报告通用页面
  * @author enmaoFu
  * @date 2017-01-04
  */
@@ -159,6 +159,7 @@ public class DataPublicDetailsActivity extends BaseActivity implements View.OnCl
                 break;
             case R.id.right_text:
                 intent.setClass(this,DataHealthyAnalysisActivity.class);
+                intent.putExtra("key",key);
                 startActivity(intent);
                 break;
         }
