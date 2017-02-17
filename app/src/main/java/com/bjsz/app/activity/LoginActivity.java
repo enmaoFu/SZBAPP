@@ -22,7 +22,10 @@ import com.orhanobut.logger.Logger;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
+import java.util.Set;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -182,48 +185,67 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             Call<LoginData> call = as.getLogin(parameterPhone,parameterCode);
             call.enqueue(new Callback<LoginData>() {
                 @Override
-                public void onResponse(Call<LoginData> call, Response<LoginData> response) {
+                public void onResponse(Call<LoginData> call, final Response<LoginData> response) {
                     int status = response.body().getStatus();
                     if(status == 0){
-                        baseHideDialog();
                         /**
                          * 获取个人基本信息，保存到本地
                          */
-                        String uid = response.body().getData().getPersonMessage().getUid();//uid
-                        String name = response.body().getData().getPersonMessage().getName();//姓名
-                        String sex = response.body().getData().getPersonMessage().getSex();//性别
-                        String phoneNumber = response.body().getData().getPhoneNumber();//手机号
-                        String identityId = response.body().getData().getPersonMessage().getIdentityid();//身份证号
-                        String healthyKey = response.body().getData().getHealthyKey();//获取数据key
+                        final String uid = response.body().getData().getPersonMessage().getUid();//uid
+                        final String name = response.body().getData().getPersonMessage().getName();//姓名
+                        final String sex = response.body().getData().getPersonMessage().getSex();//性别
+                        final String phoneNumber = response.body().getData().getPhoneNumber();//手机号
+                        final String identityId = response.body().getData().getPersonMessage().getIdentityid();//身份证号
+                        final String healthyKey = response.body().getData().getHealthyKey();//获取数据key
 
+                        final int cardnum_age;
                         //从身份证获取出生日期，计算年龄
-                        String cardnum = identityId.substring(6,10);
-                        int age = Integer.parseInt(cardnum);
-                        //获取现在年份
-                        Time time = new Time("GMT+8");
-                        time.setToNow();
-                        //计算年龄
-                        int cardnum_age = time.year-age;
+                        if(identityId.equals("")){
+                            cardnum_age = 000000000000000000;
+                        }else{
+                            String cardnum = identityId.substring(6,10);
+                            int age = Integer.parseInt(cardnum);
+                            //获取现在年份
+                            Time time = new Time("GMT+8");
+                            time.setToNow();
+                            //计算年龄
+                            cardnum_age = time.year-age;
+                        }
 
-                        basePreference.setString("uid",uid);
-                        basePreference.setString("name",name);
-                        basePreference.setString("sex",sex);
-                        basePreference.setString("age",cardnum_age+"");//因为年龄计算出来是Int类型，此处加一个""变成字符串
-                        basePreference.setString("phoneNumber",phoneNumber);
-                        basePreference.setString("identityId",identityId);
-                        basePreference.setString("healthyKey",healthyKey);
-                        /**
-                         * 获取首页三个检测数据，保存到本地
-                         */
-                        String total = response.body().getData().getMeasureNumber().getTotal();//总测量条数
-                        String today = response.body().getData().getMeasureNumber().getToday();//今日测量条数
-                        String abnormal = response.body().getData().getMeasureNumber().getAbnormal();//异常测量条数
-                        basePreference.setString("total",total);
-                        basePreference.setString("today",today);
-                        basePreference.setString("abnormal",abnormal);
-                        intent.setClass(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                        JPushInterface.setAlias(LoginActivity.this, //上下文对象
+                                phoneNumber, //别名
+                                new TagAliasCallback() {//回调接口,i=0表示成功,其它设置失败
+                                    @Override
+                                    public void gotResult(int i, String s, Set<String> set) {
+                                        if(i == 0){
+                                            basePreference.setString("uid",uid);
+                                            basePreference.setString("name",name);
+                                            basePreference.setString("sex",sex);
+                                            basePreference.setString("age",cardnum_age+"");//因为年龄计算出来是Int类型，此处加一个""变成字符串
+                                            basePreference.setString("phoneNumber",phoneNumber);
+                                            basePreference.setString("identityId",identityId);
+                                            basePreference.setString("healthyKey",healthyKey);
+                                            /**
+                                             * 获取首页三个检测数据，保存到本地
+                                             */
+                                            String total = response.body().getData().getMeasureNumber().getTotal();//总测量条数
+                                            String today = response.body().getData().getMeasureNumber().getToday();//今日测量条数
+                                            String abnormal = response.body().getData().getMeasureNumber().getAbnormal();//异常测量条数
+                                            basePreference.setString("total",total);
+                                            basePreference.setString("today",today);
+                                            basePreference.setString("abnormal",abnormal);
+                                            baseHideDialog();
+                                            Logger.v(i+"");
+                                            intent.setClass(LoginActivity.this,MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }else{
+                                            baseHideDialog();
+                                            showToast("未知错误，请重新登录");
+                                        }
+                                    }
+                                });
+
                     }else{
                         baseHideDialog();
                         showToast("验证码错误，登陆失败");

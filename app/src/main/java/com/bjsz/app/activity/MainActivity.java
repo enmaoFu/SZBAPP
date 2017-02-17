@@ -93,6 +93,7 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
 
     @Override
     protected void initData() {
+        registerMessageReceiver();  // used for receive msg
         basePreference = new BasePreference(this);
         textcolor = Color.parseColor("#50BDFE");
         textcolor1 = Color.parseColor("#505050");

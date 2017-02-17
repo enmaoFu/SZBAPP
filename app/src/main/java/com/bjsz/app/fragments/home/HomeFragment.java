@@ -1,16 +1,22 @@
 package com.bjsz.app.fragments.home;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bjsz.app.MyApplication;
 import com.bjsz.app.R;
 import com.bjsz.app.activity.data.DataPublicDetailsActivity;
 import com.bjsz.app.activity.home.ArchivesMessageCoreActivity;
+import com.bjsz.app.activity.home.ArchivesMessageDetailsActivity;
 import com.bjsz.app.adapters.home.FragmentHomeAdapter;
 import com.bjsz.app.base.BaseFragment;
 import com.bjsz.app.entity.home.HomeGridviewOptionEntity;
@@ -42,6 +48,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     private TextView home_total_number_right;//异常测量条数
     private BasePreference basePreference;//本地存储
 
+    private LocalBroadcastManager broadcastManager;//广播
+
+    private TextView msg;
+    private RelativeLayout home_msg_re;
+
     /**
      * 初始化布局
      * @return
@@ -62,6 +73,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
         home_total_number = (BaseRiseNumberTextView)findViewById(R.id.home_total_number);
         home_total_number_left = (TextView)findViewById(R.id.home_total_number_left);
         home_total_number_right = (TextView)findViewById(R.id.home_total_number_right);
+        msg = (TextView)findViewById(R.id.msg);
+        home_msg_re = (RelativeLayout)findViewById(R.id.home_msg_re);
+        home_msg_re.setOnClickListener(this);
         fragmentHomeAdapter = new FragmentHomeAdapter(getActivity());
         home_grid.setAdapter(fragmentHomeAdapter);
         right_img.setOnClickListener(this);
@@ -73,6 +87,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
     @Override
     protected void initData() {
         basePreference = new BasePreference(getActivity());
+        msg.setText("暂无");
+        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction("android.intent.action.CART_BROADCAST");//建议把它写一个公共的变量，这里方便阅读就不写了。
+        broadcastManager.registerReceiver(mItemViewListClickReceiver, intentFilter);
         setNumber();
         initGridview();
         home_grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,6 +105,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
             }
         });
     }
+
+    BroadcastReceiver mItemViewListClickReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent){
+            msg.setText(intent.getStringExtra("resource"));
+        }
+    };
 
     /**
      * 初始化标题栏
@@ -126,6 +152,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        broadcastManager.unregisterReceiver(mItemViewListClickReceiver);
+    }
+
     /**
      * 事件监听
      * @param v
@@ -139,6 +171,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener{
             case R.id.right_img:
                 intent.setClass(getActivity(), ArchivesMessageCoreActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.home_msg_re:
+                if(msg.getText().toString().trim().equals("暂无")){
+                    return;
+                }else{
+                    intent.setClass(getActivity(), ArchivesMessageDetailsActivity.class);
+                    intent.putExtra("key","home");
+                    intent.putExtra("msg",msg.getText().toString().trim());
+                    startActivity(intent);
+                }
                 break;
         }
     }

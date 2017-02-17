@@ -1,7 +1,6 @@
 package com.bjsz.app.activity.home;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,11 +27,10 @@ import retrofit2.Response;
  * @author enmaoFu
  * @date 2017-01-04
  */
-public class ArchivesMessageDetailsActivity extends BaseActivity implements View.OnClickListener,BaseInterface,SwipeRefreshLayout.OnRefreshListener{
+public class ArchivesMessageDetailsActivity extends BaseActivity implements View.OnClickListener,BaseInterface{
 
     private ImageView left_img;//标题栏左边返回
     private TextView center_text;//标题栏中间标题
-    private SwipeRefreshLayout swipeLayout;//下拉刷新控件
     private TextView msg;//消息详情
 
     private String key;//接收消息通知传过来的某一条消息的标识
@@ -55,7 +53,6 @@ public class ArchivesMessageDetailsActivity extends BaseActivity implements View
     protected void initView() {
         left_img = (ImageView)findViewById(R.id.left_img);
         center_text = (TextView)findViewById(R.id.center_text);
-        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipeLayout);
         msg = (TextView)findViewById(R.id.msg);
         left_img.setOnClickListener(this);
     }
@@ -69,8 +66,14 @@ public class ArchivesMessageDetailsActivity extends BaseActivity implements View
         net = new BaseNetworkJudge(this);
         Bundle bundle = this.getIntent().getExtras();
         key = bundle.getString("key");
-        initSwipeRefreshLayout();
-        netWorkNoticeMessageDetails();
+        if(key.equals("home")){
+            Bundle bundleHome = this.getIntent().getExtras();
+            String getMes = bundleHome.getString("msg");
+            msg.setText(getMes);
+        }else{
+            netWorkNoticeMessageDetails();
+        }
+
     }
 
     /**
@@ -106,7 +109,7 @@ public class ArchivesMessageDetailsActivity extends BaseActivity implements View
 
         boolean flag = net.isNetworkConnected(this);
         if(flag == true){
-            swipeLayout.setRefreshing(true);
+            baseShowDialog();
             ApiService as = initRetrofit(URL);
             Call<NoticeMessageDetailsData> call = as.getNoticeMessageDetails(key);
             call.enqueue(new Callback<NoticeMessageDetailsData>() {
@@ -116,9 +119,9 @@ public class ArchivesMessageDetailsActivity extends BaseActivity implements View
                     if(status == 0){
                         String str = response.body().getData();
                         msg.setText(str);
-                        swipeLayout.setRefreshing(false);
+                        baseHideDialog();
                     }else{
-                        swipeLayout.setRefreshing(false);
+                        baseHideDialog();
                         showToast("获取通知消息失败，请重试");
                     }
                 }
@@ -126,13 +129,13 @@ public class ArchivesMessageDetailsActivity extends BaseActivity implements View
                 @Override
                 public void onFailure(Call<NoticeMessageDetailsData> call, Throwable t) {
                     if (t instanceof SocketTimeoutException) {
-                        swipeLayout.setRefreshing(false);
+                        baseHideDialog();
                         showToast("网络超时，请检查您的网络状态");
                     } else if (t instanceof ConnectException) {
-                        swipeLayout.setRefreshing(false);
+                        baseHideDialog();
                         showToast("网络中断，请检查您的网络状态");
                     } else {
-                        swipeLayout.setRefreshing(false);
+                        baseHideDialog();
                         showToast("服务器发生错误，请等待修复");
                     }
                     Logger.v("获取通知消息失败"+t.getMessage());
@@ -144,16 +147,4 @@ public class ArchivesMessageDetailsActivity extends BaseActivity implements View
 
     }
 
-    /**
-     * 初始化设置下拉刷新
-     */
-    public void initSwipeRefreshLayout(){
-        swipeLayout.setColorSchemeResources(R.color.colorSwipeLayout);
-        swipeLayout.setOnRefreshListener(this);
-    }
-
-    @Override
-    public void onRefresh() {
-        netWorkNoticeMessageDetails();
-    }
 }
