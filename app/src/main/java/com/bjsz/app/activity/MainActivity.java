@@ -1,5 +1,9 @@
 package com.bjsz.app.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +20,7 @@ import com.bjsz.app.fragments.data.DataFragment;
 import com.bjsz.app.fragments.home.HomeFragment;
 import com.bjsz.app.fragments.my.MyFragment;
 import com.bjsz.app.utils.BasePreference;
+import com.bjsz.app.utils.ExampleUtil;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,6 +59,8 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     private int textcolor,textcolor1;//底部菜单字体颜色
 
     private BasePreference basePreference;//本地存储
+
+    public static boolean isForeground = false;
 
     @Override
     protected void bindViews() {
@@ -98,6 +105,54 @@ public class MainActivity extends BaseFragmentActivity implements View.OnClickLi
     @Override
     protected void initActionBar() {
 
+    }
+
+    @Override
+    protected void onResume() {
+        isForeground = true;
+        super.onResume();
+    }
+
+
+    @Override
+    protected void onPause() {
+        isForeground = false;
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mMessageReceiver);
+        super.onDestroy();
+    }
+
+    private MessageReceiver mMessageReceiver;
+    public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_EXTRAS = "extras";
+
+    public void registerMessageReceiver() {
+        mMessageReceiver = new MessageReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+        filter.addAction(MESSAGE_RECEIVED_ACTION);
+        registerReceiver(mMessageReceiver, filter);
+    }
+
+    public class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+                String messge = intent.getStringExtra(KEY_MESSAGE);
+                String extras = intent.getStringExtra(KEY_EXTRAS);
+                StringBuilder showMsg = new StringBuilder();
+                showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
+                if (!ExampleUtil.isEmpty(extras)) {
+                    showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
+                }
+            }
+        }
     }
 
     /**

@@ -47,4 +47,6 @@ dependencies {
     compile 'cn.qqtheme.framework:WheelPicker:latest.release'
     //气泡
     compile 'com.daasuu:BubbleLayout:1.0.0'
+    compile files('libs/jpush-android_v3.0.1.jar')
+    compile files('libs/jcore-android_v1.1.0.jar')
 }

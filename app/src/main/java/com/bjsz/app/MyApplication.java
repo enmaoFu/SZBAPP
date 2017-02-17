@@ -8,6 +8,8 @@ import com.orhanobut.logger.Logger;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * 当前应用的 Application
@@ -31,7 +33,8 @@ public class MyApplication extends Application {
         Logger.v("Init Application...");
         initHomeGridviewImageMap();
         initFresco();
-
+        JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);     		// 初始化 JPush
     }
 
     /**
